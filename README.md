@@ -315,3 +315,48 @@ Deployment is automated via GitHub Actions (`.github/workflows/deploy.yml`) on e
 - **Draft system:** Set `draft: true` in frontmatter to hide content from listings and builds
 - **Path aliases:** `@components/*`, `@layouts/*`, `@styles/*`, `@utils/*`, `@content/*`
 - **Glossary:** Add terms to `src/data/glossary.json`; use `<KeyTerm>` for inline tooltips
+
+---
+
+## Agent / AI Notes
+
+This section records hard-won troubleshooting findings from prior automated sessions so future agents do not repeat the same dead-ends.
+
+### Sandbox networking — Playwright browser cannot reach local dev servers
+
+**Symptom:** When running inside the GitHub Copilot Coding Agent sandbox, the Playwright browser tool consistently returns `ERR_CONNECTION_REFUSED` for `localhost` and `127.0.0.1`, and `ERR_BLOCKED_BY_CLIENT` for LAN IPs (e.g. `10.x.x.x`) and `file://` URLs — even when `curl` from Bash can successfully fetch the same URL.
+
+**Root cause:** The Playwright MCP server runs in an isolated browser context that is not network-peered with the host process. The allow-list (`localhost;localhost:*;127.0.0.1;127.0.0.1:*`) governs what the _firewall_ permits, but the browser's own network stack cannot reach sockets bound by the Astro/Vite process in the same sandbox host.
+
+**What does NOT work:**
+
+- `npm run dev` / `node node_modules/.bin/astro dev` (any port) — `ERR_CONNECTION_REFUSED`
+- `python3 -m http.server` serving `dist/` — `ERR_CONNECTION_REFUSED`
+- `npx serve dist` — same
+- `file:///…/dist/…/index.html` — `ERR_BLOCKED_BY_CLIENT`
+- Network-interface IP (e.g. `http://10.1.0.163:4321`) — `ERR_BLOCKED_BY_CLIENT`
+
+**What DOES work for verifying UI changes without a browser:**
+
+1. **Build the project** (`npm run build`) and grep the generated `dist/` HTML to confirm class names / markup are correct:
+   ```bash
+   grep -A5 "page-prev\|page-next" dist/courses/motivational-interviewing/index.html
+   ```
+2. **Read the source file** directly after editing — verify the classes / template strings look right before building.
+3. **Lint** with `npm run lint` to catch formatting issues early.
+
+### Button / DaisyUI styling conventions
+
+- Navigation / back-link buttons use `btn btn-ghost btn-sm` — no visible border at rest.
+- Primary action buttons (submit, quiz) use `btn btn-primary`.
+- `btn-outline btn-neutral` produces a **dark/black boxed border** in the DaisyUI v5 `corporate` theme and should be avoided for subtle navigation controls.
+- The preferred pattern for Previous/Next pagination controls is:
+  - **Previous** → `btn btn-sm btn-ghost gap-2 font-sans` (subtle, no border)
+  - **Next** → `btn btn-sm btn-outline btn-primary gap-2 font-sans` (primary-coloured outline)
+- All interactive text links in the site use `hover:text-indigo-600 transition-colors` as the hover style.
+
+### Pagination implementation location
+
+All page-splitting and Previous/Next navigation logic lives in a single `<script>` block at the bottom of `src/layouts/ContentLayout.astro`. Content is split into pages on every `<h2>` boundary (requires ≥ 2 `<h2>` elements). The nav bar is injected via `document.createElement` at runtime — it does **not** appear in the static HTML of the page source, only in the built `<script>` tag.
+
+The motivational-interviewing course (`src/content/courses/motivational-interviewing.mdx`) has 15 `<h2>` sections and is the best page for testing pagination UI changes.
