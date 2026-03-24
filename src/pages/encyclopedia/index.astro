@@ -9,14 +9,14 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Encyclopedia" description="Reference articles on specific topics">
-  <h1 class="text-3xl font-bold mb-2">Encyclopedia</h1>
-  <p class="text-base-content/60 font-sans mb-6">
+  <h1 class="text-3xl font-extrabold mb-2" style="color:#1a1a2e;">Encyclopedia</h1>
+  <p class="text-base-content/60 mb-6">
     Browse authoritative reference articles on specific topics.
   </p>
 
   {
     entries.length === 0 ? (
-      <div class="alert font-sans">
+      <div class="alert">
         <span>
           No entries yet. Add <code>.mdx</code> files to <code>src/content/encyclopedia/</code>.
         </span>
@@ -27,10 +27,12 @@ const base = import.meta.env.BASE_URL;
           <li>
             <a
               href={`${base}encyclopedia/${entry.slug}/`}
-              class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans block"
+              class="feature-card card bg-white border border-base-300 hover:shadow-md transition-shadow no-underline rounded-xl block"
             >
-              <div class="card-body py-4">
-                <h2 class="card-title text-base">{entry.data.title}</h2>
+              <div class="card-body py-4 px-5">
+                <h2 class="card-title text-base" style="color:#1a1a2e;">
+                  {entry.data.title}
+                </h2>
                 <p class="text-sm text-base-content/60 mt-1">{entry.data.summary}</p>
                 {entry.data.tags.length > 0 && (
                   <div class="flex flex-wrap gap-1 mt-2">

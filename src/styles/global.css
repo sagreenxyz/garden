@@ -3,9 +3,22 @@
   themes: [ 'corporate'];
 }
 
-/* ── Typography tuning for encyclopedia readability ─────────────────────── */
+/* ── Base typography & background ───────────────────────────────────────── */
 body {
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  background-color: #f5f5f7;
+}
+
+/* Override DaisyUI corporate base-100 for slightly warmer off-white cards */
+[data-theme='corporate'] {
+  --color-base-100: #ffffff;
+  --color-base-200: #f5f5f7;
+  --color-base-300: #e8e8ed;
 }
 
 .font-sans {
@@ -15,6 +28,11 @@ body {
     BlinkMacSystemFont,
     'Segoe UI',
     sans-serif;
+}
+
+/* Serif font for long-form prose readability */
+.font-prose {
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 /* Content body max readable width */
@@ -28,4 +46,64 @@ body {
   text-decoration: underline dotted;
   text-decoration-color: var(--color-primary, currentColor);
   cursor: help;
+}
+
+/* ── Hero lightning bolt gradient ───────────────────────────────────────── */ /* ── Feature card hover lift ────────────────────────────────────────────── */
+.feature-card {
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+.feature-card:hover {
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.08),
+    0 2px 6px rgba(0, 0, 0, 0.04);
+  transform: translateY(-2px);
+}
+
+/* ── Article three-column layout ────────────────────────────────────────── */
+.article-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr 200px;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 1024px) {
+  .article-grid {
+    grid-template-columns: 1fr;
+  }
+  .article-sidebar-left,
+  .article-sidebar-right {
+    display: none;
+  }
+}
+
+.article-sidebar-left {
+  position: sticky;
+  top: 1.5rem;
+}
+
+.article-sidebar-right {
+  position: sticky;
+  top: 1.5rem;
+}
+
+/* ── TOC styles ─────────────────────────────────────────────────────────── */
+.toc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+.toc-list li {
+  margin-bottom: 0.35rem;
+}
+.toc-list a {
+  color: #4f46e5;
+  text-decoration: none;
+}
+.toc-list a:hover {
+  text-decoration: underline;
 }
