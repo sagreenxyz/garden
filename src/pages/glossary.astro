@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GlossaryBrowser from '../components/lms/GlossaryBrowser.svelte';
+import glossary from '../data/glossary.json';
+import type { GlossaryEntry } from '../types/glossary';
+
+const base = import.meta.env.BASE_URL;
+const entries = glossary as GlossaryEntry[];
+---
+
+<BaseLayout title="Glossary" description="Keywords and keyphrases used throughout the LMS">
+  <h1 class="text-3xl font-bold mb-2">Glossary</h1>
+  <p class="text-base-content/60 font-sans mb-6">
+    Keywords and keyphrases defined for this project. Terms are drawn from
+    <code>src/data/glossary.json</code> and used as tooltips throughout the content.
+  </p>
+
+  <GlossaryBrowser entries={entries} base={base} client:load />
+</BaseLayout>

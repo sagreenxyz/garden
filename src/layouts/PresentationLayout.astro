@@ -1,0 +1,37 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  publishedAt?: Date;
+  tags?: string[];
+}
+
+const { title, description, publishedAt, tags = [] } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="mb-8 border-b border-base-300 pb-5">
+    <a href={`${base}presentations/`} class="btn btn-ghost btn-sm font-sans mb-4">
+      ← All Presentations
+    </a>
+    <h1 class="text-3xl font-bold">{title}</h1>
+    {description && <p class="text-base-content/70 mt-1 text-lg">{description}</p>}
+    <div class="flex flex-wrap gap-1 mt-3">
+      {tags.map((tag) => <span class="badge badge-outline badge-sm font-sans">{tag}</span>)}
+    </div>
+    {
+      publishedAt && (
+        <p class="text-sm text-base-content/50 font-sans mt-2">
+          Published: {publishedAt.toLocaleDateString()}
+        </p>
+      )
+    }
+  </div>
+
+  <div class="space-y-6">
+    <slot />
+  </div>
+</BaseLayout>

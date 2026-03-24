@@ -39,19 +39,6 @@ const notesCollection = defineCollection({
   }),
 });
 
-// ── Presentations ────────────────────────────────────────────────────────────
-const presentationsCollection = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    tags: z.array(z.string()).default([]),
-    publishedAt: z.date(),
-    draft: z.boolean().default(false),
-    slideCount: z.number().optional(),
-  }),
-});
-
 // ── Quizzes ──────────────────────────────────────────────────────────────────
 const quizzesCollection = defineCollection({
   type: 'data',
@@ -79,6 +66,5 @@ export const collections = {
   encyclopedia: encyclopediaCollection,
   courses: coursesCollection,
   notes: notesCollection,
-  presentations: presentationsCollection,
   quizzes: quizzesCollection,
 };

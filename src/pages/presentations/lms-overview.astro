@@ -1,0 +1,92 @@
+---
+import PresentationLayout from '../../layouts/PresentationLayout.astro';
+import Slide from '../../components/lms/Slide.astro';
+import KeyTerm from '../../components/lms/KeyTerm.svelte';
+import glossary from '../../data/glossary.json';
+
+const astroEntry = glossary.find((e) => e.slug === 'astro')!;
+const islandArch = glossary.find((e) => e.slug === 'island-architecture')!;
+const ssg = glossary.find((e) => e.slug === 'ssg')!;
+const ghPages = glossary.find((e) => e.slug === 'github-pages')!;
+
+const base = import.meta.env.BASE_URL;
+---
+
+<PresentationLayout
+  title="LMS Overview"
+  description="A high-level overview of the LMS project, its goals, and architecture."
+  publishedAt={new Date('2026-03-24')}
+  tags={['overview', 'lms', 'architecture']}
+>
+  <Slide number={1} title="LMS Project Overview">
+    <p>
+      Welcome to the <strong>Astro LMS</strong> — a Learning Management System built with
+      <KeyTerm entry={astroEntry} base={base} client:load /> and published via GitHub Pages.
+    </p>
+    <p>
+      This is a <KeyTerm entry={ssg} base={base} client:load /> project: all pages are pre-rendered at
+      build time and served as static HTML.
+    </p>
+  </Slide>
+
+  <Slide number={2} title="Goals">
+    <ul>
+      <li>Provide encyclopedia-style reference content</li>
+      <li>Deliver structured courses</li>
+      <li>Enable personal note-taking</li>
+      <li>Support web-based presentations (built as <code>.astro</code> files)</li>
+      <li>Offer quizzes and exams</li>
+      <li>Maintain a searchable glossary of project keywords</li>
+    </ul>
+  </Slide>
+
+  <Slide number={3} title="Technology Stack">
+    <ul>
+      <li>
+        <strong>Framework:</strong>
+        <KeyTerm entry={astroEntry} base={base} client:load /> — <KeyTerm
+          entry={islandArch}
+          base={base}
+          client:load
+        /> for zero-JS static output with selective hydration
+      </li>
+      <li>
+        <strong>Hosting:</strong>
+        <KeyTerm entry={ghPages} base={base} client:load /> via GitHub Actions CI/CD
+      </li>
+      <li><strong>UI:</strong> Tailwind CSS v4 + DaisyUI (corporate theme)</li>
+      <li><strong>Interactive components:</strong> Svelte islands</li>
+      <li><strong>Content:</strong> <code>.mdx</code> files + <code>.astro</code> pages</li>
+      <li><strong>Type safety:</strong> TypeScript strict mode + Zod content schemas</li>
+    </ul>
+  </Slide>
+
+  <Slide number={4} title="Content Architecture">
+    <ul>
+      <li>
+        <strong>Encyclopedia, Courses, Notes</strong> — authored in <code>.mdx</code> files inside Astro
+        Content Collections with Zod-validated frontmatter
+      </li>
+      <li>
+        <strong>Presentations</strong> — individual <code>.astro</code> page files using the
+        <code>PresentationLayout</code> and <code>Slide</code> components
+      </li>
+      <li>
+        <strong>Quizzes</strong> — JSON data files with interactive client-side scoring
+      </li>
+      <li>
+        <strong>Glossary</strong> — <code>src/data/glossary.json</code> powering keyword tooltips throughout
+        all content
+      </li>
+    </ul>
+  </Slide>
+
+  <Slide number={5} title="Next Steps">
+    <ul>
+      <li>Add authentication for the private content area</li>
+      <li>Expand encyclopedia and course entries</li>
+      <li>Configure search (Pagefind or Algolia)</li>
+      <li>Add more interactive Svelte components</li>
+    </ul>
+  </Slide>
+</PresentationLayout>

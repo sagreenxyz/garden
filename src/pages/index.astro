@@ -7,7 +7,7 @@ const sections = [
   {
     title: 'Encyclopedia',
     href: `${base}encyclopedia/`,
-    description: 'Reference articles on specific topics',
+    description: 'Authoritative reference articles on specific topics',
     icon: '📖',
   },
   {
@@ -19,13 +19,13 @@ const sections = [
   {
     title: 'Notes',
     href: `${base}notes/`,
-    description: 'Quick personal notes and references',
+    description: 'Quick references and personal notes',
     icon: '📝',
   },
   {
     title: 'Presentations',
     href: `${base}presentations/`,
-    description: 'Slide-based content',
+    description: 'Web-based slide presentations',
     icon: '📊',
   },
   {
@@ -34,22 +34,35 @@ const sections = [
     description: 'Assessments to test your knowledge',
     icon: '✅',
   },
+  {
+    title: 'Glossary',
+    href: `${base}glossary/`,
+    description: 'Keyword and keyphrase definitions',
+    icon: '🔑',
+  },
 ];
 ---
 
 <BaseLayout title="Home" description="Welcome to the Astro LMS">
-  <section class="hero">
-    <h1>Welcome to Astro LMS</h1>
-    <p>A Learning Management System built with Astro.build and published on GitHub Pages.</p>
+  <section class="text-center py-12">
+    <h1 class="text-4xl font-bold mb-3">Astro LMS</h1>
+    <p class="text-base-content/60 text-lg max-w-xl mx-auto font-sans">
+      A Learning Management System built with Astro.build and published on GitHub Pages.
+    </p>
   </section>
 
-  <section class="content-grid">
+  <section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
     {
       sections.map((section) => (
-        <a href={section.href} class="content-card">
-          <span class="card-icon">{section.icon}</span>
-          <h2>{section.title}</h2>
-          <p>{section.description}</p>
+        <a
+          href={section.href}
+          class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans"
+        >
+          <div class="card-body">
+            <span class="text-3xl">{section.icon}</span>
+            <h2 class="card-title text-base mt-2">{section.title}</h2>
+            <p class="text-sm text-base-content/60">{section.description}</p>
+          </div>
         </a>
       ))
     }

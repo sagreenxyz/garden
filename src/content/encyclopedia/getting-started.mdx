@@ -1,0 +1,33 @@
+---
+title: 'Getting Started with This LMS'
+summary: 'An overview of how to use this Learning Management System and the content types available.'
+tags: ['introduction', 'lms', 'guide']
+publishedAt: 2026-03-24
+draft: false
+---
+
+import KeyTerm from '../../components/lms/KeyTerm.svelte';
+import glossary from '../../data/glossary.json';
+
+export const lms = glossary.find((e) => e.slug === 'lms');
+export const mdx = glossary.find((e) => e.slug === 'mdx');
+export const cc = glossary.find((e) => e.slug === 'content-collections');
+
+## Welcome
+
+This encyclopedia entry explains the foundational concepts of this <KeyTerm entry={lms} client:load />.
+
+### Content Types
+
+- **Encyclopedia** – Authoritative reference articles on specific topics
+- **Courses** – Structured learning paths with ordered lessons
+- **Notes** – Quick personal notes and references
+- **Presentations** – Web-based presentations built as `.astro` pages
+- **Quizzes** – Assessments to test knowledge
+
+### Technology
+
+Content is authored in <KeyTerm entry={mdx} client:load /> files, which let you embed interactive
+Svelte components directly in your writing. All content files are validated through
+
+<KeyTerm entry={cc} client:load /> with strict Zod schemas.

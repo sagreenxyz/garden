@@ -1,0 +1,86 @@
+[
+  {
+    "term": "LMS",
+    "fullForm": "Learning Management System",
+    "definition": "A software application for the administration, documentation, tracking, reporting, automation, and delivery of educational courses, training programs, or learning and development programs.",
+    "relatedTerms": ["Course", "Curriculum", "Assessment"],
+    "slug": "lms"
+  },
+  {
+    "term": "Astro",
+    "fullForm": "Astro.build",
+    "definition": "A modern static site builder designed for content-heavy websites. Uses an island architecture to ship zero JavaScript by default, hydrating interactive components only when needed.",
+    "relatedTerms": ["Island Architecture", "Static Site Generator", "SSG"],
+    "slug": "astro"
+  },
+  {
+    "term": "Island Architecture",
+    "fullForm": "Island Architecture",
+    "definition": "A web architecture pattern where individual interactive UI components (islands) are hydrated independently on an otherwise static HTML page, minimising JavaScript sent to the browser.",
+    "relatedTerms": ["Astro", "Hydration", "SSG"],
+    "slug": "island-architecture"
+  },
+  {
+    "term": "SSG",
+    "fullForm": "Static Site Generator",
+    "definition": "A tool that generates a full static HTML website based on raw data and templates. Pages are pre-rendered at build time rather than on each request.",
+    "relatedTerms": ["Astro", "GitHub Pages", "Island Architecture"],
+    "slug": "ssg"
+  },
+  {
+    "term": "MDX",
+    "fullForm": "Markdown + JSX",
+    "definition": "A superset of Markdown that allows you to embed JSX (and Astro/Svelte components) directly inside Markdown files, enabling rich interactive documentation and educational content.",
+    "relatedTerms": ["Markdown", "Astro", "Content Collections"],
+    "slug": "mdx"
+  },
+  {
+    "term": "Content Collections",
+    "fullForm": "Astro Content Collections",
+    "definition": "Astro's built-in mechanism for organising, validating, and querying collections of local content files (Markdown, MDX, JSON, YAML) with type-safe schemas using Zod.",
+    "relatedTerms": ["Astro", "MDX", "Zod"],
+    "slug": "content-collections"
+  },
+  {
+    "term": "Svelte",
+    "fullForm": "Svelte",
+    "definition": "A component-based JavaScript framework that compiles components to efficient vanilla JavaScript at build time, producing no runtime framework overhead.",
+    "relatedTerms": ["Island Architecture", "Astro"],
+    "slug": "svelte"
+  },
+  {
+    "term": "Tailwind CSS",
+    "fullForm": "Tailwind CSS",
+    "definition": "A utility-first CSS framework that provides low-level CSS utility classes, allowing developers to build custom designs directly in markup without writing custom CSS.",
+    "relatedTerms": ["DaisyUI", "CSS"],
+    "slug": "tailwind-css"
+  },
+  {
+    "term": "DaisyUI",
+    "fullForm": "DaisyUI",
+    "definition": "A Tailwind CSS plugin that provides semantic component classes (btn, card, badge, etc.) on top of Tailwind utilities, speeding up UI development with a clean, themeable design system.",
+    "relatedTerms": ["Tailwind CSS", "UI Component Library"],
+    "slug": "daisyui"
+  },
+  {
+    "term": "GitHub Pages",
+    "fullForm": "GitHub Pages",
+    "definition": "A static site hosting service that publishes web pages directly from a GitHub repository, supporting custom domains and HTTPS. Ideal for hosting Astro static builds.",
+    "relatedTerms": ["SSG", "Astro", "CI/CD"],
+    "slug": "github-pages"
+  },
+  {
+    "term": "Encyclopedia",
+    "fullForm": "Encyclopedia",
+    "definition": "A comprehensive reference work containing articles on a wide range of subjects or a particular field. In this LMS, encyclopedia entries are authoritative reference articles on specific topics.",
+    "relatedTerms": ["Content Collections", "MDX"],
+    "slug": "encyclopedia"
+  },
+  {
+    "term": "Zod",
+    "fullForm": "Zod",
+    "definition": "A TypeScript-first schema declaration and validation library used in Astro Content Collections to define and validate the frontmatter schema of content files.",
+    "relatedTerms": ["Content Collections", "TypeScript"],
+    "slug": "zod"
+  }
+]

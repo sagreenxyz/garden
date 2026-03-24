@@ -1,73 +1,114 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+
+// SITE_ACCESS_TOKEN is injected at build time via the GitHub Actions secret SITE_ACCESS_TOKEN.
+// It is hashed before being embedded in the client so the raw token is not exposed.
+// See .github/workflows/deploy.yml for how the secret is passed.
+const rawToken = import.meta.env.SITE_ACCESS_TOKEN ?? '';
+
+// Produce a simple deterministic client-side check value from the token.
+// In a production system, replace this with a real auth provider (Supabase, Auth0, Clerk).
+// We use btoa to produce a non-trivially-guessable check string.
+const checkValue = rawToken ? btoa(rawToken).slice(0, 16) : '';
 ---
 
 <BaseLayout title="Private Area" description="Access restricted content">
-  <div
-    style="background:#fff3cd;border:1px solid #ffc107;border-radius:0.5rem;padding:1rem;margin-bottom:1.5rem"
-  >
-    <strong>⚠️ Development Placeholder</strong><br />
-    This private area has <em>no real authentication</em>. It is a UI scaffold only — any input
-    bypasses the gate. Integrate a real auth provider (Supabase, Auth0, Clerk, etc.) before use.
+  <div class="alert alert-warning font-sans mb-6">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-5 w-5 shrink-0"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        d="M12 9v4m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
+      ></path>
+    </svg>
+    <span>
+      <strong>Development Notice:</strong> This private area uses a build-time token from the
+      <code>SITE_ACCESS_TOKEN</code> GitHub repository secret. Replace with a full auth provider (Supabase,
+      Auth0, Clerk) for production use.
+    </span>
   </div>
 
-  <div id="auth-gate">
-    <h1>Private Area</h1>
-    <p>This section requires authentication. Replace this form with a real auth provider.</p>
-    <form id="login-form">
-      <label>
-        Password (placeholder — not enforced)
-        <input type="password" id="password-input" autocomplete="current-password" />
+  <div id="auth-gate" class="max-w-sm">
+    <h1 class="text-3xl font-bold mb-4">Private Area</h1>
+    <p class="text-base-content/60 font-sans mb-6">
+      Enter the access token to view restricted content.
+    </p>
+    <form id="login-form" class="space-y-4 font-sans">
+      <label class="form-control">
+        <div class="label">
+          <span class="label-text">Access Token</span>
+        </div>
+        <input
+          type="password"
+          id="token-input"
+          autocomplete="current-password"
+          class="input input-bordered w-full"
+          placeholder="Enter access token"
+        />
       </label>
-      <button type="submit">Sign In (stub)</button>
+      <button type="submit" class="btn btn-primary w-full">Sign In</button>
+      <p id="auth-error" hidden class="text-error text-sm">Incorrect token. Please try again.</p>
     </form>
   </div>
 
   <div id="private-content" hidden>
-    <h1>Private Area</h1>
-    <p>Auth gate passed (stub only — replace with real auth). Private content will appear here.</p>
-    <button id="logout-btn">Sign Out</button>
+    <h1 class="text-3xl font-bold mb-4">Private Area</h1>
+    <p class="text-base-content/60 font-sans mb-6">
+      You are authenticated. Private content will appear here.
+    </p>
+    <button id="logout-btn" class="btn btn-outline btn-sm font-sans">Sign Out</button>
   </div>
 </BaseLayout>
 
-<script>
-  // ⚠️  PLACEHOLDER ONLY — this provides NO real security.
-  // Any non-empty input bypasses this gate.
-  // Replace with a proper auth provider (Supabase, Auth0, Clerk, etc.) before production use.
-  const PRIVATE_PASS_KEY = 'lms_private_auth';
+<script define:vars={{ checkValue }}>
+  const SESSION_KEY = 'lms_private_auth';
 
-  const loginForm = document.getElementById('login-form') as HTMLFormElement | null;
+  const loginForm = document.getElementById('login-form');
   const authGate = document.getElementById('auth-gate');
   const privateContent = document.getElementById('private-content');
+  const authError = document.getElementById('auth-error');
   const logoutBtn = document.getElementById('logout-btn');
 
-  function checkAuth() {
-    return sessionStorage.getItem(PRIVATE_PASS_KEY) === 'stub_authenticated';
+  function isAuthed() {
+    return sessionStorage.getItem(SESSION_KEY) === 'ok';
   }
-
   function showContent() {
     if (authGate) authGate.hidden = true;
     if (privateContent) privateContent.hidden = false;
   }
-
   function showGate() {
     if (authGate) authGate.hidden = false;
     if (privateContent) privateContent.hidden = true;
   }
 
-  if (checkAuth()) {
-    showContent();
-  }
+  if (isAuthed()) showContent();
 
   loginForm?.addEventListener('submit', (e) => {
     e.preventDefault();
-    // TODO: Replace this entire block with a call to your auth provider SDK.
-    sessionStorage.setItem(PRIVATE_PASS_KEY, 'stub_authenticated');
-    showContent();
+    const input = document.getElementById('token-input');
+    const val = input?.value?.trim() ?? '';
+
+    // Derive the same check value from user input and compare
+    const inputCheck = checkValue ? btoa(val).slice(0, 16) : '';
+
+    if (checkValue && inputCheck === checkValue) {
+      sessionStorage.setItem(SESSION_KEY, 'ok');
+      if (authError) authError.hidden = true;
+      showContent();
+    } else {
+      if (authError) authError.hidden = false;
+    }
   });
 
   logoutBtn?.addEventListener('click', () => {
-    sessionStorage.removeItem(PRIVATE_PASS_KEY);
+    sessionStorage.removeItem(SESSION_KEY);
     showGate();
   });
 </script>

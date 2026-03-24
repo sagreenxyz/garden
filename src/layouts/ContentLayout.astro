@@ -13,34 +13,38 @@ const { title, description, publishedAt, updatedAt, tags = [] } = Astro.props;
 ---
 
 <BaseLayout title={title} description={description}>
-  <article class="content-article">
-    <header class="content-header">
-      <h1>{title}</h1>
-      {description && <p class="content-description">{description}</p>}
+  <article>
+    <header class="mb-6 border-b border-base-300 pb-5">
+      <h1 class="text-3xl font-bold mb-2">{title}</h1>
+      {description && <p class="text-base-content/70 mt-1 text-lg">{description}</p>}
       {
         tags.length > 0 && (
-          <ul class="content-tags">
+          <div class="flex flex-wrap gap-1 mt-3">
             {tags.map((tag) => (
-              <li class="tag">{tag}</li>
+              <span class="badge badge-outline badge-sm font-sans">{tag}</span>
             ))}
-          </ul>
+          </div>
         )
       }
-      {
-        publishedAt && (
-          <time datetime={publishedAt.toISOString()}>
-            Published: {publishedAt.toLocaleDateString()}
-          </time>
-        )
-      }
-      {
-        updatedAt && (
-          <time datetime={updatedAt.toISOString()}>Updated: {updatedAt.toLocaleDateString()}</time>
-        )
-      }
+      <div class="flex gap-4 mt-3 text-sm text-base-content/50 font-sans">
+        {
+          publishedAt && (
+            <time datetime={publishedAt.toISOString()}>
+              Published: {publishedAt.toLocaleDateString()}
+            </time>
+          )
+        }
+        {
+          updatedAt && (
+            <time datetime={updatedAt.toISOString()}>
+              Updated: {updatedAt.toLocaleDateString()}
+            </time>
+          )
+        }
+      </div>
     </header>
 
-    <div class="content-body">
+    <div class="prose prose-lms max-w-none">
       <slot />
     </div>
   </article>

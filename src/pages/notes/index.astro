@@ -9,24 +9,41 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Notes" description="Quick personal notes and references">
-  <h1>Notes</h1>
-  <p>Quick references and personal notes.</p>
+  <h1 class="text-3xl font-bold mb-2">Notes</h1>
+  <p class="text-base-content/60 font-sans mb-6">Quick references and personal notes.</p>
 
   {
     entries.length === 0 ? (
-      <p>
-        No notes yet. Add Markdown files to <code>src/content/notes/</code>.
-      </p>
+      <div class="alert font-sans">
+        <span>
+          No notes yet. Add <code>.mdx</code> files to <code>src/content/notes/</code>.
+        </span>
+      </div>
     ) : (
-      <ul class="entry-list">
+      <ul class="space-y-4">
         {entries.map((entry) => (
           <li>
-            <a href={`${base}notes/${entry.slug}/`}>
-              <strong>{entry.data.title}</strong>
+            <a
+              href={`${base}notes/${entry.slug}/`}
+              class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans block"
+            >
+              <div class="card-body py-4">
+                <h2 class="card-title text-base">{entry.data.title}</h2>
+                <time
+                  datetime={entry.data.createdAt.toISOString()}
+                  class="text-xs text-base-content/40 mt-1"
+                >
+                  {entry.data.createdAt.toLocaleDateString()}
+                </time>
+                {entry.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    {entry.data.tags.map((tag) => (
+                      <span class="badge badge-outline badge-sm">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
             </a>
-            <time datetime={entry.data.createdAt.toISOString()}>
-              {entry.data.createdAt.toLocaleDateString()}
-            </time>
           </li>
         ))}
       </ul>

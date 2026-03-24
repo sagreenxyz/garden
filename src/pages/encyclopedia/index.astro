@@ -9,29 +9,38 @@ const base = import.meta.env.BASE_URL;
 ---
 
 <BaseLayout title="Encyclopedia" description="Reference articles on specific topics">
-  <h1>Encyclopedia</h1>
-  <p>Browse reference articles on specific topics.</p>
+  <h1 class="text-3xl font-bold mb-2">Encyclopedia</h1>
+  <p class="text-base-content/60 font-sans mb-6">
+    Browse authoritative reference articles on specific topics.
+  </p>
 
   {
     entries.length === 0 ? (
-      <p>
-        No entries yet. Add Markdown files to <code>src/content/encyclopedia/</code>.
-      </p>
+      <div class="alert font-sans">
+        <span>
+          No entries yet. Add <code>.mdx</code> files to <code>src/content/encyclopedia/</code>.
+        </span>
+      </div>
     ) : (
-      <ul class="entry-list">
+      <ul class="space-y-4">
         {entries.map((entry) => (
           <li>
-            <a href={`${base}encyclopedia/${entry.slug}/`}>
-              <strong>{entry.data.title}</strong>
+            <a
+              href={`${base}encyclopedia/${entry.slug}/`}
+              class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans block"
+            >
+              <div class="card-body py-4">
+                <h2 class="card-title text-base">{entry.data.title}</h2>
+                <p class="text-sm text-base-content/60 mt-1">{entry.data.summary}</p>
+                {entry.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    {entry.data.tags.map((tag) => (
+                      <span class="badge badge-outline badge-sm">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
             </a>
-            <p>{entry.data.summary}</p>
-            {entry.data.tags.length > 0 && (
-              <ul class="tag-list">
-                {entry.data.tags.map((tag) => (
-                  <li class="tag">{tag}</li>
-                ))}
-              </ul>
-            )}
           </li>
         ))}
       </ul>

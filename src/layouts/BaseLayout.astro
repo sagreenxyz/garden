@@ -1,4 +1,6 @@
 ---
+import '../styles/global.css';
+
 export interface Props {
   title: string;
   description?: string;
@@ -6,41 +8,92 @@ export interface Props {
 
 const { title, description = 'A Learning Management System built with Astro' } = Astro.props;
 const base = import.meta.env.BASE_URL;
+
+const navLinks = [
+  { href: `${base}encyclopedia/`, label: 'Encyclopedia' },
+  { href: `${base}courses/`, label: 'Courses' },
+  { href: `${base}notes/`, label: 'Notes' },
+  { href: `${base}presentations/`, label: 'Presentations' },
+  { href: `${base}quizzes/`, label: 'Quizzes' },
+  { href: `${base}glossary/`, label: 'Glossary' },
+];
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="corporate">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <title>{title} | Astro LMS</title>
-    <link rel="stylesheet" href={`${base}styles/global.css`} />
   </head>
-  <body>
-    <header class="site-header">
-      <nav class="site-nav">
-        <a href={base} class="nav-brand">Astro LMS</a>
-        <ul class="nav-links">
-          <li><a href={`${base}encyclopedia/`}>Encyclopedia</a></li>
-          <li><a href={`${base}courses/`}>Courses</a></li>
-          <li><a href={`${base}notes/`}>Notes</a></li>
-          <li><a href={`${base}presentations/`}>Presentations</a></li>
-          <li><a href={`${base}quizzes/`}>Quizzes</a></li>
+  <body class="min-h-screen flex flex-col bg-base-100 text-base-content">
+    <!-- Navbar -->
+    <header class="navbar bg-base-200 border-b border-base-300 px-4 font-sans">
+      <div class="navbar-start">
+        <a href={base} class="btn btn-ghost text-lg font-bold tracking-tight normal-case">
+          Astro LMS
+        </a>
+      </div>
+      <nav class="navbar-center hidden lg:flex">
+        <ul class="menu menu-horizontal px-1 gap-1">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a href={link.href} class="text-sm font-medium">
+                  {link.label}
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </nav>
+      <!-- Mobile dropdown -->
+      <div class="navbar-end lg:hidden">
+        <div class="dropdown dropdown-end">
+          <div tabindex="0" role="button" class="btn btn-ghost btn-sm" aria-label="Open navigation">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"></path></svg
+            >
+          </div>
+          <ul
+            tabindex="0"
+            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            {
+              navLinks.map((link) => (
+                <li>
+                  <a href={link.href}>{link.label}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
     </header>
 
-    <main class="site-main">
+    <!-- Main content -->
+    <main class="flex-1 w-full max-w-5xl mx-auto px-4 py-10">
       <slot />
     </main>
 
-    <footer class="site-footer">
+    <!-- Footer -->
+    <footer
+      class="footer footer-center bg-base-200 border-t border-base-300 p-6 font-sans text-base-content/60 text-sm"
+    >
       <p>
-        &copy; {new Date().getFullYear()} Astro LMS. Built with <a href="https://astro.build"
-          >Astro</a
-        >.
+        &copy; {new Date().getFullYear()} Astro LMS &mdash; Built with
+        <a href="https://astro.build" class="link link-hover">Astro</a>
       </p>
     </footer>
   </body>

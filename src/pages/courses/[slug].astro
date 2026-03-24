@@ -21,9 +21,8 @@ const { Content } = await entry.render();
   publishedAt={entry.data.publishedAt}
   tags={entry.data.tags}
 >
-  <p>
-    <strong>Level:</strong>
-    <span class="badge">{entry.data.level}</span>
-  </p>
+  <div class="mb-4 font-sans">
+    <span class="badge badge-primary capitalize">{entry.data.level}</span>
+  </div>
   <Content />
 </ContentLayout>
