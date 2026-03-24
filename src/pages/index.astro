@@ -11,12 +11,6 @@ const features = [
     href: `${base}encyclopedia/`,
   },
   {
-    icon: '🔒',
-    title: 'Private Side',
-    description: 'Sign in to access your private dashboard and encrypted personal content vault.',
-    href: `${base}private/`,
-  },
-  {
     icon: '🛡️',
     title: 'Secure by Design',
     description:
@@ -105,10 +99,8 @@ const sections = [
     </h1>
 
     <p class="text-lg text-base-content/70 max-w-2xl mx-auto mb-3 leading-relaxed">
-      This site is the root hub for everything — it has a <strong
-        class="text-base-content font-semibold">public side</strong
-      > anyone can browse and a <strong class="text-base-content font-semibold">private side</strong
-      > for authenticated users with access to encrypted personal content.
+      A public knowledge hub with courses, encyclopedias, notes, presentations, quizzes, and more —
+      freely available to everyone.
     </p>
 
     <p class="text-sm text-base-content/40 mb-10">
@@ -118,15 +110,8 @@ const sections = [
     <!-- CTA buttons -->
     <div class="flex flex-wrap justify-center gap-4">
       <a
-        href={`${base}private/`}
-        class="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-indigo-600 text-white font-semibold text-base hover:bg-indigo-700 transition-colors shadow-md"
-      >
-        Sign In to Private Area
-        <span aria-hidden="true">→</span>
-      </a>
-      <a
         href={`${base}encyclopedia/`}
-        class="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-white text-base-content font-semibold text-base border border-base-300 hover:bg-base-200 transition-colors shadow-sm"
+        class="inline-flex items-center gap-2 px-7 py-3 rounded-xl bg-indigo-600 text-white font-semibold text-base hover:bg-indigo-700 transition-colors shadow-md"
       >
         Browse Public Content
         <span aria-hidden="true">→</span>
@@ -135,7 +120,7 @@ const sections = [
   </section>
 
   <!-- Feature cards -->
-  <section class="grid grid-cols-1 sm:grid-cols-3 gap-5 mt-4 px-4 pb-16">
+  <section class="grid grid-cols-1 sm:grid-cols-2 gap-5 mt-4 px-4 pb-16 max-w-2xl mx-auto w-full">
     {
       features.map((f) => (
         <div class="feature-card bg-white rounded-2xl p-6 border border-base-300">

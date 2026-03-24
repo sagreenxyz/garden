@@ -23,12 +23,7 @@
       "id": "mi-q2",
       "text": "A nurse asks a patient, 'What concerns you most about your current diet?' This is an example of which OARS skill?",
       "type": "multiple-choice",
-      "options": [
-        "Affirmation",
-        "Reflective listening",
-        "Open question",
-        "Summary"
-      ],
+      "options": ["Affirmation", "Reflective listening", "Open question", "Summary"],
       "answer": "Open question",
       "explanation": "Open questions invite the patient to elaborate on their thoughts and feelings rather than responding with a simple yes/no. 'What concerns you most about your current diet?' is an open question that encourages the patient to explore their own perspective."
     },
@@ -36,12 +31,7 @@
       "id": "mi-q3",
       "text": "A patient says, 'I've tried to quit smoking before, but it's just too hard.' The nurse responds, 'Quitting is really challenging, and you've already shown real courage by trying.' This response is an example of:",
       "type": "multiple-choice",
-      "options": [
-        "A closed question",
-        "A double-sided reflection",
-        "An affirmation",
-        "A summary"
-      ],
+      "options": ["A closed question", "A double-sided reflection", "An affirmation", "A summary"],
       "answer": "An affirmation",
       "explanation": "An affirmation acknowledges the patient's strengths, efforts, or qualities in a genuine and specific way. Recognizing the patient's courage in attempting to quit is an affirmation that supports self-efficacy."
     },
@@ -75,12 +65,7 @@
       "id": "mi-q6",
       "text": "A patient with hypertension states: 'I know I should cut back on salt, but honestly I'm not even thinking about changing my diet right now.' According to the Transtheoretical Model, which stage of change is this patient in?",
       "type": "multiple-choice",
-      "options": [
-        "Contemplation",
-        "Preparation",
-        "Pre-contemplation",
-        "Action"
-      ],
+      "options": ["Contemplation", "Preparation", "Pre-contemplation", "Action"],
       "answer": "Pre-contemplation",
       "explanation": "Pre-contemplation is characterized by the patient not intending to change in the foreseeable future, often unaware or unwilling to acknowledge the problem. 'Not even thinking about changing' is a hallmark of this stage."
     },

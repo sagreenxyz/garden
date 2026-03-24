@@ -186,7 +186,68 @@ const base = import.meta.env.BASE_URL;
 </BaseLayout>
 
 <script>
-  // Auto-generate TOC from headings in the article
+  // ── Pagination: split prose content into pages by H2 ─────────────────────
+  const proseEl = document.querySelector('.prose-lms');
+  /** @type {HTMLElement[]} */
+  const pageDivs = [];
+
+  if (proseEl) {
+    const children = Array.from(proseEl.children);
+    const h2Count = children.filter((el) => el.tagName === 'H2').length;
+
+    if (h2Count > 1) {
+      /** @type {Element[]} */
+      let pageElements = [];
+      let inPagination = false;
+
+      for (const el of children) {
+        if (el.tagName === 'H2') {
+          if (inPagination) {
+            const pageDiv = document.createElement('div');
+            pageDiv.className = 'content-page';
+            pageDiv.hidden = pageDivs.length > 0;
+            proseEl.insertBefore(pageDiv, pageElements[0]);
+            pageElements.forEach((e) => pageDiv.appendChild(e));
+            pageDivs.push(pageDiv);
+          }
+          inPagination = true;
+          pageElements = [el];
+        } else if (inPagination) {
+          pageElements.push(el);
+        }
+        // elements before the first H2 stay in place (always visible)
+      }
+
+      // Wrap the last section
+      if (pageElements.length > 0) {
+        const pageDiv = document.createElement('div');
+        pageDiv.className = 'content-page';
+        pageDiv.hidden = pageDivs.length > 0;
+        proseEl.insertBefore(pageDiv, pageElements[0]);
+        pageElements.forEach((e) => pageDiv.appendChild(e));
+        pageDivs.push(pageDiv);
+      }
+    }
+  }
+
+  // ── Pagination state & navigation ────────────────────────────────────────
+  let currentPage = 0;
+
+  function goToPage(index) {
+    if (index < 0 || index >= pageDivs.length) return;
+    pageDivs[currentPage].hidden = true;
+    currentPage = index;
+    pageDivs[currentPage].hidden = false;
+    const prevBtn = /** @type {HTMLButtonElement|null} */ (document.getElementById('page-prev'));
+    const nextBtn = /** @type {HTMLButtonElement|null} */ (document.getElementById('page-next'));
+    const counter = document.getElementById('page-counter');
+    if (prevBtn) prevBtn.disabled = currentPage === 0;
+    if (nextBtn) nextBtn.disabled = currentPage === pageDivs.length - 1;
+    if (counter) counter.textContent = `Page ${currentPage + 1} of ${pageDivs.length}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // ── TOC: hierarchical numbering ───────────────────────────────────────────
   const article = document.querySelector('article');
   const tocList = document.getElementById('toc-list');
   const tocContainer = document.getElementById('toc-container');
@@ -196,16 +257,59 @@ const base = import.meta.env.BASE_URL;
     if (headings.length === 0 && tocContainer) {
       tocContainer.hidden = true;
     } else {
+      let h2Num = 0;
+      let h3Num = 0;
+
       headings.forEach((h, i) => {
         if (!h.id) h.id = `heading-${i}`;
         const li = document.createElement('li');
-        li.style.paddingLeft = h.tagName === 'H3' ? '0.75rem' : '0';
+        let label;
+
+        if (h.tagName === 'H2') {
+          h2Num++;
+          h3Num = 0;
+          li.style.paddingLeft = '0';
+          label = `${h2Num}. ${(h.textContent || '').trim()}`;
+        } else {
+          h3Num++;
+          li.style.paddingLeft = '0.75rem';
+          label = `${h2Num}.${h3Num} ${(h.textContent || '').trim()}`;
+        }
+
         const a = document.createElement('a');
         a.href = `#${h.id}`;
-        a.textContent = `${i + 1}. ${h.innerText ?? h.textContent ?? ''}`.trim();
+        a.textContent = label;
+
+        // When paginated, clicking a TOC link shows the right page then scrolls
+        if (pageDivs.length > 1) {
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            const pageIndex = pageDivs.findIndex((pd) => pd.contains(h));
+            if (pageIndex !== -1) goToPage(pageIndex);
+            setTimeout(() => h.scrollIntoView({ behavior: 'smooth', block: 'start' }), 50);
+          });
+        }
+
         li.appendChild(a);
         tocList.appendChild(li);
       });
     }
+  }
+
+  // ── Pagination nav UI ─────────────────────────────────────────────────────
+  if (pageDivs.length > 1 && proseEl) {
+    const nav = document.createElement('div');
+    nav.className = 'content-page-nav';
+    nav.innerHTML = `
+      <button id="page-prev" class="btn btn-sm btn-outline" disabled>← Previous</button>
+      <span id="page-counter">Page 1 of ${pageDivs.length}</span>
+      <button id="page-next" class="btn btn-sm btn-primary">Next →</button>
+    `;
+    proseEl.after(nav);
+
+    const prevBtn = document.getElementById('page-prev');
+    const nextBtn = document.getElementById('page-next');
+    if (prevBtn) prevBtn.addEventListener('click', () => goToPage(currentPage - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goToPage(currentPage + 1));
   }
 </script>
