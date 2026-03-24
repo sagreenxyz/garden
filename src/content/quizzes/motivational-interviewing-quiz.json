@@ -1,0 +1,159 @@
+{
+  "title": "Motivational Interviewing — Knowledge Check",
+  "description": "NCLEX-style formative assessment covering MI theory, OARS skills, change talk, sustain talk, discord, stages of change, ethics, and documentation.",
+  "tags": ["motivational interviewing", "communication", "behavior change", "counseling"],
+  "timeLimit": 30,
+  "passingScore": 75,
+  "draft": false,
+  "questions": [
+    {
+      "id": "mi-q1",
+      "text": "Which of the following best describes the foundational spirit of Motivational Interviewing (MI)?",
+      "type": "multiple-choice",
+      "options": [
+        "Confronting the patient with the consequences of unhealthy behavior",
+        "Providing expert advice and a clear action plan for the patient to follow",
+        "Collaborating with the patient to evoke their own motivation for change",
+        "Educating the patient about the health risks associated with their current behavior"
+      ],
+      "answer": "Collaborating with the patient to evoke their own motivation for change",
+      "explanation": "MI is a collaborative, person-centered style that draws out the patient's own motivations rather than imposing external reasons for change. The spirit of MI is captured in the PACE acronym: Partnership, Acceptance, Compassion, and Evocation."
+    },
+    {
+      "id": "mi-q2",
+      "text": "A nurse asks a patient, 'What concerns you most about your current diet?' This is an example of which OARS skill?",
+      "type": "multiple-choice",
+      "options": [
+        "Affirmation",
+        "Reflective listening",
+        "Open question",
+        "Summary"
+      ],
+      "answer": "Open question",
+      "explanation": "Open questions invite the patient to elaborate on their thoughts and feelings rather than responding with a simple yes/no. 'What concerns you most about your current diet?' is an open question that encourages the patient to explore their own perspective."
+    },
+    {
+      "id": "mi-q3",
+      "text": "A patient says, 'I've tried to quit smoking before, but it's just too hard.' The nurse responds, 'Quitting is really challenging, and you've already shown real courage by trying.' This response is an example of:",
+      "type": "multiple-choice",
+      "options": [
+        "A closed question",
+        "A double-sided reflection",
+        "An affirmation",
+        "A summary"
+      ],
+      "answer": "An affirmation",
+      "explanation": "An affirmation acknowledges the patient's strengths, efforts, or qualities in a genuine and specific way. Recognizing the patient's courage in attempting to quit is an affirmation that supports self-efficacy."
+    },
+    {
+      "id": "mi-q4",
+      "text": "According to the DARN-CAT framework, which of the following patient statements represents 'Commitment' (mobilizing change talk)?",
+      "type": "multiple-choice",
+      "options": [
+        "'I want to lose weight so I can play with my kids.'",
+        "'I think I could probably exercise more if I tried.'",
+        "'I will start walking every day, starting tomorrow.'",
+        "'I know I need to change my diet.'"
+      ],
+      "answer": "'I will start walking every day, starting tomorrow.'",
+      "explanation": "Commitment language reflects the patient's intention or decision to act. 'I will start walking every day' is Commitment (C in DARN-CAT). The other options reflect Desire, Ability, and Need — which are preparatory change talk, not mobilizing change talk."
+    },
+    {
+      "id": "mi-q5",
+      "text": "A nurse is counseling a patient about alcohol use. The patient says, 'Look, I'm here for my back pain — I don't need a lecture about my drinking.' Which MI-consistent response is most appropriate?",
+      "type": "multiple-choice",
+      "options": [
+        "Explain the relationship between alcohol use and back pain in detail",
+        "Acknowledge the patient's perspective and shift the focus back to their agenda",
+        "Document the patient as 'resistant' and end the behavior change conversation",
+        "Tell the patient that addressing alcohol use is required for treatment"
+      ],
+      "answer": "Acknowledge the patient's perspective and shift the focus back to their agenda",
+      "explanation": "The patient's response indicates discord — a signal that the nurse-patient collaboration has broken down. An MI-consistent response acknowledges the patient's point of view, affirms their autonomy, and shifts focus without confrontation or coercion."
+    },
+    {
+      "id": "mi-q6",
+      "text": "A patient with hypertension states: 'I know I should cut back on salt, but honestly I'm not even thinking about changing my diet right now.' According to the Transtheoretical Model, which stage of change is this patient in?",
+      "type": "multiple-choice",
+      "options": [
+        "Contemplation",
+        "Preparation",
+        "Pre-contemplation",
+        "Action"
+      ],
+      "answer": "Pre-contemplation",
+      "explanation": "Pre-contemplation is characterized by the patient not intending to change in the foreseeable future, often unaware or unwilling to acknowledge the problem. 'Not even thinking about changing' is a hallmark of this stage."
+    },
+    {
+      "id": "mi-q7",
+      "text": "Which of the following nursing documentation phrases is MOST consistent with MI principles?",
+      "type": "multiple-choice",
+      "options": [
+        "'Patient is non-compliant with dietary recommendations.'",
+        "'Patient is resistant to medication changes.'",
+        "'Patient stated, \"I'm not ready to change my diet yet\"; autonomy affirmed; MI engagement continued.'",
+        "'Patient refuses to cooperate with treatment plan.'"
+      ],
+      "answer": "'Patient stated, \"I'm not ready to change my diet yet\"; autonomy affirmed; MI engagement continued.'",
+      "explanation": "MI-consistent documentation uses the patient's own words, avoids value-laden language like 'non-compliant' or 'resistant,' and objectively describes the nursing approach. The other options use stigmatizing language that can negatively color how other clinicians view the patient."
+    },
+    {
+      "id": "mi-q8",
+      "text": "The 'righting reflex' in MI refers to:",
+      "type": "multiple-choice",
+      "options": [
+        "The patient's tendency to become defensive when confronted about health behaviors",
+        "The nurse's natural impulse to correct problems by telling patients what to do",
+        "A technique for redirecting patient sustain talk toward change talk",
+        "The process of shifting from Evoking to Planning in an MI encounter"
+      ],
+      "answer": "The nurse's natural impulse to correct problems by telling patients what to do",
+      "explanation": "The righting reflex is the clinician's instinct to fix, warn, advise, and direct. While well-intentioned, it often provokes discord and sustain talk, and is counter to the evocative, collaborative MI spirit."
+    },
+    {
+      "id": "mi-q9",
+      "text": "Which ethical principle is MOST central to the practice of Motivational Interviewing?",
+      "type": "multiple-choice",
+      "options": [
+        "Beneficence — acting in the patient's best clinical interest",
+        "Non-maleficence — avoiding harm through inaction",
+        "Autonomy — supporting the patient's right to make their own decisions",
+        "Justice — ensuring equitable access to behavior change resources"
+      ],
+      "answer": "Autonomy — supporting the patient's right to make their own decisions",
+      "explanation": "Respect for patient autonomy is the ethical cornerstone of MI. MI practitioners evoke the patient's own values and reasons for change rather than imposing external judgments, reflecting genuine respect for the patient's right to self-determination."
+    },
+    {
+      "id": "mi-q10",
+      "text": "A nurse completes an MI encounter with a patient who is in the Contemplation stage regarding physical activity. Which of the following is the MOST appropriate plan to document?",
+      "type": "multiple-choice",
+      "options": [
+        "Referred patient to gym membership program and scheduled 3-month follow-up",
+        "Explored patient's ambivalence regarding physical activity; patient identified 'wanting to feel better' as motivation; importance ruler score 7/10, confidence 4/10; patient agreed to think about one small step before next visit",
+        "Patient refused all recommendations for increasing physical activity; will re-address at next visit",
+        "Educated patient on the health benefits of regular exercise and provided brochure"
+      ],
+      "answer": "Explored patient's ambivalence regarding physical activity; patient identified 'wanting to feel better' as motivation; importance ruler score 7/10, confidence 4/10; patient agreed to think about one small step before next visit",
+      "explanation": "For a Contemplation-stage patient, the appropriate MI strategy is to explore ambivalence, develop discrepancy, and build motivation without pushing to action. This documentation accurately reflects the MI process, uses objective language, and describes a patient-appropriate goal (thinking about a small step, not committing to action)."
+    },
+    {
+      "id": "mi-q11",
+      "text": "This is true: A nurse should argue persuasively for behavior change when a patient's health is at serious risk.",
+      "type": "true-false",
+      "options": ["True", "False"],
+      "answer": "False",
+      "explanation": "Even when health risks are serious, MI principles discourage arguing for change. Arguing typically activates the patient's sustain talk (defending the status quo) and damages the therapeutic relationship. Instead, the nurse should express genuine concern, offer information with permission, and continue to evoke the patient's own motivations."
+    },
+    {
+      "id": "mi-q12",
+      "text": "Describe one key difference between a simple reflection and a complex reflection in Motivational Interviewing.",
+      "type": "short-answer",
+      "answer": [
+        "A simple reflection mirrors back the patient's words or meaning without adding new content. A complex reflection adds meaning, infers feelings, or goes slightly beyond what the patient said to deepen understanding.",
+        "Simple reflections restate what the patient said; complex reflections add meaning or inferred emotion.",
+        "A simple reflection repeats content; a complex reflection adds feeling or implied meaning."
+      ],
+      "explanation": "Simple reflections demonstrate active listening by restating patient statements. Complex reflections deepen the exploration by adding inferred feelings, meaning, or perspective — they help patients feel deeply heard and often elicit further elaboration and change talk."
+    }
+  ]
+}
