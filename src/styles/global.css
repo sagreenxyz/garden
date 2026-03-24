@@ -48,12 +48,7 @@ body {
   cursor: help;
 }
 
-/* ── Hero lightning bolt gradient ───────────────────────────────────────── */
-.bolt-gradient {
-  fill: url(#bolt-grad);
-}
-
-/* ── Feature card hover lift ────────────────────────────────────────────── */
+/* ── Hero lightning bolt gradient ───────────────────────────────────────── */ /* ── Feature card hover lift ────────────────────────────────────────────── */
 .feature-card {
   transition:
     box-shadow 0.2s ease,

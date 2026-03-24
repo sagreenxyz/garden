@@ -202,7 +202,7 @@ const base = import.meta.env.BASE_URL;
         li.style.paddingLeft = h.tagName === 'H3' ? '0.75rem' : '0';
         const a = document.createElement('a');
         a.href = `#${h.id}`;
-        a.textContent = `${i + 1}. ${h.textContent}`;
+        a.textContent = `${i + 1}. ${h.innerText ?? h.textContent ?? ''}`.trim();
         li.appendChild(a);
         tocList.appendChild(li);
       });
