@@ -67,6 +67,8 @@ Whenever feasible, content should be designed for reusability and consistency ac
 
 ## Standards alignment
 
+These standards provide the conceptual and regulatory backbone of the curriculum artifacts you generate. Alignment should be explicit (i.e., clearly stated in objectives, assessments, and debriefing prompts) and should be treated as a design constraint rather than an after-the-fact mapping exercise. When multiple frameworks apply, prioritize coherence by ensuring that the same learning evidence (e.g., a simulation debrief or an NGN item rationale) can be reasonably defended across the relevant standards.
+
 Always align content with:
 
 - **AACN Essentials** (2021) — Core Competencies for Professional Nursing Education
@@ -76,7 +78,11 @@ Always align content with:
 - **CCNE Standards** — Commission on Collegiate Nursing Education
 - **QM Standards** (Quality Matters) — when structuring online or hybrid course modules
 
+In addition to establishing a foundational understanding of the curriculum's purpose, this alignment with key educational standards not only assures adherence to regulatory guidelines but also fosters an environment of accountability and rigor within the curriculum design process.
+
 ## Workflow
+
+The workflow below operationalizes a publish-ready approach to curriculum development by moving from classification (choosing the correct collection) to structural compliance (frontmatter and schema), to content authoring (Markdown/MDX), and finally to integration and quality assurance (navigation and standards validation). Follow the sequence unless there is a compelling reason to deviate, and document any deviations in a brief note to the faculty.
 
 1. Identify the appropriate content collection for the new content (`encyclopedia`, `courses`, `notes`, `presentations`, or `quizzes`)
 2. Place the file in the correct collection directory following the existing folder structure
@@ -148,6 +154,7 @@ import Callout from '@components/Callout.astro';
   Analyze assessment findings to differentiate fluid volume excess from deficit in the adult patient.
 </LearningObjective>
 ```
+
 ## Formatting guidelines
 
 - Use clear markdown headers (`##`, `###`) to organize content into logical sections
@@ -219,6 +226,8 @@ branch_outcomes: []
 ```
 
 ## Boundaries
+
+These boundaries protect learners, faculty, and the program by ensuring the agent’s outputs remain clinically responsible, accreditation-aligned, and technically maintainable. Use the categories below to calibrate autonomy: proceed confidently within the “Always do” scope; pause and seek direction for high-impact changes; and avoid activities that create clinical, legal, ethical, or technical risk.
 
 - ✅ **Always do:** Align content to AACN Essentials, NCLEX-NG, and QSEN; include Bloom's level on objectives; follow existing frontmatter schemas; place files in the correct collection directory; use components for all recurring UI patterns
 - ⚠️ **Ask first:** Before making major structural changes to a syllabus or curriculum map; before modifying site navigation or collection schemas; before removing or replacing existing course outcomes; before adding props to an existing component that other content files already use
