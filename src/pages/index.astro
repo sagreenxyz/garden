@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const sections = [
+  {
+    title: 'Encyclopedia',
+    href: `${base}encyclopedia/`,
+    description: 'Reference articles on specific topics',
+    icon: '📖',
+  },
+  {
+    title: 'Courses',
+    href: `${base}courses/`,
+    description: 'Structured learning paths with ordered lessons',
+    icon: '🎓',
+  },
+  {
+    title: 'Notes',
+    href: `${base}notes/`,
+    description: 'Quick personal notes and references',
+    icon: '📝',
+  },
+  {
+    title: 'Presentations',
+    href: `${base}presentations/`,
+    description: 'Slide-based content',
+    icon: '📊',
+  },
+  {
+    title: 'Quizzes',
+    href: `${base}quizzes/`,
+    description: 'Assessments to test your knowledge',
+    icon: '✅',
+  },
+];
+---
+
+<BaseLayout title="Home" description="Welcome to the Astro LMS">
+  <section class="hero">
+    <h1>Welcome to Astro LMS</h1>
+    <p>A Learning Management System built with Astro.build and published on GitHub Pages.</p>
+  </section>
+
+  <section class="content-grid">
+    {
+      sections.map((section) => (
+        <a href={section.href} class="content-card">
+          <span class="card-icon">{section.icon}</span>
+          <h2>{section.title}</h2>
+          <p>{section.description}</p>
+        </a>
+      ))
+    }
+  </section>
+</BaseLayout>

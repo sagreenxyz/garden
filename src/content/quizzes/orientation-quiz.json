@@ -1,0 +1,32 @@
+{
+  "title": "LMS Orientation Quiz",
+  "description": "Test your knowledge of the LMS basics.",
+  "tags": ["orientation", "lms"],
+  "passingScore": 70,
+  "draft": false,
+  "questions": [
+    {
+      "id": "q1",
+      "text": "Which framework is this LMS built with?",
+      "type": "multiple-choice",
+      "options": ["Next.js", "Astro.build", "Nuxt", "SvelteKit"],
+      "answer": "Astro.build",
+      "explanation": "This LMS is built with Astro.build, a modern static site generator."
+    },
+    {
+      "id": "q2",
+      "text": "This LMS is hosted on GitHub Pages.",
+      "type": "true-false",
+      "options": ["True", "False"],
+      "answer": "True",
+      "explanation": "GitHub Pages is used for static hosting."
+    },
+    {
+      "id": "q3",
+      "text": "Name one content type available in this LMS.",
+      "type": "short-answer",
+      "answer": ["encyclopedia", "courses", "notes", "presentations", "quizzes"],
+      "explanation": "The LMS supports encyclopedia entries, courses, notes, presentations, and quizzes."
+    }
+  ]
+}

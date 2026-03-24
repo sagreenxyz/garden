@@ -1,0 +1,110 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection('quizzes', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+};
+
+const { entry } = Astro.props;
+const quiz = entry.data;
+---
+
+<BaseLayout title={quiz.title} description={quiz.description}>
+  <article class="quiz">
+    <h1>{quiz.title}</h1>
+    {quiz.description && <p>{quiz.description}</p>}
+    <p>
+      <strong>Questions:</strong>
+      {quiz.questions.length} &nbsp;|&nbsp;
+      <strong>Passing score:</strong>
+      {quiz.passingScore}%
+      {
+        quiz.timeLimit && (
+          <>
+            {' '}
+            &nbsp;|&nbsp;<strong>Time limit:</strong> {quiz.timeLimit} min
+          </>
+        )
+      }
+    </p>
+
+    <form id="quiz-form" class="quiz-form">
+      {
+        quiz.questions.map((q, i) => (
+          <fieldset class="quiz-question">
+            <legend>
+              {i + 1}. {q.text}
+            </legend>
+
+            {q.type === 'multiple-choice' &&
+              q.options?.map((opt) => (
+                <label>
+                  <input type="radio" name={q.id} value={opt} required />
+                  {opt}
+                </label>
+              ))}
+
+            {q.type === 'true-false' && (
+              <>
+                <label>
+                  <input type="radio" name={q.id} value="True" required />
+                  True
+                </label>
+                <label>
+                  <input type="radio" name={q.id} value="False" required />
+                  False
+                </label>
+              </>
+            )}
+
+            {q.type === 'short-answer' && (
+              <input type="text" name={q.id} placeholder="Your answer" required />
+            )}
+          </fieldset>
+        ))
+      }
+
+      <button type="submit">Submit Quiz</button>
+    </form>
+
+    <div id="quiz-result" hidden>
+      <h2>Results</h2>
+      <p id="quiz-score"></p>
+    </div>
+  </article>
+</BaseLayout>
+
+<script define:vars={{ quiz }}>
+  const form = document.getElementById('quiz-form');
+  const resultDiv = document.getElementById('quiz-result');
+  const scoreP = document.getElementById('quiz-score');
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const data = new FormData(form);
+    let correct = 0;
+
+    quiz.questions.forEach((q) => {
+      const userAnswer = (data.get(q.id) ?? '').toString().trim().toLowerCase();
+      const expected = Array.isArray(q.answer)
+        ? q.answer.map((a) => a.toLowerCase())
+        : [q.answer.toLowerCase()];
+      if (expected.includes(userAnswer)) correct++;
+    });
+
+    const pct = Math.round((correct / quiz.questions.length) * 100);
+    const passed = pct >= quiz.passingScore;
+
+    if (scoreP) {
+      scoreP.textContent = `You answered ${correct} of ${quiz.questions.length} correctly (${pct}%). ${passed ? '✅ Passed!' : '❌ Did not pass.'}`;
+    }
+    if (resultDiv) resultDiv.hidden = false;
+    form.hidden = true;
+  });
+</script>

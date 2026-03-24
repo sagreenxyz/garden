@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const entries = await getCollection('quizzes', ({ data }) => !data.draft);
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Quizzes" description="Assessments to test your knowledge">
+  <h1>Quizzes & Exams</h1>
+  <p>Test your knowledge with these assessments.</p>
+
+  {
+    entries.length === 0 ? (
+      <p>
+        No quizzes yet. Add JSON files to <code>src/content/quizzes/</code>.
+      </p>
+    ) : (
+      <ul class="entry-list">
+        {entries.map((entry) => (
+          <li>
+            <a href={`${base}quizzes/${entry.id}/`}>
+              <strong>{entry.data.title}</strong>
+            </a>
+            {entry.data.description && <p>{entry.data.description}</p>}
+            <p>
+              <strong>Questions:</strong> {entry.data.questions.length} &nbsp;|&nbsp;
+              <strong>Passing score:</strong> {entry.data.passingScore}%
+              {entry.data.timeLimit && (
+                <>
+                  &nbsp;|&nbsp;<strong>Time limit:</strong> {entry.data.timeLimit} min
+                </>
+              )}
+            </p>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

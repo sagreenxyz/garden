@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const entries = await getCollection('encyclopedia', ({ data }) => !data.draft);
+entries.sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Encyclopedia" description="Reference articles on specific topics">
+  <h1>Encyclopedia</h1>
+  <p>Browse reference articles on specific topics.</p>
+
+  {
+    entries.length === 0 ? (
+      <p>
+        No entries yet. Add Markdown files to <code>src/content/encyclopedia/</code>.
+      </p>
+    ) : (
+      <ul class="entry-list">
+        {entries.map((entry) => (
+          <li>
+            <a href={`${base}encyclopedia/${entry.slug}/`}>
+              <strong>{entry.data.title}</strong>
+            </a>
+            <p>{entry.data.summary}</p>
+            {entry.data.tags.length > 0 && (
+              <ul class="tag-list">
+                {entry.data.tags.map((tag) => (
+                  <li class="tag">{tag}</li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

@@ -1,0 +1,47 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+export interface Props {
+  title: string;
+  description?: string;
+  publishedAt?: Date;
+  updatedAt?: Date;
+  tags?: string[];
+}
+
+const { title, description, publishedAt, updatedAt, tags = [] } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="content-article">
+    <header class="content-header">
+      <h1>{title}</h1>
+      {description && <p class="content-description">{description}</p>}
+      {
+        tags.length > 0 && (
+          <ul class="content-tags">
+            {tags.map((tag) => (
+              <li class="tag">{tag}</li>
+            ))}
+          </ul>
+        )
+      }
+      {
+        publishedAt && (
+          <time datetime={publishedAt.toISOString()}>
+            Published: {publishedAt.toLocaleDateString()}
+          </time>
+        )
+      }
+      {
+        updatedAt && (
+          <time datetime={updatedAt.toISOString()}>Updated: {updatedAt.toLocaleDateString()}</time>
+        )
+      }
+    </header>
+
+    <div class="content-body">
+      <slot />
+    </div>
+  </article>
+</BaseLayout>

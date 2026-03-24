@@ -1,0 +1,13 @@
+---
+title: 'Project Setup Notes'
+tags: ['setup', 'astro', 'lms']
+createdAt: 2026-03-24
+draft: false
+---
+
+## Setup Notes
+
+- Astro.build chosen as the framework
+- GitHub Pages for hosting
+- Content collections used for structured content management
+- TypeScript strict mode enabled
