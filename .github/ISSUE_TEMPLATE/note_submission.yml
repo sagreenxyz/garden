@@ -1,36 +1,32 @@
-name: Invoke BSN User Agent
-description: Submit a note or request for BSN processing, cleanup, and cross-referencing.
-title: '[BSN]: '
+name: Note Submission
+description: Submit a raw note to be cleaned, organized, and converted into a structured note draft.
+title: '[Note]: '
 labels:
-  - bsn
   - note
   - submission
 body:
   - type: markdown
     attributes:
       value: |
-        Use this template to explicitly invoke the BSN user agent to clean, structure, and cross-reference a note.
+        Use this template to submit rough notes. The agent will clean, organize, label, and cross-reference them.
         If the agent confidence is low the note will be placed in **needs-review** state and not published automatically.
+
+  - type: input
+    id: title
+    attributes:
+      label: Suggested Title
+      description: A short title for the note.
+      placeholder: 'Meeting notes on protected content workflow'
+    validations:
+      required: true
 
   - type: textarea
     id: raw_notes
     attributes:
       label: Raw Notes
-      description: Paste the content to be processed by BSN.
+      description: Paste your raw notes here.
       placeholder: |
-        Enter the notes you want BSN to clean up...
-    validations:
-      required: true
-
-  - type: dropdown
-    id: output_mode
-    attributes:
-      label: Desired Output
-      description: What should BSN create?
-      options:
-        - Draft note only
-        - Private note page
-        - Public note page
+        Enter your raw notes...
     validations:
       required: true
 
@@ -38,7 +34,7 @@ body:
     id: visibility
     attributes:
       label: Visibility
-      description: Should the note be public, private, or protected?
+      description: Should this note be public, private, or protected?
       options:
         - public
         - private
@@ -66,13 +62,13 @@ body:
     attributes:
       label: Tags
       description: Comma-separated tags for the note.
-      placeholder: 'bsn, notes, workflow'
+      placeholder: 'astro, notes, workflow'
 
   - type: input
     id: source_issue
     attributes:
       label: Source / Reference URL
-      description: URL of the originating issue or external reference for this note.
+      description: URL of a related issue, article, or external resource that this note is based on.
       placeholder: 'https://github.com/sagreenxyz/astro2/issues/123'
 
   - type: input
@@ -80,17 +76,15 @@ body:
     attributes:
       label: Related Internal Links
       description: Comma-separated paths to related pages in this site.
-      placeholder: '/notes/index, /encyclopedia/topic'
+      placeholder: '/notes/project-setup, /encyclopedia/some-topic'
 
   - type: checkboxes
     id: processing
     attributes:
-      label: BSN Actions
+      label: Processing Options
       options:
-        - label: Invoke BSN processing
+        - label: Convert this issue into a structured note draft
           required: true
-        - label: Clean and organize the note
-          required: true
-        - label: Cross-reference internal repository content
-        - label: Keep the result protected/private if visibility requires it
-        - label: Flag for review if the agent confidence is low before publishing
+        - label: Cross-reference related repository content
+        - label: Place the result on the protected/private side if visibility requires it
+        - label: Flag for manual review before publishing if agent confidence is low

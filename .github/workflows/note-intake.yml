@@ -1,0 +1,101 @@
+name: Note Intake Workflow
+
+# Triggered when a new issue is opened or labeled with 'note' or 'bsn'.
+# The workflow parses the issue body, performs duplicate detection, assesses
+# confidence, and either generates a note draft or leaves it in needs-review state.
+on:
+  issues:
+    types:
+      - opened
+      - labeled
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  process-note:
+    name: Process Note Submission
+    runs-on: ubuntu-latest
+    # Only run when the issue carries a note or bsn label
+    if: |
+      contains(github.event.issue.labels.*.name, 'note') ||
+      contains(github.event.issue.labels.*.name, 'bsn')
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      # ── Parse issue body ────────────────────────────────────────────────────
+      - name: Parse issue and generate note
+        id: generate
+        env:
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_LABELS: ${{ toJson(github.event.issue.labels.*.name) }}
+          REPO: ${{ github.repository }}
+        run: node .github/scripts/process-note.mjs
+
+      # ── Commit the generated file (if any) ─────────────────────────────────
+      - name: Commit note file
+        if: steps.generate.outputs.note_file != ''
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add "src/content/notes/${{ steps.generate.outputs.note_file }}"
+          git commit -m "note: add draft from issue #${{ github.event.issue.number }}"
+          git push
+
+      # ── Apply labels ────────────────────────────────────────────────────────
+      - name: Apply needs-review label
+        if: steps.generate.outputs.review_state == 'needs-review'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['needs-review'],
+            });
+
+      - name: Apply draft label
+        if: steps.generate.outputs.review_state == 'draft'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.addLabels({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ['draft'],
+            });
+
+      # ── Post result comment ─────────────────────────────────────────────────
+      - name: Post result comment
+        uses: actions/github-script@v7
+        env:
+          COMMENT_BODY: ${{ steps.generate.outputs.comment_body }}
+        with:
+          script: |
+            const body = process.env.COMMENT_BODY;
+            if (!body) return;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });

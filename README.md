@@ -157,10 +157,23 @@ title: 'My Note'
 tags: ['quick-ref']
 createdAt: 2026-01-01
 draft: false
+visibility: public # public | private | protected
+noteType: reference # general | meeting | idea | reference | task | research
+reviewState: published # published | needs-review | draft
+# sourceIssue: 'https://github.com/sagreenxyz/astro2/issues/123'
+# relatedLinks: ['/notes/other-note', '/encyclopedia/topic']
 ---
 
 Note content...
 ```
+
+- Notes with `visibility: public` (default) appear in the public `/notes/` index.
+- Notes with `visibility: private` or `visibility: protected` appear only in the auth-gated `/private/notes/` hub.
+- Notes with `reviewState: needs-review` are held as drafts and shown only in the private hub's **Pending Review** section until manually approved.
+- Use `sourceIssue` to record the originating GitHub Issue URL (provenance).
+- Use `relatedLinks` to cross-reference internal pages or external resources.
+
+You can also submit a note via a GitHub Issue — see [Issue-to-Note Workflow](#issue-to-note-workflow) below.
 
 ### Presentation
 
@@ -233,6 +246,85 @@ Add an entry to `src/data/glossary.json`:
 ```
 
 The term will automatically appear in the `/glossary/` page and can be referenced in any `.mdx` or `.astro` file using the `<KeyTerm>` Svelte component.
+
+---
+
+## Issue-to-Note Workflow
+
+This repository supports an issue-driven note capture workflow. Submit raw notes via GitHub Issues and the automation cleans, structures, and stores them as `.mdx` files.
+
+### Available Issue Templates
+
+| Template                  | Purpose                                                      |
+| ------------------------- | ------------------------------------------------------------ |
+| **Note Submission**       | Submit raw notes for conversion into a structured note draft |
+| **Invoke BSN User Agent** | Request full BSN processing, cleanup, and cross-referencing  |
+
+Open a new issue at: `https://github.com/sagreenxyz/astro2/issues/new/choose`
+
+### How it works
+
+1. Open a GitHub Issue using one of the note templates.
+2. Fill in the raw notes, visibility preference, note type, tags, and any related links.
+3. Submit the issue. The `note-intake` GitHub Actions workflow triggers automatically.
+4. The workflow:
+   - Parses the issue body to extract all fields
+   - Assesses **agent confidence** based on content length, title, and tags
+   - Performs **duplicate detection** by comparing new content against existing notes
+   - Writes a `.mdx` file to `src/content/notes/`
+   - Sets the `reviewState` based on confidence:
+     - `high` → `published` (note goes live on next deploy)
+     - `medium` / `low` → `needs-review` (note is created as a draft, not published publicly)
+   - Posts a summary comment on the issue explaining what was done
+
+### Labels used
+
+| Label          | Meaning                                           |
+| -------------- | ------------------------------------------------- |
+| `note`         | Triggers the note-intake workflow                 |
+| `bsn`          | BSN agent invocation (also triggers note-intake)  |
+| `submission`   | Added automatically to all note submissions       |
+| `needs-review` | Agent confidence was low — note is in draft state |
+| `draft`        | Note created but not yet published                |
+
+### Low-confidence / review fallback
+
+If the agent cannot confidently process a note (e.g. content is too short, no title, no tags), it:
+
+- Sets `reviewState: needs-review` and `draft: true` in the frontmatter
+- Labels the issue `needs-review`
+- Posts a comment explaining why and what to fix
+
+To promote a draft note to published:
+
+1. Edit `src/content/notes/<slug>.mdx`
+2. Set `draft: false` and `reviewState: published`
+3. Commit and push — the note will appear in the appropriate index on next deploy
+
+### Duplicate detection
+
+When a new note is submitted, the workflow compares it against all existing notes using word-overlap similarity. If a potential duplicate is found:
+
+- The `duplicateOf` frontmatter field is set to the slug of the similar note
+- A warning is shown on the note detail page
+- The issue comment lists the possible duplicate(s) for manual review
+
+### Note visibility routing
+
+| `visibility` value | URL                                  |
+| ------------------ | ------------------------------------ |
+| `public` (default) | `/notes/` — public, no auth required |
+| `private`          | `/private/notes/` — auth-gated       |
+| `protected`        | `/private/notes/` — auth-gated       |
+
+### Provenance and related links
+
+The note frontmatter stores:
+
+- `sourceIssue` — URL of the originating GitHub Issue
+- `relatedLinks` — array of internal paths or external URLs
+
+Both are displayed at the bottom of note detail pages as a provenance and cross-reference section.
 
 ---
 
@@ -489,7 +581,7 @@ const base = import.meta.env.BASE_URL;
 
 #### Private vs public notes routing
 
-Notes with `visibility: 'private'` should only appear under `/private/notes/` (auth-gated). Notes with `visibility: 'public'` (or no visibility field, which defaults to `'public'`) appear under the public `/notes/` listing. Both listing and detail pages filter using this field — if you add a new visibility-aware page, make sure to apply the same filter to `getCollection`.
+Notes with `visibility: 'private'` or `visibility: 'protected'` appear only under `/private/notes/` (auth-gated). Notes with `visibility: 'public'` (or no visibility field, which defaults to `'public'`) appear under the public `/notes/` listing. Notes with `reviewState: 'needs-review'` are shown in the private hub's **Pending Review** section regardless of visibility — they are never shown on the public index. If you add a new visibility-aware page, apply the same filter to `getCollection`.
 
 ---
 

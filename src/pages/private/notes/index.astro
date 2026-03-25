@@ -1,0 +1,161 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+// Only private and protected notes appear here; draft and needs-review notes are listed
+// for review but visually distinguished so the authenticated user can act on them.
+const allNotes = await getCollection(
+  'notes',
+  ({ data }) => data.visibility === 'private' || data.visibility === 'protected'
+);
+allNotes.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime());
+
+const needsReview = allNotes.filter((e) => e.data.reviewState === 'needs-review' || e.data.draft);
+const published = allNotes.filter((e) => e.data.reviewState === 'published' && !e.data.draft);
+
+const base = import.meta.env.BASE_URL;
+
+function reviewStateBadge(state: string) {
+  if (state === 'needs-review') return 'badge-warning';
+  if (state === 'draft') return 'badge-ghost';
+  return 'badge-success';
+}
+---
+
+<BaseLayout title="Private Notes" description="Private and protected notes hub">
+  <div id="private-notes-content" hidden>
+    <div class="flex items-center gap-3 mb-2">
+      <h1 class="text-3xl font-bold">Private Notes</h1>
+      <span class="badge badge-outline badge-sm font-sans">🔒 protected</span>
+    </div>
+    <p class="text-base-content/60 font-sans mb-8">
+      Private and protected notes visible only after authentication. Notes marked
+      <strong>needs-review</strong> were flagged by the agent as low-confidence and have not been published
+      publicly.
+    </p>
+
+    {
+      needsReview.length > 0 && (
+        <section class="mb-10">
+          <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+            <span class="badge badge-warning badge-sm">needs-review</span> Pending Review
+          </h2>
+          <p class="text-sm text-base-content/60 font-sans mb-4">
+            These notes were left in draft/review state because the agent confidence was low or the
+            content requires manual verification before publishing.
+          </p>
+          <ul class="space-y-4">
+            {needsReview.map((entry) => (
+              <li>
+                <a
+                  href={`${base}private/notes/${entry.slug}/`}
+                  class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans block border-warning/40"
+                >
+                  <div class="card-body py-4">
+                    <div class="flex items-start justify-between gap-2">
+                      <h3 class="card-title text-base">{entry.data.title}</h3>
+                      <span class={`badge badge-sm ${reviewStateBadge(entry.data.reviewState)}`}>
+                        {entry.data.draft ? 'draft' : entry.data.reviewState}
+                      </span>
+                    </div>
+                    <time
+                      datetime={entry.data.createdAt.toISOString()}
+                      class="text-xs text-base-content/40 mt-1"
+                    >
+                      {entry.data.createdAt.toLocaleDateString()}
+                    </time>
+                    {entry.data.confidence && (
+                      <span class="text-xs text-base-content/50 font-sans">
+                        Agent confidence: {entry.data.confidence}
+                      </span>
+                    )}
+                    {entry.data.tags.length > 0 && (
+                      <div class="flex flex-wrap gap-1 mt-2">
+                        {entry.data.tags.map((tag) => (
+                          <span class="badge badge-outline badge-sm">{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <section>
+      <h2 class="text-xl font-semibold mb-4">Published Private Notes</h2>
+      {
+        published.length === 0 ? (
+          <div class="alert font-sans text-sm">
+            <span>No published private notes yet.</span>
+          </div>
+        ) : (
+          <ul class="space-y-4">
+            {published.map((entry) => (
+              <li>
+                <a
+                  href={`${base}private/notes/${entry.slug}/`}
+                  class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans block"
+                >
+                  <div class="card-body py-4">
+                    <div class="flex items-start justify-between gap-2">
+                      <h3 class="card-title text-base">{entry.data.title}</h3>
+                      <span class="badge badge-outline badge-sm">{entry.data.visibility}</span>
+                    </div>
+                    <time
+                      datetime={entry.data.createdAt.toISOString()}
+                      class="text-xs text-base-content/40 mt-1"
+                    >
+                      {entry.data.createdAt.toLocaleDateString()}
+                    </time>
+                    {entry.data.tags.length > 0 && (
+                      <div class="flex flex-wrap gap-1 mt-2">
+                        {entry.data.tags.map((tag) => (
+                          <span class="badge badge-outline badge-sm">{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                    {entry.data.noteType && entry.data.noteType !== 'general' && (
+                      <span class="badge badge-ghost badge-sm mt-1">{entry.data.noteType}</span>
+                    )}
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+
+    <div class="mt-10 pt-6 border-t border-base-300 flex gap-3">
+      <a href={`${base}private/`} class="btn btn-ghost btn-sm font-sans">← Private Home</a>
+      <button id="logout-btn" class="btn btn-outline btn-sm font-sans">Sign Out</button>
+    </div>
+  </div>
+</BaseLayout>
+
+<script define:vars={{ base }}>
+  const SESSION_KEY = 'lms_auth';
+  const REDIRECT_KEY = 'lms_redirect';
+
+  const content = document.getElementById('private-notes-content');
+  const logoutBtn = document.getElementById('logout-btn');
+
+  if (sessionStorage.getItem(SESSION_KEY) === 'ok') {
+    if (content) content.hidden = false;
+  } else {
+    sessionStorage.setItem(
+      REDIRECT_KEY,
+      window.location.pathname + window.location.search + window.location.hash
+    );
+    window.location.replace(base + 'login/');
+  }
+
+  logoutBtn?.addEventListener('click', () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    window.location.replace(base + 'login/');
+  });
+</script>

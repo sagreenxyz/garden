@@ -1,0 +1,40 @@
+---
+title: 'Private Workflow Notes'
+tags: ['workflow', 'private', 'notes']
+createdAt: 2026-03-25
+draft: false
+visibility: private
+noteType: reference
+reviewState: published
+relatedLinks:
+  - '/notes/'
+  - '/private/'
+---
+
+## Private Workflow Notes
+
+These notes are only visible in the authenticated `/private/notes/` area.
+
+### Note Visibility Rules
+
+| Value       | Where visible                      |
+| ----------- | ---------------------------------- |
+| `public`    | Public `/notes/` index             |
+| `private`   | Private `/private/notes/` hub only |
+| `protected` | Private `/private/notes/` hub only |
+
+### Review State Rules
+
+| Value          | Behaviour                                                               |
+| -------------- | ----------------------------------------------------------------------- |
+| `published`    | Shown in the appropriate listing                                        |
+| `needs-review` | Listed under **Pending Review** in the private hub — not shown publicly |
+| `draft`        | Listed under **Pending Review** in the private hub — not shown publicly |
+
+### Agent Confidence
+
+When the note-intake workflow runs, it assigns a confidence level:
+
+- `high` — note is published automatically
+- `medium` — note is published with a warning comment on the issue
+- `low` — note is placed in `needs-review` state and not published until manually approved
