@@ -1,0 +1,77 @@
+name: Practice Test Notes
+description: >
+  Capture notes from a HESL or Silvestri practice quiz. The agent will
+  format the note, structure it into clear sections, and generate keyword
+  tags automatically from the topic and note content.
+title: '[Practice Test Notes]: '
+labels:
+  - note
+  - practice-test
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to record notes from a practice quiz.
+        **You do not need to supply tags** — the agent extracts keywords from your topic and notes automatically.
+
+        Fill in the quiz source, the topic the quiz covered, and your notes.
+        The agent will produce a structured, publish-ready reference note.
+
+  - type: dropdown
+    id: quiz_source
+    attributes:
+      label: Quiz Source
+      description: Which practice quiz are these notes from?
+      options:
+        - HESL Practice Quiz
+        - Silvestri Practice Quiz
+    validations:
+      required: true
+
+  - type: input
+    id: quiz_topic
+    attributes:
+      label: Quiz Topic
+      description: The subject area, chapter, or concept cluster this quiz covers.
+      placeholder: 'e.g., Fluid and Electrolyte Balance, Cardiac Pharmacology, Respiratory Assessment'
+    validations:
+      required: true
+
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: >
+        Your notes from the quiz. Include key concepts, rationales, mnemonics,
+        areas of difficulty, commonly missed points, or any content you want to
+        reinforce. Bullet points, numbered lists, and short paragraphs all work.
+      placeholder: |
+        - Key concept: ...
+        - Rationale: ...
+        - Mnemonic: ...
+        - Commonly missed: ...
+        - Remember: ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: visibility
+    attributes:
+      label: Visibility
+      description: Should this note be publicly visible or limited to authenticated users?
+      options:
+        - public
+        - protected
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: processing
+    attributes:
+      label: Processing Options
+      options:
+        - label: Format into a structured reference note with metadata header
+          required: true
+        - label: Auto-generate keyword tags from the topic and note content
+        - label: Cross-reference related content already in the repository
+        - label: Flag for manual review before publishing if agent confidence is low
