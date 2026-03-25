@@ -17,10 +17,11 @@ jobs:
   process-note:
     name: Process Note Submission
     runs-on: ubuntu-latest
-    # Only run when the issue carries a note or bsn label
+    # Only run when the issue carries a note, bsn, or practice-test label
     if: |
       contains(github.event.issue.labels.*.name, 'note') ||
-      contains(github.event.issue.labels.*.name, 'bsn')
+      contains(github.event.issue.labels.*.name, 'bsn') ||
+      contains(github.event.issue.labels.*.name, 'practice-test')
 
     steps:
       - name: Checkout repository
