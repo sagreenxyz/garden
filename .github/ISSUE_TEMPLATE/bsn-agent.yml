@@ -1,44 +1,72 @@
-name: Invoke BSN User Agent
-description: Submit a note or request for BSN processing, cleanup, and cross-referencing.
+name: Invoke BSN Curriculum Agent
+description: Request the BSN Curriculum Agent to create, update, or align nursing educational content in the LMS.
 title: '[BSN]: '
 labels:
   - bsn
-  - note
   - submission
 body:
   - type: markdown
     attributes:
       value: |
-        Use this template to explicitly invoke the BSN user agent to clean, structure, and cross-reference a note.
-        If the agent confidence is low the note will be placed in **needs-review** state and not published automatically.
+        Use this template to invoke the **BSN Curriculum Agent** to create or update nursing educational content.
 
-  - type: textarea
-    id: raw_notes
-    attributes:
-      label: Raw Notes
-      description: Paste the content to be processed by BSN.
-      placeholder: |
-        Enter the notes you want BSN to clean up...
-    validations:
-      required: true
+        The agent can produce course modules, encyclopedia entries, reference notes, quizzes, and presentations.
+        It will automatically determine the appropriate **AACN Essentials (2021)**, **QSEN competencies**,
+        **NCLEX-NG**, **CCNE/ACEN accreditation standard** alignments, and course level from the content you provide.
+
+        Fill in as many fields as possible. The more context you provide, the higher the agent's confidence and the
+        better the resulting content. Required fields are marked with an asterisk (*).
 
   - type: dropdown
-    id: output_mode
+    id: content_type
     attributes:
-      label: Desired Output
-      description: What should BSN create?
+      label: Content Type *
+      description: What type of LMS content should be created or updated?
       options:
-        - Draft note only
-        - Private note page
-        - Public note page
+        - Course module
+        - Encyclopedia entry
+        - Reference note
+        - Quiz / Assessment
+        - Presentation
     validations:
       required: true
+
+  - type: input
+    id: title
+    attributes:
+      label: Suggested Title or Topic *
+      description: A descriptive title or subject for the content.
+      placeholder: 'e.g., Fluid and Electrolyte Balance in Acute Care'
+    validations:
+      required: true
+
+  - type: textarea
+    id: content
+    attributes:
+      label: Content or Context *
+      description: >
+        Paste raw notes, lecture material, topic descriptions, or any reference material
+        the agent should use as a basis for the content. The more detail provided, the better the output.
+      placeholder: |
+        Describe the topic, paste raw notes, or provide reference material...
+    validations:
+      required: true
+
+  - type: textarea
+    id: learning_objectives
+    attributes:
+      label: Learning Objectives
+      description: List specific learning objectives for this content (one per line). These will be stored in the content's frontmatter.
+      placeholder: |
+        1. Identify signs and symptoms of fluid volume imbalance.
+        2. Select appropriate nursing interventions for common electrolyte disturbances.
+        3. Apply the Clinical Judgment Measurement Model to fluid and electrolyte scenarios.
 
   - type: dropdown
     id: visibility
     attributes:
-      label: Visibility
-      description: Should the note be public, private, or protected?
+      label: Visibility *
+      description: Should the content be publicly accessible or limited to authenticated users?
       options:
         - public
         - private
@@ -46,52 +74,25 @@ body:
     validations:
       required: true
 
-  - type: dropdown
-    id: note_type
-    attributes:
-      label: Note Type
-      description: What kind of note is this?
-      options:
-        - general
-        - meeting
-        - idea
-        - reference
-        - task
-        - research
-    validations:
-      required: false
-
   - type: input
     id: tags
     attributes:
       label: Tags
-      description: Comma-separated tags for the note.
-      placeholder: 'bsn, notes, workflow'
-
-  - type: input
-    id: source_issue
-    attributes:
-      label: Source / Reference URL
-      description: URL of the originating issue or external reference for this note.
-      placeholder: 'https://github.com/sagreenxyz/astro2/issues/123'
+      description: Comma-separated tags to categorize this content.
+      placeholder: 'fluid balance, electrolytes, acute care, pharmacology'
 
   - type: input
     id: related_links
     attributes:
-      label: Related Internal Links
-      description: Comma-separated paths to related pages in this site.
-      placeholder: '/notes/index, /encyclopedia/topic'
+      label: Related Content Links
+      description: Comma-separated paths to related LMS pages (encyclopedia entries, courses, notes).
+      placeholder: '/encyclopedia/acid-base-balance, /courses/med-surg-fundamentals'
 
-  - type: checkboxes
-    id: processing
+  - type: textarea
+    id: special_instructions
     attributes:
-      label: BSN Actions
-      options:
-        - label: Invoke BSN processing
-          required: true
-        - label: Clean and organize the note
-          required: true
-        - label: Cross-reference internal repository content
-        - label: Keep the result protected/private if visibility requires it
-        - label: Flag for review if the agent confidence is low before publishing
-        - label: Check for duplicate or near-duplicate notes before publishing
+      label: Special Instructions for the Agent
+      description: Any additional guidance, constraints, or context the BSN Curriculum Agent should follow.
+      placeholder: |
+        e.g., Focus on NCLEX-style application questions. Use a clinical scenario format.
+        Cross-reference the existing encyclopedia entry on acid-base balance.

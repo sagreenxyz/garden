@@ -30,7 +30,7 @@ This repository supports an issue-driven note capture workflow. Open a GitHub Is
 ### Available Issue Templates
 
 - **Note Submission** (`note_submission.yml`) — submit raw notes to be cleaned, organized, and converted into a note draft or page.
-- **Invoke BSN User Agent** (`bsn-agent.yml`) — explicitly request BSN processing for a note.
+- **Invoke BSN Curriculum Agent** (`bsn-agent.yml`) — request the BSN Curriculum Agent to create, update, or align nursing educational content (course modules, encyclopedia entries, notes, quizzes, or presentations) with AACN Essentials, QSEN, NCLEX-NG, and CCNE/ACEN standards.
 
 ### How it works
 
@@ -339,8 +339,8 @@ This repository supports an issue-driven note capture workflow. Submit raw notes
 
 | Template                  | Purpose                                                      |
 | ------------------------- | ------------------------------------------------------------ |
-| **Note Submission**       | Submit raw notes for conversion into a structured note draft |
-| **Invoke BSN User Agent** | Request full BSN processing, cleanup, and cross-referencing  |
+| **Note Submission**              | Submit raw notes for conversion into a structured note draft                                         |
+| **Invoke BSN Curriculum Agent**  | Create, update, or align nursing content with AACN Essentials, QSEN, NCLEX-NG, and CCNE/ACEN standards |
 
 Open a new issue at: `https://github.com/sagreenxyz/astro2/issues/new/choose`
 
