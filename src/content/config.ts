@@ -89,17 +89,19 @@ const notesCollection = defineCollection({
     createdAt: z.date(),
     updatedAt: z.date().optional(),
     draft: z.boolean().default(false),
-    /** Visibility: public notes appear in /notes/, private/protected notes in /private/notes/ */
+    /** Visibility: public notes appear in /notes/, private/protected in /private/notes/ only */
     visibility: z.enum(['public', 'private', 'protected']).default('public'),
-    /** Note type for categorization */
+    /** Note type for categorisation */
     noteType: z
       .enum(['meeting', 'idea', 'reference', 'task', 'research', 'general'])
       .default('general'),
-    /** When true the note needs human review before being considered final */
-    needsReview: z.boolean().default(false),
+    /** Review state — notes with 'needs-review' are kept as drafts pending confirmation */
+    reviewState: z.enum(['draft', 'needs-review', 'published']).default('published'),
     /** Human-readable reason why review is needed (populated by automation) */
     reviewReason: z.string().optional(),
-    /** GitHub issue URL that originated this note (provenance) */
+    /** Agent confidence level when this note was auto-generated */
+    confidence: z.enum(['high', 'medium', 'low']).optional(),
+    /** URL of the originating GitHub Issue (provenance) */
     sourceIssue: z.string().url().optional(),
     /** External source URL for the note content */
     sourceUrl: z.string().url().optional(),
@@ -112,7 +114,7 @@ const notesCollection = defineCollection({
         })
       )
       .default([]),
-    /** Slug of another note that this may duplicate; set by automation on low-confidence matches */
+    /** Slug of another note this may duplicate */
     duplicateOf: z.string().optional(),
   }),
 });

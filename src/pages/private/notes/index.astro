@@ -2,94 +2,51 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 
-// Only include private/protected notes that are not drafts.
-// The auth gate below (client-side session check) prevents unauthenticated access.
+// Only private and protected notes appear here; draft and needs-review notes are listed
+// for review but visually distinguished so the authenticated user can act on them.
 const allNotes = await getCollection(
   'notes',
-  ({ data }) => !data.draft && (data.visibility === 'private' || data.visibility === 'protected')
+  ({ data }) => data.visibility === 'private' || data.visibility === 'protected'
 );
 allNotes.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime());
 
-// Collect all unique tags for filtering
+const needsReview = allNotes.filter((e) => e.data.reviewState === 'needs-review' || e.data.draft);
+const published = allNotes.filter((e) => e.data.reviewState === 'published' && !e.data.draft);
+
+// Collect all unique tags for client-side filtering
 const allTags = [...new Set(allNotes.flatMap((n) => n.data.tags))].sort();
 
 const base = import.meta.env.BASE_URL;
+
+function reviewStateBadge(state: string) {
+  if (state === 'needs-review') return 'badge-warning';
+  if (state === 'draft') return 'badge-ghost';
+  return 'badge-success';
+}
 ---
 
-<BaseLayout title="Private Notes" description="Private and protected note hub">
+<BaseLayout title="Private Notes" description="Private and protected notes hub">
   <div id="private-notes-content" hidden>
-    <div class="flex items-start justify-between flex-wrap gap-4 mb-6">
-      <div>
-        <h1 class="text-3xl font-bold mb-1">Private Notes</h1>
-        <p class="text-base-content/60 font-sans">
-          Protected notes visible only to authenticated users.
-        </p>
-      </div>
-      <a href={`${base}private/`} class="btn btn-ghost btn-sm font-sans">← Private Area</a>
+    <div class="flex items-center gap-3 mb-2">
+      <h1 class="text-3xl font-bold">Private Notes</h1>
+      <span class="badge badge-outline badge-sm font-sans">🔒 protected</span>
     </div>
-
-    {/* Review needed banner */}
-    {
-      allNotes.some((n) => n.data.needsReview) && (
-        <div class="alert alert-warning mb-6 font-sans" role="alert">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 9v2m0 4h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
-            />
-          </svg>
-          <span>
-            {allNotes.filter((n) => n.data.needsReview).length} note(s) flagged for review. Check
-            them before promoting to public.
-          </span>
-        </div>
-      )
-    }
-
-    {/* Duplicate detection banner */}
-    {
-      allNotes.some((n) => n.data.duplicateOf) && (
-        <div class="alert alert-error mb-6 font-sans" role="alert">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5 shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-          <span>
-            {allNotes.filter((n) => n.data.duplicateOf).length} note(s) flagged as possible
-            duplicates. Review and merge or discard before publishing.
-          </span>
-        </div>
-      )
-    }
+    <p class="text-base-content/60 font-sans mb-8">
+      Private and protected notes visible only after authentication. Notes marked
+      <strong>needs-review</strong> were flagged by the agent as low-confidence and have not been published
+      publicly.
+    </p>
 
     {/* Tag filter (client-side) */}
     {
       allTags.length > 0 && (
-        <div class="mb-6">
+        <div class="mb-8">
           <p class="text-xs font-semibold uppercase tracking-wide text-base-content/50 mb-2 font-sans">
             Filter by tag
           </p>
           <div class="flex flex-wrap gap-2">
             <button
-              class="badge badge-outline badge-sm font-sans cursor-pointer tag-filter active"
+              class="badge badge-outline badge-sm font-sans cursor-pointer tag-filter badge-primary"
               data-tag="__all__"
             >
               All
@@ -108,101 +65,118 @@ const base = import.meta.env.BASE_URL;
     }
 
     {
-      allNotes.length === 0 ? (
-        <div class="alert font-sans">
-          <span>
-            No private notes yet. Set <code>visibility: private</code> or{' '}
-            <code>visibility: protected</code> in a note's frontmatter.
-          </span>
-        </div>
-      ) : (
-        <ul class="space-y-4" id="notes-list">
-          {allNotes.map((entry) => (
-            <li data-tags={JSON.stringify(entry.data.tags)}>
-              <div class="card card-border bg-base-100 font-sans">
-                <div class="card-body py-4">
-                  <div class="flex items-start justify-between gap-2 flex-wrap">
-                    <h2 class="card-title text-base">{entry.data.title}</h2>
-                    <div class="flex gap-1 flex-wrap">
-                      <span
-                        class={`badge badge-sm ${entry.data.visibility === 'protected' ? 'badge-error' : 'badge-warning'}`}
-                      >
-                        🔒 {entry.data.visibility}
+      needsReview.length > 0 && (
+        <section class="mb-10" id="needs-review-section">
+          <h2 class="text-xl font-semibold mb-4 flex items-center gap-2">
+            <span class="badge badge-warning badge-sm">needs-review</span> Pending Review
+          </h2>
+          <p class="text-sm text-base-content/60 font-sans mb-4">
+            These notes were left in draft/review state because the agent confidence was low or the
+            content requires manual verification before publishing.
+          </p>
+          <ul class="space-y-4" id="needs-review-list">
+            {needsReview.map((entry) => (
+              <li data-tags={JSON.stringify(entry.data.tags)}>
+                <a
+                  href={`${base}private/notes/${entry.slug}/`}
+                  class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans block border-warning/40"
+                >
+                  <div class="card-body py-4">
+                    <div class="flex items-start justify-between gap-2">
+                      <h3 class="card-title text-base">{entry.data.title}</h3>
+                      <div class="flex gap-1 flex-wrap">
+                        <span class={`badge badge-sm ${reviewStateBadge(entry.data.reviewState)}`}>
+                          {entry.data.draft ? 'draft' : entry.data.reviewState}
+                        </span>
+                        {entry.data.duplicateOf && (
+                          <span class="badge badge-error badge-sm">possible duplicate</span>
+                        )}
+                      </div>
+                    </div>
+                    <time
+                      datetime={entry.data.createdAt.toISOString()}
+                      class="text-xs text-base-content/40 mt-1"
+                    >
+                      {entry.data.createdAt.toLocaleDateString()}
+                    </time>
+                    {entry.data.reviewReason && (
+                      <p class="text-xs text-warning mt-1 font-sans">⚠ {entry.data.reviewReason}</p>
+                    )}
+                    {entry.data.confidence && (
+                      <span class="text-xs text-base-content/50 font-sans">
+                        Agent confidence: {entry.data.confidence}
                       </span>
-                      {entry.data.needsReview && (
-                        <span class="badge badge-warning badge-sm">needs review</span>
-                      )}
-                      {entry.data.duplicateOf && (
-                        <span class="badge badge-error badge-sm">possible duplicate</span>
-                      )}
-                      {entry.data.noteType !== 'general' && (
-                        <span class="badge badge-ghost badge-sm">{entry.data.noteType}</span>
-                      )}
-                    </div>
+                    )}
+                    {entry.data.tags.length > 0 && (
+                      <div class="flex flex-wrap gap-1 mt-2">
+                        {entry.data.tags.map((tag) => (
+                          <span class="badge badge-outline badge-sm">{tag}</span>
+                        ))}
+                      </div>
+                    )}
                   </div>
-
-                  <time
-                    datetime={entry.data.createdAt.toISOString()}
-                    class="text-xs text-base-content/40 mt-1"
-                  >
-                    {entry.data.createdAt.toLocaleDateString()}
-                  </time>
-
-                  {entry.data.tags.length > 0 && (
-                    <div class="flex flex-wrap gap-1 mt-2">
-                      {entry.data.tags.map((tag) => (
-                        <span class="badge badge-outline badge-sm">{tag}</span>
-                      ))}
-                    </div>
-                  )}
-
-                  {entry.data.needsReview && entry.data.reviewReason && (
-                    <p class="text-sm text-warning mt-2">⚠ {entry.data.reviewReason}</p>
-                  )}
-
-                  {entry.data.duplicateOf && (
-                    <p class="text-sm text-error mt-2">
-                      Possible duplicate of: <code>{entry.data.duplicateOf}</code>
-                    </p>
-                  )}
-
-                  {(entry.data.sourceIssue || entry.data.sourceUrl) && (
-                    <div class="mt-2 text-xs text-base-content/50 space-y-0.5">
-                      {entry.data.sourceIssue && (
-                        <p>
-                          Source issue:{' '}
-                          <a
-                            href={entry.data.sourceIssue}
-                            class="link link-primary"
-                            target="_blank"
-                            rel="noopener"
-                          >
-                            {entry.data.sourceIssue}
-                          </a>
-                        </p>
-                      )}
-                      {entry.data.sourceUrl && (
-                        <p>
-                          Source:{' '}
-                          <a
-                            href={entry.data.sourceUrl}
-                            class="link link-primary"
-                            target="_blank"
-                            rel="noopener"
-                          >
-                            {entry.data.sourceUrl}
-                          </a>
-                        </p>
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
       )
     }
+
+    <section id="published-section">
+      <h2 class="text-xl font-semibold mb-4">Published Private Notes</h2>
+      {
+        published.length === 0 ? (
+          <div class="alert font-sans text-sm">
+            <span>No published private notes yet.</span>
+          </div>
+        ) : (
+          <ul class="space-y-4" id="published-list">
+            {published.map((entry) => (
+              <li data-tags={JSON.stringify(entry.data.tags)}>
+                <a
+                  href={`${base}private/notes/${entry.slug}/`}
+                  class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans block"
+                >
+                  <div class="card-body py-4">
+                    <div class="flex items-start justify-between gap-2">
+                      <h3 class="card-title text-base">{entry.data.title}</h3>
+                      <div class="flex gap-1 flex-wrap">
+                        <span class="badge badge-outline badge-sm">{entry.data.visibility}</span>
+                        {entry.data.duplicateOf && (
+                          <span class="badge badge-error badge-sm">possible duplicate</span>
+                        )}
+                      </div>
+                    </div>
+                    <time
+                      datetime={entry.data.createdAt.toISOString()}
+                      class="text-xs text-base-content/40 mt-1"
+                    >
+                      {entry.data.createdAt.toLocaleDateString()}
+                    </time>
+                    {entry.data.tags.length > 0 && (
+                      <div class="flex flex-wrap gap-1 mt-2">
+                        {entry.data.tags.map((tag) => (
+                          <span class="badge badge-outline badge-sm">{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                    {entry.data.noteType && entry.data.noteType !== 'general' && (
+                      <span class="badge badge-ghost badge-sm mt-1">{entry.data.noteType}</span>
+                    )}
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+
+    <div class="mt-10 pt-6 border-t border-base-300 flex gap-3">
+      <a href={`${base}private/`} class="btn btn-ghost btn-sm font-sans">← Private Home</a>
+      <button id="logout-btn" class="btn btn-outline btn-sm font-sans">Sign Out</button>
+    </div>
   </div>
 </BaseLayout>
 
@@ -211,6 +185,7 @@ const base = import.meta.env.BASE_URL;
   const REDIRECT_KEY = 'lms_redirect';
 
   const content = document.getElementById('private-notes-content');
+  const logoutBtn = document.getElementById('logout-btn');
 
   if (sessionStorage.getItem(SESSION_KEY) === 'ok') {
     if (content) content.hidden = false;
@@ -222,16 +197,21 @@ const base = import.meta.env.BASE_URL;
     window.location.replace(base + 'login/');
   }
 
-  // Client-side tag filtering
+  logoutBtn?.addEventListener('click', () => {
+    sessionStorage.removeItem(SESSION_KEY);
+    window.location.replace(base + 'login/');
+  });
+
+  // Client-side tag filtering across both sections
   const filterBtns = document.querySelectorAll('.tag-filter');
-  const noteItems = document.querySelectorAll('#notes-list > li');
+  const noteItems = document.querySelectorAll('#needs-review-list > li, #published-list > li');
 
   filterBtns.forEach((btn) => {
     btn.addEventListener('click', () => {
       const tag = btn.getAttribute('data-tag');
 
-      filterBtns.forEach((b) => b.classList.remove('active', 'badge-primary'));
-      btn.classList.add('active', 'badge-primary');
+      filterBtns.forEach((b) => b.classList.remove('badge-primary'));
+      btn.classList.add('badge-primary');
 
       noteItems.forEach((item) => {
         if (tag === '__all__') {

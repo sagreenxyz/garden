@@ -1,7 +1,5 @@
 name: Invoke BSN User Agent
-description: >
-  Submit a note or request for BSN processing, cleanup, and cross-referencing.
-  The agent will clean, structure, and optionally publish the note.
+description: Submit a note or request for BSN processing, cleanup, and cross-referencing.
 title: '[BSN]: '
 labels:
   - bsn
@@ -11,9 +9,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this template to explicitly invoke the BSN user agent for note processing.
-        The agent will clean, organize, label, and cross-reference your notes.
-        If confidence is low, the note will be left in draft state with a `needs-review` label.
+        Use this template to explicitly invoke the BSN user agent to clean, structure, and cross-reference a note.
+        If the agent confidence is low the note will be placed in **needs-review** state and not published automatically.
 
   - type: textarea
     id: raw_notes
@@ -41,9 +38,7 @@ body:
     id: visibility
     attributes:
       label: Visibility
-      description: >
-        Choose where this note should appear.
-        Private and protected notes only appear in the auth-gated Private Notes Hub.
+      description: Should the note be public, private, or protected?
       options:
         - public
         - private
@@ -64,7 +59,7 @@ body:
         - task
         - research
     validations:
-      required: true
+      required: false
 
   - type: input
     id: tags
@@ -74,19 +69,18 @@ body:
       placeholder: 'bsn, notes, workflow'
 
   - type: input
-    id: source_url
+    id: source_issue
     attributes:
-      label: Source URL
-      description: Optional external source URL for provenance (must start with https://).
-      placeholder: 'https://example.com/article'
+      label: Source / Reference URL
+      description: URL of the originating issue or external reference for this note.
+      placeholder: 'https://github.com/sagreenxyz/astro2/issues/123'
 
   - type: input
-    id: related_content
+    id: related_links
     attributes:
-      label: Related Internal Pages
-      description: >
-        Comma-separated internal paths or full URLs to pages that should be cross-referenced.
-      placeholder: '/notes/index, /private/notes/'
+      label: Related Internal Links
+      description: Comma-separated paths to related pages in this site.
+      placeholder: '/notes/index, /encyclopedia/topic'
 
   - type: checkboxes
     id: processing
@@ -98,6 +92,6 @@ body:
         - label: Clean and organize the note
           required: true
         - label: Cross-reference internal repository content
-        - label: Keep the result protected/private if visibility is not public
-        - label: Flag for human review if agent confidence is low (recommended)
+        - label: Keep the result protected/private if visibility requires it
+        - label: Flag for review if the agent confidence is low before publishing
         - label: Check for duplicate or near-duplicate notes before publishing

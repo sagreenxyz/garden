@@ -6,7 +6,7 @@ import ContentLayout from '../../layouts/ContentLayout.astro';
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection(
     'notes',
-    ({ data }) => !data.draft && data.visibility === 'public'
+    ({ data }) => !data.draft && data.visibility === 'public' && data.reviewState === 'published'
   );
   return entries.map((entry) => ({
     params: { slug: entry.slug },
@@ -18,7 +18,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 
 const base = import.meta.env.BASE_URL;
-const { needsReview, reviewReason, duplicateOf, sourceIssue, sourceUrl, relatedLinks } = entry.data;
+const { reviewReason, duplicateOf, sourceIssue, sourceUrl, relatedLinks } = entry.data;
 ---
 
 <ContentLayout
@@ -31,7 +31,7 @@ const { needsReview, reviewReason, duplicateOf, sourceIssue, sourceUrl, relatedL
   backHref={`${base}notes/`}
 >
   {
-    needsReview && (
+    duplicateOf && (
       <div class="alert alert-warning mb-6 font-sans" role="alert">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,39 +48,15 @@ const { needsReview, reviewReason, duplicateOf, sourceIssue, sourceUrl, relatedL
           />
         </svg>
         <div>
-          <p class="font-semibold">This note needs review before it is considered final.</p>
-          {reviewReason && <p class="text-sm mt-1">{reviewReason}</p>}
-        </div>
-      </div>
-    )
-  }
-
-  {
-    duplicateOf && (
-      <div class="alert alert-error mb-6 font-sans" role="alert">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-5 w-5 shrink-0"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
-        <div>
           <p class="font-semibold">Possible duplicate detected.</p>
           <p class="text-sm mt-1">
             This note may overlap with{' '}
             <a href={`${base}notes/${duplicateOf}/`} class="underline font-medium">
               {duplicateOf}
             </a>
-            . Please review before publishing.
+            . Consider merging or reviewing both.
           </p>
+          {reviewReason && <p class="text-sm mt-1">{reviewReason}</p>}
         </div>
       </div>
     )
@@ -90,41 +66,55 @@ const { needsReview, reviewReason, duplicateOf, sourceIssue, sourceUrl, relatedL
 
   {
     (sourceIssue || sourceUrl || relatedLinks.length > 0) && (
-      <aside class="mt-10 pt-6 border-t border-base-300 font-sans">
-        <h2 class="text-sm font-semibold uppercase tracking-wide text-base-content/50 mb-3">
+      <aside class="mt-10 pt-6 border-t border-base-300 font-sans text-sm text-base-content/70 space-y-3">
+        <p class="font-semibold uppercase tracking-wide text-xs text-base-content/50">
           Provenance &amp; Related Links
-        </h2>
-        <ul class="space-y-1 text-sm">
-          {sourceIssue && (
-            <li>
-              <span class="text-base-content/50 mr-1">Source issue:</span>
-              <a href={sourceIssue} class="link link-primary" target="_blank" rel="noopener">
-                {sourceIssue}
-              </a>
-            </li>
-          )}
-          {sourceUrl && (
-            <li>
-              <span class="text-base-content/50 mr-1">Source:</span>
-              <a href={sourceUrl} class="link link-primary" target="_blank" rel="noopener">
-                {sourceUrl}
-              </a>
-            </li>
-          )}
-          {relatedLinks.map((link) => (
-            <li>
-              <span class="text-base-content/50 mr-1">Related:</span>
-              <a
-                href={link.url}
-                class="link link-primary"
-                target={link.url.startsWith('http') ? '_blank' : undefined}
-                rel={link.url.startsWith('http') ? 'noopener' : undefined}
-              >
-                {link.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        </p>
+        {sourceIssue && (
+          <p>
+            <span class="font-semibold">Source issue:</span>{' '}
+            <a
+              href={sourceIssue}
+              class="underline hover:text-base-content/90 transition-colors"
+              target="_blank"
+              rel="noopener"
+            >
+              {sourceIssue}
+            </a>
+          </p>
+        )}
+        {sourceUrl && (
+          <p>
+            <span class="font-semibold">Source:</span>{' '}
+            <a
+              href={sourceUrl}
+              class="underline hover:text-base-content/90 transition-colors"
+              target="_blank"
+              rel="noopener"
+            >
+              {sourceUrl}
+            </a>
+          </p>
+        )}
+        {relatedLinks.length > 0 && (
+          <div>
+            <p class="font-semibold mb-1">Related links:</p>
+            <ul class="list-disc list-inside space-y-1">
+              {relatedLinks.map((link) => (
+                <li>
+                  <a
+                    href={link.url}
+                    class="underline hover:text-base-content/90 transition-colors"
+                    target={link.url.startsWith('http') ? '_blank' : undefined}
+                    rel={link.url.startsWith('http') ? 'noopener' : undefined}
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </aside>
     )
   }

@@ -1,7 +1,5 @@
 name: Note Submission
-description: >
-  Submit a raw note to be cleaned, organized, and converted into a structured note draft or page.
-  The automation will set needsReview=true if confidence is low.
+description: Submit a raw note to be cleaned, organized, and converted into a structured note draft.
 title: '[Note]: '
 labels:
   - note
@@ -10,9 +8,8 @@ body:
   - type: markdown
     attributes:
       value: |
-        Use this template to submit raw notes. The agent will clean, organize, label,
-        and cross-reference them. If the agent is uncertain it will leave the note as a
-        **draft** and add a `needs-review` label instead of publishing automatically.
+        Use this template to submit rough notes. The agent will clean, organize, label, and cross-reference them.
+        If the agent confidence is low the note will be placed in **needs-review** state and not published automatically.
 
   - type: input
     id: title
@@ -21,7 +18,29 @@ body:
       description: A short title for the note.
       placeholder: 'Meeting notes on protected content workflow'
     validations:
-      required: false
+      required: true
+
+  - type: textarea
+    id: raw_notes
+    attributes:
+      label: Raw Notes
+      description: Paste your raw notes here.
+      placeholder: |
+        Enter your raw notes...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: visibility
+    attributes:
+      label: Visibility
+      description: Should this note be public, private, or protected?
+      options:
+        - public
+        - private
+        - protected
+    validations:
+      required: true
 
   - type: dropdown
     id: note_type
@@ -36,31 +55,7 @@ body:
         - task
         - research
     validations:
-      required: true
-
-  - type: textarea
-    id: raw_notes
-    attributes:
-      label: Raw Notes
-      description: Paste your raw notes here. The agent will clean and structure them.
-      placeholder: |
-        Enter your raw notes...
-    validations:
-      required: true
-
-  - type: dropdown
-    id: visibility
-    attributes:
-      label: Visibility
-      description: >
-        Choose where this note should appear.
-        Private and protected notes only appear in the auth-gated Private Notes Hub.
-      options:
-        - public
-        - private
-        - protected
-    validations:
-      required: true
+      required: false
 
   - type: input
     id: tags
@@ -70,27 +65,27 @@ body:
       placeholder: 'astro, notes, workflow'
 
   - type: input
-    id: source_url
+    id: source_issue
     attributes:
-      label: Source URL
-      description: Optional external source URL for provenance (must start with https://).
-      placeholder: 'https://example.com/article'
+      label: Source / Reference URL
+      description: URL of a related issue, article, or external resource that this note is based on.
+      placeholder: 'https://github.com/sagreenxyz/astro2/issues/123'
 
   - type: input
-    id: related_content
+    id: related_links
     attributes:
-      label: Related Internal Pages
-      description: >
-        Comma-separated internal paths or full URLs to pages that should be cross-referenced.
-      placeholder: '/notes/project-setup, /encyclopedia/topic'
+      label: Related Internal Links
+      description: Comma-separated paths to related pages in this site.
+      placeholder: '/notes/project-setup, /encyclopedia/some-topic'
 
   - type: checkboxes
     id: processing
     attributes:
       label: Processing Options
       options:
-        - label: Convert this issue into a note draft
+        - label: Convert this issue into a structured note draft
           required: true
         - label: Cross-reference related repository content
-        - label: Keep the result private/protected if visibility is not public
-        - label: Flag for human review if agent confidence is low (recommended)
+        - label: Place the result on the protected/private side if visibility requires it
+        - label: Flag for manual review before publishing if agent confidence is low
+        - label: Check for duplicate or near-duplicate notes before publishing

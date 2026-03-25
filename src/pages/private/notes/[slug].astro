@@ -1,0 +1,130 @@
+---
+import { getCollection } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import ContentLayout from '../../../layouts/ContentLayout.astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection(
+    'notes',
+    ({ data }) => data.visibility === 'private' || data.visibility === 'protected'
+  );
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+};
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+const { sourceIssue, relatedLinks, duplicateOf, reviewState, confidence, reviewReason } =
+  entry.data;
+const base = import.meta.env.BASE_URL;
+---
+
+<ContentLayout
+  title={entry.data.title}
+  publishedAt={entry.data.createdAt}
+  updatedAt={entry.data.updatedAt}
+  tags={entry.data.tags}
+>
+  <div id="private-note-content" hidden>
+    <!-- Visibility & review state banner -->
+    <div class="flex flex-wrap gap-2 mb-6">
+      <span class="badge badge-outline badge-sm font-sans">🔒 {entry.data.visibility}</span>
+      {
+        reviewState === 'needs-review' && (
+          <span class="badge badge-warning badge-sm font-sans">needs-review</span>
+        )
+      }
+      {reviewState === 'draft' && <span class="badge badge-ghost badge-sm font-sans">draft</span>}
+      {
+        confidence && (
+          <span class="badge badge-ghost badge-sm font-sans">confidence: {confidence}</span>
+        )
+      }
+    </div>
+
+    {
+      reviewState === 'needs-review' && (
+        <div class="alert alert-warning mb-6 font-sans text-sm">
+          <span>
+            ⚠️ This note was flagged as <strong>needs-review</strong> because the agent confidence
+            was {confidence ?? 'low'}. Please verify the content before promoting it to published.
+            {reviewReason && <span> Reason: {reviewReason}</span>}
+          </span>
+        </div>
+      )
+    }
+
+    {
+      duplicateOf && (
+        <div class="alert alert-warning mb-6 font-sans text-sm">
+          <span>
+            ⚠️ This note may be a near-duplicate of{' '}
+            <a href={`${base}private/notes/${duplicateOf}/`} class="underline">
+              {duplicateOf}
+            </a>
+            . Consider reviewing and merging.
+          </span>
+        </div>
+      )
+    }
+
+    <Content />
+
+    {
+      (sourceIssue || relatedLinks.length > 0) && (
+        <aside class="mt-10 pt-6 border-t border-base-300 font-sans text-sm text-base-content/70 space-y-3">
+          {sourceIssue && (
+            <p>
+              <span class="font-semibold">Source issue:</span>{' '}
+              <a href={sourceIssue} class="underline hover:text-base-content/90 transition-colors">
+                {sourceIssue}
+              </a>
+            </p>
+          )}
+          {relatedLinks.length > 0 && (
+            <div>
+              <p class="font-semibold mb-1">Related links:</p>
+              <ul class="list-disc list-inside space-y-1">
+                {relatedLinks.map((link) => (
+                  <li>
+                    <a
+                      href={link.url}
+                      class="underline hover:text-base-content/90 transition-colors"
+                      target={link.url.startsWith('http') ? '_blank' : undefined}
+                      rel={link.url.startsWith('http') ? 'noopener' : undefined}
+                    >
+                      {link.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+        </aside>
+      )
+    }
+
+    <div class="mt-8 pt-4 border-t border-base-300">
+      <a href={`${base}private/notes/`} class="btn btn-ghost btn-sm font-sans"> ← Private Notes </a>
+    </div>
+  </div>
+</ContentLayout>
+
+<script define:vars={{ base }}>
+  const SESSION_KEY = 'lms_auth';
+  const REDIRECT_KEY = 'lms_redirect';
+
+  const content = document.getElementById('private-note-content');
+
+  if (sessionStorage.getItem(SESSION_KEY) === 'ok') {
+    if (content) content.hidden = false;
+  } else {
+    sessionStorage.setItem(
+      REDIRECT_KEY,
+      window.location.pathname + window.location.search + window.location.hash
+    );
+    window.location.replace(base + 'login/');
+  }
+</script>

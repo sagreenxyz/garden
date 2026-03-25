@@ -4,7 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 
 const entries = await getCollection(
   'notes',
-  ({ data }) => !data.draft && data.visibility === 'public'
+  ({ data }) => !data.draft && data.visibility === 'public' && data.reviewState === 'published'
 );
 entries.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime());
 
@@ -34,9 +34,6 @@ const base = import.meta.env.BASE_URL;
                 <div class="flex items-start justify-between gap-2 flex-wrap">
                   <h2 class="card-title text-base">{entry.data.title}</h2>
                   <div class="flex gap-1 flex-wrap">
-                    {entry.data.needsReview && (
-                      <span class="badge badge-warning badge-sm font-sans">needs review</span>
-                    )}
                     {entry.data.duplicateOf && (
                       <span class="badge badge-error badge-sm font-sans">possible duplicate</span>
                     )}
