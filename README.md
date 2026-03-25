@@ -320,7 +320,178 @@ Deployment is automated via GitHub Actions (`.github/workflows/deploy.yml`) on e
 
 ## Agent / AI Notes
 
-This section records hard-won troubleshooting findings from prior automated sessions so future agents do not repeat the same dead-ends.
+This section records hard-won troubleshooting findings and research strategies from prior automated sessions so future agents do not repeat the same dead-ends.
+
+---
+
+### 🔍 Finding Content in the Repository
+
+**Start here before making any changes.** This repo's structure is predictable — knowing where things live saves significant time.
+
+#### Quick orientation checklist
+
+| What you need                  | Where to look                                                              |
+| ------------------------------ | -------------------------------------------------------------------------- |
+| Content schemas / field names  | `src/content/config.ts` — single source of truth for all Zod schemas       |
+| TypeScript types for nursing   | `src/types/nursing.ts`                                                     |
+| Nursing framework data         | `src/data/` — `aacn-essentials.json`, `qsen-competencies.json`, etc.       |
+| Glossary terms                 | `src/data/glossary.json`                                                   |
+| Page routing / URL structure   | `src/pages/` — mirrors the URL structure exactly                           |
+| Shared UI layouts              | `src/layouts/` — `BaseLayout`, `ContentLayout`, `PresentationLayout`       |
+| Svelte interactive components  | `src/components/lms/` — `KeyTerm.svelte`, `GlossaryBrowser.svelte`, etc.   |
+| Auth / private section logic   | `src/pages/private/index.astro` and `src/pages/login.astro`                |
+| Environment variables in use   | `.env.example` (docs) + `.github/workflows/deploy.yml` (injected at build) |
+| Existing GitHub Actions        | `.github/workflows/`                                                       |
+| BSN curriculum agent config    | `.github/agents/bsn-curriculum-agent.md`                                   |
+| Example content (encyclopedia) | `src/content/encyclopedia/*.mdx`                                           |
+| Example content (courses)      | `src/content/courses/*.mdx`                                                |
+
+#### Effective search strategies
+
+1. **Use `grep` with context flags** to understand surrounding code, not just matching lines:
+
+   ```bash
+   grep -rn "visibility" src/content/ --include="*.ts" -A3 -B1
+   ```
+
+2. **Search for schema field names first** — every content type's shape is declared in `src/content/config.ts`. Read the full file before editing any content collection.
+
+3. **Search across all `.mdx` files** to see how frontmatter fields are actually used in practice:
+
+   ```bash
+   grep -rn "draft:" src/content/ --include="*.mdx"
+   ```
+
+4. **Find which pages render a given collection** — all collection listing/detail pages follow the pattern `src/pages/<collection>/index.astro` and `src/pages/<collection>/[slug].astro`:
+
+   ```bash
+   grep -rn "getCollection" src/pages/ --include="*.astro"
+   ```
+
+5. **Trace imports to find component usage**:
+
+   ```bash
+   grep -rn "KeyTerm" src/ --include="*.{astro,mdx,svelte}"
+   ```
+
+6. **Check `dist/` after building** to confirm what the static output actually contains — especially useful for verifying routing, class names, and injected metadata:
+   ```bash
+   npm run build && grep -r "my-expected-class" dist/ --include="*.html" -l
+   ```
+
+---
+
+### 🛠 Troubleshooting Common Problems
+
+#### Build fails with a Zod schema validation error
+
+**Symptom:** `npm run build` fails with an error like `"Invalid input"` or `"Expected string, received undefined"` for a content file.
+
+**Cause:** A `.mdx` file is missing a required frontmatter field, or a field value does not match the Zod schema declared in `src/content/config.ts`.
+
+**Fix:**
+
+1. Read `src/content/config.ts` to see the exact schema for the affected collection.
+2. Open the `.mdx` file and compare its frontmatter keys and types against the schema.
+3. Common mismatches: date strings vs `z.date()` (Astro parses YAML date literals automatically — use `2026-01-01` not `"2026-01-01"`), missing required fields, enum values that don't match the declared options.
+
+#### Build fails with a TypeScript error in an `.astro` file
+
+**Symptom:** `Type '…' is not assignable to type '…'` inside a `.astro` frontmatter block.
+
+**Fix:**
+
+1. Check the `Props` interface exported from the layout being used (e.g. `ContentLayout.astro` — it explicitly declares every prop and its type).
+2. Ensure optional props are annotated with `?` or have a default value.
+3. Run `npm run lint` first — some TypeScript errors manifest as Prettier issues that mask the real error.
+
+#### Content does not appear on a listing page
+
+**Symptom:** A new `.mdx` file exists but does not show up on the index page.
+
+**Common causes:**
+
+- `draft: true` is set — all listing pages filter out drafts with `({ data }) => !data.draft`.
+- A new field added to the schema has no default value, causing the `getCollection` call to throw at runtime (caught during build).
+- The file was added to the wrong directory (e.g. `src/content/encyclopedia/` instead of `src/content/notes/`).
+- Frontmatter YAML is malformed — check for unescaped colons, missing quotes around strings that contain special characters, or incorrect indentation.
+
+#### Private/protected pages are not working correctly
+
+The private section uses **client-side session storage**, not server-side auth. Understand this model before making changes:
+
+- `sessionStorage.getItem('lms_auth') === 'ok'` is the auth check — set by `/login/` after verifying credentials.
+- Protected pages always render their HTML statically; the JS client-side check hides content and redirects unauthenticated visitors.
+- **There is no true server-side auth** — this is a static site hosted on GitHub Pages. The protection is UI-only. Private content is still present in the built HTML.
+- The `AUTH_HASH` secret is a SHA-256 hex digest of `"username:password"`. It is embedded at build time via the deploy workflow. Without it, login always fails.
+- If a new private page does not redirect correctly, confirm it has the same `<script define:vars={{ base }}>` block as `src/pages/private/index.astro`.
+
+#### GitHub Actions workflow does not trigger
+
+- Check the `on:` trigger conditions carefully. `issues.labeled` only fires when a label is **added** — it does not fire when an issue is opened with labels defined in a template (the `opened` event fires, not `labeled`).
+- `github.event.label.name` is only available on the `labeled` event, not on `opened`. Use `contains(github.event.issue.labels.*.name, 'note')` for `opened` triggers.
+- Check that the `permissions:` block in the workflow grants the required scopes (`contents: write` to push files, `issues: write` to comment).
+- Use `workflow_dispatch` as a secondary trigger while debugging workflows so you can manually invoke them from the Actions tab.
+
+#### Prettier / lint failures after editing `.astro` files
+
+**Symptom:** `npm run lint` reports formatting errors even though the file looks correct to you.
+
+**Fix:** Run `npm run format` to auto-fix all formatting. Prettier with `prettier-plugin-astro` applies specific rules to `.astro` frontmatter (triple-dash fences) and template blocks. Never manually guess whitespace — always let Prettier fix it.
+
+---
+
+### 💡 Effective AI Session Strategies
+
+#### Research first, change second
+
+Always explore and understand the codebase before writing code. A single read of `src/content/config.ts` and the relevant page files prevents most mistakes. Batch your exploration into parallel tool calls to minimize round-trips.
+
+#### Understand the Astro content collection pipeline
+
+```
+src/content/<collection>/*.mdx
+   → schema validated by src/content/config.ts (Zod)
+   → queried with getCollection('<collection>') in src/pages/
+   → rendered via [slug].astro or index.astro
+   → built to dist/<collection>/<slug>/index.html
+```
+
+Any change that touches the schema must be reflected in both the `.mdx` files (frontmatter) and the `.astro` pages (prop usage).
+
+#### Use `npm run build` as your integration test
+
+There are no unit tests in this project. The build (`npm run build`) is the primary correctness check — it validates Zod schemas, runs TypeScript type checks, and generates all static pages. Run it before and after your changes.
+
+#### Work incrementally and commit often
+
+Make one logical change at a time, build to confirm it works, then commit. Large batches of changes are harder to debug when the build breaks.
+
+#### Use the `explore` agent for multi-file questions
+
+When you need to understand how multiple files relate to each other (e.g. "how does the private section authenticate?"), the `explore` agent is more efficient than manually grepping multiple files. Batch all related questions into a single call — the explore agent loses all context between calls.
+
+#### Understand the base URL pattern
+
+The site is deployed to GitHub Pages at `/astro2`, so all internal links and asset references use `import.meta.env.BASE_URL` (which resolves to `/astro2/`). Never hardcode `/` as the root — always prefix with `base`:
+
+```astro
+const base = import.meta.env.BASE_URL;
+<a href={`${base}notes/`}>Notes</a>
+```
+
+#### Adding a new content field safely
+
+1. Add the field to the schema in `src/content/config.ts` with `.optional()` or `.default(...)` so existing files remain valid.
+2. Update the `.astro` pages that render this collection to handle the new field.
+3. Add the field to any new `.mdx` files you create.
+4. Run `npm run build` to confirm all existing content still validates.
+
+#### Private vs public notes routing
+
+Notes with `visibility: 'private'` should only appear under `/private/notes/` (auth-gated). Notes with `visibility: 'public'` (or no visibility field, which defaults to `'public'`) appear under the public `/notes/` listing. Both listing and detail pages filter using this field — if you add a new visibility-aware page, make sure to apply the same filter to `getCollection`.
+
+---
 
 ### Sandbox networking — Playwright browser cannot reach local dev servers
 
