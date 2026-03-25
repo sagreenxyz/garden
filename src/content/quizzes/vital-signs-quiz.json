@@ -1,0 +1,195 @@
+{
+  "title": "Vital Signs Assessment — Knowledge Check",
+  "description": "NCLEX-NG formative assessment covering vital signs measurement technique, normal ranges, critical values, clinical interpretation, special populations, pulse oximetry, pain assessment, and SBAR communication.",
+  "tags": [
+    "vital signs",
+    "temperature",
+    "pulse",
+    "blood pressure",
+    "respirations",
+    "oxygen saturation",
+    "pain assessment",
+    "patient monitoring",
+    "fundamentals of nursing"
+  ],
+  "timeLimit": 30,
+  "passingScore": 75,
+  "draft": false,
+  "questions": [
+    {
+      "id": "vs-q1",
+      "text": "A nurse is preparing to measure a patient's blood pressure. The nurse selects a cuff that is too small for the patient's arm. Which of the following describes the effect this will have on the reading?",
+      "type": "multiple-choice",
+      "options": [
+        "The reading will be falsely low",
+        "The reading will be falsely high",
+        "The reading will be accurate if the cuff is positioned correctly",
+        "The diastolic reading will be affected but not the systolic"
+      ],
+      "answer": "The reading will be falsely high",
+      "explanation": "A cuff that is too small for the arm creates excessive pressure to occlude the artery, producing a falsely elevated blood pressure reading. The bladder of the cuff should encircle approximately 80% of the upper arm circumference. This is one of the most common sources of hypertension over-diagnosis in clinical practice."
+    },
+    {
+      "id": "vs-q2",
+      "text": "A nurse assesses a patient and finds: temperature 38.8°C oral, heart rate 114 bpm, blood pressure 96/58 mmHg, respiratory rate 24 bpm, and SpO₂ 94% on 2L/NC. The patient was admitted for a surgical site infection. Which of these findings requires the MOST immediate nursing action?",
+      "type": "multiple-choice",
+      "options": [
+        "Temperature 38.8°C — administer prescribed antipyretic",
+        "Heart rate 114 bpm — obtain a 12-lead ECG",
+        "Blood pressure 96/58 mmHg — notify the provider using SBAR",
+        "SpO₂ 94% — increase supplemental oxygen to 4L/NC"
+      ],
+      "answer": "Blood pressure 96/58 mmHg — notify the provider using SBAR",
+      "explanation": "SBP < 90 mmHg is a critical value and, in the context of fever, tachycardia, tachypnea, and a source of infection, is highly concerning for early septic shock. Hypotension in sepsis indicates inadequate perfusion pressure and organ dysfunction risk. This requires immediate provider notification and likely initiation of a sepsis bundle. The other findings are also abnormal and should be addressed, but hypotension with evidence of organ hypoperfusion is the priority."
+    },
+    {
+      "id": "vs-q3",
+      "text": "A nurse is measuring a patient's pulse and finds the rhythm irregular. What is the most appropriate next action?",
+      "type": "multiple-choice",
+      "options": [
+        "Document the finding and continue with the assessment",
+        "Auscultate the apical pulse for one full minute and compare it to the radial rate",
+        "Repeat the radial pulse measurement using the other wrist",
+        "Notify the provider that the patient is in atrial fibrillation"
+      ],
+      "answer": "Auscultate the apical pulse for one full minute and compare it to the radial rate",
+      "explanation": "When an irregular radial pulse is detected, the nurse should assess the apical pulse by auscultating at the 5th intercostal space, midclavicular line for one full minute. Comparing the apical rate to the radial rate identifies a pulse deficit — a sign of ineffective ventricular contractions. The nurse should not label the rhythm as atrial fibrillation without an ECG, but should assess further before notifying the provider."
+    },
+    {
+      "id": "vs-q4",
+      "text": "A patient who was admitted for carbon monoxide poisoning following a house fire has a pulse oximetry reading of 99%. The nurse should recognize which of the following about this finding?",
+      "type": "multiple-choice",
+      "options": [
+        "The patient is well-oxygenated and no further intervention is needed",
+        "Pulse oximetry cannot differentiate oxyhemoglobin from carboxyhemoglobin and the reading is falsely normal",
+        "A pulse oximetry reading above 95% always indicates adequate oxygenation",
+        "The elevated SpO₂ indicates the patient has compensated for the CO exposure"
+      ],
+      "answer": "Pulse oximetry cannot differentiate oxyhemoglobin from carboxyhemoglobin and the reading is falsely normal",
+      "explanation": "Standard pulse oximetry cannot distinguish carboxyhemoglobin (COHb) from oxyhemoglobin — both absorb light similarly at the wavelengths used. In carbon monoxide poisoning, COHb displaces oxygen from hemoglobin, causing cellular hypoxia, while the SpO₂ reads falsely normal (often 98–100%). CO-oximetry (co-oximetry via arterial blood gas) is required for accurate assessment of oxygen saturation in suspected CO poisoning."
+    },
+    {
+      "id": "vs-q5",
+      "text": "The nurse is caring for a patient with COPD who has a documented SpO₂ target of 88–92%. The patient's current SpO₂ is 90% on 2L/NC. The nurse should:",
+      "type": "multiple-choice",
+      "options": [
+        "Increase the oxygen to 4L/NC to bring the SpO₂ above 95%",
+        "Recognize this is within the prescribed target range and continue monitoring",
+        "Notify the provider that the patient is hypoxic",
+        "Discontinue supplemental oxygen since the patient is above 88%"
+      ],
+      "answer": "Recognize this is within the prescribed target range and continue monitoring",
+      "explanation": "In patients with COPD and chronic CO₂ retention (type II respiratory failure), the SpO₂ target is deliberately maintained at 88–92% rather than the standard 95–100%. Over-oxygenation can blunt the hypoxic drive in these patients and precipitate hypercapnic respiratory failure. An SpO₂ of 90% on 2L/NC is within the target range and should be continued while monitoring for changes in clinical status."
+    },
+    {
+      "id": "vs-q6",
+      "text": "A nurse counts a patient's respirations while still holding the patient's wrist after measuring the pulse. The patient's respiratory rate is 24 breaths per minute, shallow, with use of accessory muscles. What is the nurse's priority action?",
+      "type": "multiple-choice",
+      "options": [
+        "Document the findings and reassess in 4 hours per routine vital signs schedule",
+        "Instruct the patient to take deeper breaths and recount the respiratory rate",
+        "Perform a comprehensive respiratory assessment and notify the provider",
+        "Apply supplemental oxygen at 2L/NC and reassess SpO₂ in 30 minutes"
+      ],
+      "answer": "Perform a comprehensive respiratory assessment and notify the provider",
+      "explanation": "A respiratory rate of 24 bpm with shallow breathing and accessory muscle use indicates significantly increased work of breathing and is a critical early warning of respiratory distress. A tachypnea of 25+ bpm is one of the most sensitive predictors of deterioration and is a NEWS2 trigger for urgent review. The nurse should perform a full respiratory assessment (auscultation, SpO₂, history, pulse, mental status) and notify the provider promptly."
+    },
+    {
+      "id": "vs-q7",
+      "text": "A 4-year-old child is brought to the pediatric clinic with fever and irritability. Which pain assessment scale is MOST appropriate for this patient?",
+      "type": "multiple-choice",
+      "options": [
+        "Numerical Rating Scale (NRS, 0–10)",
+        "Visual Analog Scale (VAS)",
+        "CPOT (Critical-Care Pain Observation Tool)",
+        "Wong-Baker FACES Pain Scale"
+      ],
+      "answer": "Wong-Baker FACES Pain Scale",
+      "explanation": "The Wong-Baker FACES Pain Scale is the appropriate self-report tool for children ages 3 and older. It uses cartoon facial expressions ranging from happy (0) to crying (10), which are developmentally appropriate for preschool-age children who may not yet have the cognitive ability to abstract pain as a number. The NRS requires abstract numeric thinking typically not reliable until age 8. The VAS is primarily a research tool. The CPOT is for nonverbal, critically ill adult patients."
+    },
+    {
+      "id": "vs-q8",
+      "text": "A nurse assesses an 80-year-old patient's vital signs and finds a temperature of 37.6°C. The patient appears more confused than their usual baseline, with decreased appetite and dysuria. What is the nurse's best interpretation of this finding?",
+      "type": "multiple-choice",
+      "options": [
+        "The temperature is normal; confusion is unrelated to vital signs findings",
+        "A temperature of 37.6°C in an older adult with new confusion and dysuria may represent a significant febrile response and requires further assessment",
+        "The patient has hyperthermia; apply cooling measures immediately",
+        "The temperature is slightly elevated; reassess in 4 hours before taking action"
+      ],
+      "answer": "A temperature of 37.6°C in an older adult with new confusion and dysuria may represent a significant febrile response and requires further assessment",
+      "explanation": "Older adults often mount blunted febrile responses to infection due to physiological changes in thermoregulation. A temperature that appears only mildly elevated by standard criteria may represent a significant fever in this population. Combined with new-onset confusion (an atypical presentation of infection in older adults) and dysuria (a symptom of UTI), this constellation strongly suggests a possible UTI with associated systemic response. The nurse should obtain a urinalysis and urine culture, notify the provider, and continue close monitoring."
+    },
+    {
+      "id": "vs-q9",
+      "text": "A nurse takes a patient's blood pressure in both arms and obtains readings of 148/92 mmHg in the right arm and 118/74 mmHg in the left arm. What is the significance of this finding?",
+      "type": "multiple-choice",
+      "options": [
+        "This is a normal variation; use the average of the two readings",
+        "A difference of > 10–15 mmHg between arms may indicate arterial disease such as aortic dissection or subclavian artery stenosis and should be reported",
+        "Use the left arm reading as blood pressure should always be measured on the non-dominant side",
+        "The higher reading is inaccurate; repeat the right arm measurement"
+      ],
+      "answer": "A difference of > 10–15 mmHg between arms may indicate arterial disease such as aortic dissection or subclavian artery stenosis and should be reported",
+      "explanation": "A clinically significant inter-arm blood pressure difference (typically defined as > 10–15 mmHg SBP) may indicate peripheral artery disease, subclavian artery stenosis, aortic coarctation, or, in the acute setting, aortic dissection (which can impair blood flow to one subclavian artery). This finding should be documented and reported to the provider for further evaluation. The higher reading is generally used as the reference measurement going forward."
+    },
+    {
+      "id": "vs-q10",
+      "text": "The nurse obtains the following sequential vital signs for a post-operative patient over 6 hours: HR 76, 82, 88, 97, 104 bpm. BP 122/74, 118/70, 110/68, 102/64, 94/60 mmHg. Which of the following best describes the clinical significance of this trend?",
+      "type": "multiple-choice",
+      "options": [
+        "These values are within normal limits; continue routine monitoring",
+        "The tachycardia is concerning but the blood pressure remains adequate at this time",
+        "This trend suggests progressive hemodynamic compromise that may indicate hemorrhage, sepsis, or other serious complication requiring immediate provider notification",
+        "The patient should be encouraged to increase oral fluid intake and reassessed in 2 hours"
+      ],
+      "answer": "This trend suggests progressive hemodynamic compromise that may indicate hemorrhage, sepsis, or other serious complication requiring immediate provider notification",
+      "explanation": "Trending is often more clinically significant than any single value. This pattern shows progressive, directional deterioration — rising heart rate and falling blood pressure over 6 hours — which is a hallmark of early shock (compensated, then decompensated). The current SBP of 94 mmHg is near the critical threshold of 90 mmHg. Waiting for further deterioration risks progression to decompensated shock. Immediate provider notification, increased monitoring frequency, IV access assessment, and preparation for fluid resuscitation are indicated."
+    },
+    {
+      "id": "vs-q11",
+      "text": "A nurse is documenting a patient's vital signs. The patient's blood pressure was measured in the left arm, in a sitting position. The correct documentation is:",
+      "type": "multiple-choice",
+      "options": [
+        "BP 136/88 mmHg",
+        "BP 136/88 L arm sitting",
+        "BP 136/88, lying flat",
+        "BP 136/88 mmHg, left arm, sitting position"
+      ],
+      "answer": "BP 136/88 mmHg, left arm, sitting position",
+      "explanation": "Complete vital signs documentation includes the value, the limb used, and the patient's position. This information is clinically important because blood pressure values vary by arm and by position. Without this documentation, subsequent nurses cannot accurately compare readings or detect orthostatic changes. Documentation that includes all relevant parameters supports continuity and patient safety."
+    },
+    {
+      "id": "vs-q12",
+      "text": "The nurse is preparing to use SBAR to call a provider about a patient's abnormal vital signs. Which of the following statements correctly represents the 'Assessment' component of SBAR?",
+      "type": "multiple-choice",
+      "options": [
+        "'The patient is Mr. Johnson in room 412.'",
+        "'The patient was admitted 2 days ago for pneumonia and has been on IV antibiotics.'",
+        "'I believe this patient may be developing septic shock based on trending hypotension, tachycardia, and fever unresponsive to antibiotics.'",
+        "'I am requesting that you come evaluate the patient and consider ordering a fluid bolus.'"
+      ],
+      "answer": "'I believe this patient may be developing septic shock based on trending hypotension, tachycardia, and fever unresponsive to antibiotics.'",
+      "explanation": "The 'Assessment' component of SBAR is the nurse's clinical interpretation of the situation — what the nurse believes is happening based on the data. It represents clinical judgment, not just reporting of facts. The first option is the Situation, the second is Background, and the fourth is the Recommendation. Communicating a clear assessment demonstrates clinical reasoning and helps providers rapidly understand the urgency and nature of the problem."
+    },
+    {
+      "id": "vs-q13",
+      "text": "True or false: A respiratory rate of 18 breaths per minute measured by counting for 30 seconds (count of 9, multiplied by 2) is as accurate as a 60-second count for all patients.",
+      "type": "true-false",
+      "options": ["True", "False"],
+      "answer": "False",
+      "explanation": "The 30-second count multiplied by 2 is acceptable only for patients with regular, consistent respiratory patterns. For patients with irregular breathing rhythms, varying depth, or periodic breathing (such as Cheyne-Stokes), a 60-second count is required to accurately capture the true rate. In clinical practice, a full 60-second count is the standard for accuracy, especially when the respiratory rate is abnormal or the patient is in distress."
+    },
+    {
+      "id": "vs-q14",
+      "text": "Explain the clinical difference between measuring pain in a verbally communicative adult patient versus a non-verbal, cognitively impaired older adult patient, and name one validated tool appropriate for each.",
+      "type": "short-answer",
+      "answer": [
+        "For a verbally communicative adult, the Numerical Rating Scale (NRS, 0-10) is appropriate because the patient can self-report pain. For a non-verbal cognitively impaired older adult, a behavioral tool such as the PAINAD (Pain Assessment in Advanced Dementia) scale is used because self-report is not possible.",
+        "Communicative adults can self-report using scales like the NRS (0–10) or FACES. Non-verbal or cognitively impaired patients require behavioral observation tools like PAINAD or FLACC, which assess indicators such as facial expression, vocalization, and body language.",
+        "Self-report (e.g., NRS) is the gold standard in patients who can communicate reliably. In non-verbal or severely cognitively impaired patients, behavioral pain assessment scales like the PAINAD or CPOT are used to infer pain from observable behaviors."
+      ],
+      "explanation": "Patient self-report is the gold standard for pain assessment because pain is subjective. When self-report is unreliable or unavailable (due to cognitive impairment, altered level of consciousness, or intubation), behavioral observation tools validated for that specific population must be used. The PAINAD is validated for advanced dementia; the FLACC is validated for children and adults with cognitive impairment; the CPOT is validated for critically ill adults. Never assume a patient is not in pain because they cannot verbalize it."
+    }
+  ]
+}
