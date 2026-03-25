@@ -1,0 +1,35 @@
+name: Invoke BSN User Agent
+description: Collect information to process by the BSN user agent.
+
+fields:
+  - type: textarea
+    id: raw_notes
+    label: Raw Notes
+    required: true
+    attributes:
+      rows: 5
+
+  - type: input
+    id: desired_output
+    label: Desired Output
+    required: true
+
+  - type: input
+    id: privacy
+    label: Privacy Level
+    required: false
+
+  - type: input
+    id: tags
+    label: Tags
+    required: false
+
+  - type: input
+    id: related_content
+    label: Related Content
+    required: false
+
+  - type: boolean
+    id: bsn_processing
+    label: Process with BSN User Agent
+    required: true
