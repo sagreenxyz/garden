@@ -23,6 +23,8 @@ const publicLinks = [
   { href: `${base}quizzes/`, label: 'Quizzes' },
   { href: `${base}glossary/`, label: 'Glossary' },
 ];
+
+const privateLink = { href: `${base}private/`, label: 'Private' };
 ---
 
 <!doctype html>
@@ -88,11 +90,37 @@ const publicLinks = [
               </li>
             ))
           }
+          <!-- Private link: shown only when authenticated -->
+          <li id="nav-private-desktop" style="display:none">
+            <a
+              href={privateLink.href}
+              class="text-sm font-medium px-3 py-1.5 rounded-md hover:bg-base-200 transition-colors"
+            >
+              🔒 {privateLink.label}
+            </a>
+          </li>
         </ul>
       </nav>
 
-      <!-- Right side: mobile hamburger -->
+      <!-- Right side: auth controls + mobile hamburger -->
       <div class="navbar-end gap-2">
+        <!-- Sign In link: visible when logged out -->
+        <a
+          id="nav-signin-desktop"
+          href={`${base}login/`}
+          class="btn btn-ghost btn-sm font-sans gap-2 hidden lg:inline-flex"
+        >
+          Sign In
+        </a>
+        <!-- Sign Out button: visible when logged in -->
+        <button
+          id="nav-signout-desktop"
+          class="btn btn-ghost btn-sm font-sans gap-2 hidden lg:inline-flex"
+          style="display:none"
+        >
+          Sign Out
+        </button>
+
         <!-- Mobile hamburger -->
         <div class="dropdown dropdown-end lg:hidden">
           <div tabindex="0" role="button" class="btn btn-ghost btn-sm" aria-label="Open navigation">
@@ -121,6 +149,17 @@ const publicLinks = [
                 </li>
               ))
             }
+            <!-- Private link in mobile menu: shown only when authenticated -->
+            <li id="nav-private-mobile" style="display:none">
+              <a href={privateLink.href}>🔒 {privateLink.label}</a>
+            </li>
+            <!-- Auth items in mobile menu -->
+            <li id="nav-signin-mobile">
+              <a href={`${base}login/`}>Sign In</a>
+            </li>
+            <li id="nav-signout-mobile" style="display:none">
+              <button id="nav-signout-mobile-btn" class="w-full text-left">Sign Out</button>
+            </li>
           </ul>
         </div>
       </div>
@@ -142,3 +181,49 @@ const publicLinks = [
     </footer>
   </body>
 </html>
+
+<script define:vars={{ base }}>
+  const SESSION_KEY = 'lms_auth';
+
+  function applyAuthState() {
+    const loggedIn = sessionStorage.getItem(SESSION_KEY) === 'ok';
+
+    // Desktop
+    const signinDesktop = document.getElementById('nav-signin-desktop');
+    const signoutDesktop = document.getElementById('nav-signout-desktop');
+    const privateDesktop = document.getElementById('nav-private-desktop');
+
+    // Mobile
+    const signinMobile = document.getElementById('nav-signin-mobile');
+    const signoutMobile = document.getElementById('nav-signout-mobile');
+    const privateMobile = document.getElementById('nav-private-mobile');
+
+    if (loggedIn) {
+      if (signinDesktop) signinDesktop.style.display = 'none';
+      if (signoutDesktop) signoutDesktop.style.display = '';
+      if (privateDesktop) privateDesktop.style.display = '';
+
+      if (signinMobile) signinMobile.style.display = 'none';
+      if (signoutMobile) signoutMobile.style.display = '';
+      if (privateMobile) privateMobile.style.display = '';
+    } else {
+      if (signinDesktop) signinDesktop.style.display = '';
+      if (signoutDesktop) signoutDesktop.style.display = 'none';
+      if (privateDesktop) privateDesktop.style.display = 'none';
+
+      if (signinMobile) signinMobile.style.display = '';
+      if (signoutMobile) signoutMobile.style.display = 'none';
+      if (privateMobile) privateMobile.style.display = 'none';
+    }
+  }
+
+  function handleSignOut() {
+    sessionStorage.removeItem(SESSION_KEY);
+    window.location.replace(base + 'login/');
+  }
+
+  applyAuthState();
+
+  document.getElementById('nav-signout-desktop')?.addEventListener('click', handleSignOut);
+  document.getElementById('nav-signout-mobile-btn')?.addEventListener('click', handleSignOut);
+</script>
