@@ -496,6 +496,8 @@ Deployment is automated via GitHub Actions (`.github/workflows/deploy.yml`) on e
 
 This section records hard-won troubleshooting findings and research strategies from prior automated sessions so future agents do not repeat the same dead-ends.
 
+> **Standing instruction for all AI agents:** Whenever you encounter a build error, tool limitation, syntax pitfall, or workflow quirk that is not already documented here, **add it to the appropriate subsection of this `Agent / AI Notes` chapter before closing your session.** Use the same format as the existing entries (symptom → cause → fix, with a code example where helpful). Run `npm run format` after editing the README. This keeps the troubleshooting knowledge compounding across sessions instead of being rediscovered each time.
+
 ---
 
 ### 🔍 Finding Content in the Repository
@@ -613,6 +615,213 @@ The private section uses **client-side session storage**, not server-side auth. 
 
 **Fix:** Run `npm run format` to auto-fix all formatting. Prettier with `prettier-plugin-astro` applies specific rules to `.astro` frontmatter (triple-dash fences) and template blocks. Never manually guess whitespace — always let Prettier fix it.
 
+#### MDX build fails with "Unexpected character N before name"
+
+**Symptom:** `npm run build` fails with an error like:
+
+```
+[@mdx-js/rollup] Unexpected character `3` (U+0033) before name, expected a character that can start a name
+file: src/content/courses/vital-signs.mdx:156:144
+```
+
+**Cause:** MDX treats bare `<` as the start of a JSX element. A `<` followed by a digit (e.g. `<3 months`, `<25 mmHg`, `<65 mmHg`) is a JSX parse error because digits cannot start a tag name.
+
+**Fix:** Replace every bare `<` used as "less than" in MDX body text or Markdown tables with the HTML entity `&lt;`. Do the same for `>` → `&gt;` only when it directly precedes a digit or letter that could be misread as a JSX tag.
+
+```mdx
+<!-- Broken -->
+
+contraindicated in infants <3 mo
+narrowed (<25 mmHg) in cardiac tamponade
+A MAP <65 mmHg is associated with ...
+
+<!-- Fixed -->
+
+contraindicated in infants &lt;3 mo
+narrowed (&lt;25 mmHg) in cardiac tamponade
+A MAP &lt;65 mmHg is associated with ...
+```
+
+**Find all occurrences quickly:**
+
+```bash
+grep -n '<[0-9]' src/content/**/*.mdx
+```
+
+#### TypeScript/esbuild error: "Duplicate key in object literal"
+
+**Symptom:** Build fails with a `[plugin vite:esbuild]` warning/error about a duplicate key in an object literal, e.g.:
+
+```
+Duplicate key "escalationRules" in object literal
+```
+
+**Cause:** A TypeScript object literal contains the same key twice. This commonly happens when generating or copy-pasting data files — the second definition silently shadows the first at runtime, but esbuild (and TypeScript strict mode) correctly flags it as an error.
+
+**Fix:** Search for the duplicated key in the file and remove the second occurrence:
+
+```bash
+grep -n "escalationRules" src/lib/infection-control/microbes.ts
+```
+
+Identify which occurrence is the canonical one (usually the first), and delete the duplicate.
+
+#### TypeScript syntax error: apostrophe inside a single-quoted string
+
+**Symptom:** Build fails with a confusing esbuild error like:
+
+```
+Expected "}" but found "s"
+Location: src/lib/infection-control/cases.ts:56:65
+```
+
+**Cause:** A TypeScript string literal uses single quotes (`'...'`) and also contains a natural-language apostrophe (e.g. `'Mr. Alvarez's room'`). The apostrophe terminates the string, leaving the trailing `s room'` as invalid syntax.
+
+**Fix:** Use double quotes for any string that contains an apostrophe:
+
+```ts
+// Broken
+text: 'Don gloves before entering Mr. Alvarez's room',
+
+// Fixed
+text: "Don gloves before entering Mr. Alvarez's room",
+```
+
+Or escape with a backslash:
+
+```ts
+text: 'Don gloves before entering Mr. Alvarez\'s room',
+```
+
+**Find all occurrences in a file:**
+
+```bash
+grep -n "'[^']*'[a-z]" src/lib/infection-control/cases.ts
+```
+
+#### `node_modules` not present on first run
+
+**Symptom:** Commands like `node_modules/.bin/astro build` fail with `No such file or directory`.
+
+**Cause:** The repository is a fresh clone and dependencies have not been installed yet.
+
+**Fix:** Run `npm install` before any build, lint, or format commands. It completes in under 60 seconds:
+
+```bash
+npm install
+```
+
+#### `npx tsc --noEmit` does not use the project's TypeScript
+
+**Symptom:** Running `npx tsc` installs a stub `tsc@2.x` package that prints a message saying it is "not the tsc command you are looking for".
+
+**Cause:** `npx` resolves `tsc` to the npm registry package named `tsc`, which is an unrelated stub, not the TypeScript compiler.
+
+**Fix:** Use the TypeScript binary installed locally by Astro (via `astro check`), or use the build as a type check:
+
+```bash
+# Preferred — type-checks all .astro, .ts, .svelte files via Vite:
+npm run build
+
+# Alternatively, invoke the local tsc directly (if installed):
+node_modules/.bin/tsc --noEmit
+```
+
+#### `astro check` fails with "package not found" in CI / sandbox
+
+**Symptom:** `node_modules/.bin/astro check` exits with:
+
+```
+[ERROR] The `@astrojs/check` and `typescript` packages are required for this command
+```
+
+**Cause:** `@astrojs/check` is a separate optional package not installed in this project. It is not available in sandbox environments that block network installs.
+
+**Fix:** Use `npm run build` instead. The Astro Vite build validates TypeScript types, Zod content schemas, and Svelte component types as part of the build step. If the build succeeds, type checking has passed.
+
+---
+
+### 🔷 Svelte 5 Component Patterns
+
+This project uses **Svelte 5** with the new runes API. All interactive components in `src/components/` must use Svelte 5 syntax. Do not mix Svelte 4 reactive patterns (`$:`, `export let`, event dispatchers) with Svelte 5 runes — they are incompatible.
+
+#### Svelte 5 runes quick reference
+
+| Svelte 4 pattern        | Svelte 5 equivalent                               |
+| ----------------------- | ------------------------------------------------- |
+| `export let foo`        | `let { foo } = $props()`                          |
+| `let x = 0` (reactive)  | `let x = $state(0)`                               |
+| `$: derived = x + 1`    | `const derived = $derived(x + 1)`                 |
+| `$: { sideEffect(x); }` | `$effect(() => { sideEffect(x); })`               |
+| `on:click={handler}`    | `onclick={handler}` (native DOM event)            |
+| `createEventDispatcher` | Call a callback prop: `let { onDone } = $props()` |
+| `{#if}` / `{#each}`     | Unchanged — still valid in Svelte 5               |
+
+#### Props interface pattern
+
+```svelte
+<script lang="ts">
+  interface Props {
+    title: string;
+    count?: number;
+    onComplete: (result: string) => void;
+  }
+
+  let { title, count = 0, onComplete }: Props = $props();
+</script>
+```
+
+#### Reactive state and derived values
+
+```svelte
+<script lang="ts">
+  let score = $state(0);
+  let doubled = $derived(score * 2);
+
+  // Derived that calls a function (use a wrapper to avoid stale closures)
+  let grade = $derived(computeGrade(score));
+</script>
+```
+
+#### `$derived` with a function body
+
+When deriving a value requires more than a single expression, use an IIFE:
+
+```svelte
+let label = $derived(() => {
+  if (score >= 90) return 'Excellent';
+  if (score >= 75) return 'Proficient';
+  return 'Beginning';
+});
+// Call it as a function in the template: {label()}
+```
+
+#### Client-side-only code (localStorage, sessionStorage)
+
+Guard any browser API usage with an `typeof` check because Astro SSR renders Svelte components on the server at build time, even for `client:load` islands:
+
+```ts
+// Safe — works in both SSR (build time) and browser (runtime)
+function loadFromStorage(): string | null {
+  if (typeof localStorage === 'undefined') return null;
+  return localStorage.getItem('my-key');
+}
+```
+
+#### Svelte 5 components as Astro islands
+
+Use `client:load` to hydrate a Svelte component immediately on page load (needed when the component reads localStorage or needs interactivity on first paint):
+
+```astro
+---
+import MyComponent from '../components/MyComponent.svelte';
+---
+
+<MyComponent client:load />
+```
+
+Use `client:visible` if the component is below the fold and interactivity can be deferred.
+
 ---
 
 ### 💡 Effective AI Session Strategies
@@ -664,6 +873,24 @@ const base = import.meta.env.BASE_URL;
 #### Private vs public notes routing
 
 Notes with `visibility: 'private'` or `visibility: 'protected'` appear only under `/private/notes/` (auth-gated). Notes with `visibility: 'public'` (or no visibility field, which defaults to `'public'`) appear under the public `/notes/` listing. Notes with `reviewState: 'needs-review'` are shown in the private hub's **Pending Review** section regardless of visibility — they are never shown on the public index. If you add a new visibility-aware page, apply the same filter to `getCollection`.
+
+#### Update this README when you hit a new problem
+
+This is a standing expectation, not optional.
+
+If you encounter any error, tool limitation, or non-obvious workflow pattern that is not already documented in the **🛠 Troubleshooting Common Problems** or **🔷 Svelte 5 Component Patterns** sections:
+
+1. **Add a new entry** to the appropriate subsection before closing your session.
+2. Use the established format:
+   - `#### Short descriptive title` — written as the reader would describe their symptom
+   - **Symptom:** what the agent or developer sees
+   - **Cause:** why it happens
+   - **Fix:** concrete steps or code to resolve it
+3. Include a minimal code example whenever the fix involves a non-obvious syntax change.
+4. Run `npm run format` after editing the README so the lint check keeps passing.
+5. Commit the README update in the same PR as the work that triggered the discovery.
+
+The goal is for each session's hard-won lessons to become the next session's starting knowledge — not to be silently lost when the context window closes.
 
 ---
 
