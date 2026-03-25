@@ -1,0 +1,12 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import InfectionControlApp from '../../components/infection-control/InfectionControlApp.svelte';
+---
+
+<BaseLayout
+  title="Infection Control Challenge"
+  description="Master isolation precautions and chain-of-infection interventions through gamified clinical case simulations."
+  fullWidth={true}
+>
+  <InfectionControlApp client:load />
+</BaseLayout>

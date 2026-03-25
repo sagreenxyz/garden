@@ -66,12 +66,7 @@
       "id": "ic-q4",
       "text": "The nurse is reviewing the six links of the chain of infection. Which link is targeted when a nurse performs hand hygiene before and after patient care?",
       "type": "multiple-choice",
-      "options": [
-        "Infectious agent",
-        "Reservoir",
-        "Portal of exit",
-        "Mode of transmission"
-      ],
+      "options": ["Infectious agent", "Reservoir", "Portal of exit", "Mode of transmission"],
       "answer": "Mode of transmission",
       "explanation": "Hand hygiene breaks the mode of transmission link by removing transient microorganisms from the hands that could be transferred from one surface or patient to another. Hand hygiene is the single most effective infection control measure and interrupts both contact and indirect transmission."
     },
@@ -249,12 +244,7 @@
       "id": "ic-q18",
       "text": "A client with HIV asks the nurse about their CD4 T-cell count result of 185 cells/mm³. The nurse knows that a CD4 count below which threshold indicates the client has progressed to AIDS?",
       "type": "multiple-choice",
-      "options": [
-        "350 cells/mm³",
-        "500 cells/mm³",
-        "200 cells/mm³",
-        "100 cells/mm³"
-      ],
+      "options": ["350 cells/mm³", "500 cells/mm³", "200 cells/mm³", "100 cells/mm³"],
       "answer": "200 cells/mm³",
       "explanation": "AIDS is diagnosed when an HIV-positive client has a CD4+ T-cell count below 200 cells/mm³ (or when an AIDS-defining illness is present, regardless of CD4 count). A CD4 count of 185 cells/mm³ meets the CDC case definition for AIDS. At this level, the client is at high risk for opportunistic infections such as Pneumocystis jirovecii pneumonia (PCP), toxoplasmosis, and CMV."
     },

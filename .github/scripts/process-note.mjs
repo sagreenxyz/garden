@@ -22,25 +22,137 @@ import { setOutput } from './gh-output.mjs';
 
 const STOP_WORDS = new Set([
   // Articles / conjunctions / prepositions
-  'about', 'above', 'after', 'again', 'against', 'also', 'although', 'among',
-  'around', 'because', 'before', 'below', 'between', 'both', 'but', 'down',
-  'during', 'each', 'either', 'else', 'even', 'every', 'except', 'from',
-  'further', 'however', 'into', 'just', 'like', 'more', 'most', 'much',
-  'next', 'often', 'only', 'other', 'over', 'part', 'rather', 'same',
-  'since', 'some', 'such', 'than', 'that', 'their', 'them', 'then', 'there',
-  'these', 'they', 'this', 'those', 'through', 'time', 'under', 'until',
-  'upon', 'very', 'well', 'were', 'what', 'when', 'where', 'which', 'while',
-  'will', 'with', 'within', 'would', 'your',
+  'about',
+  'above',
+  'after',
+  'again',
+  'against',
+  'also',
+  'although',
+  'among',
+  'around',
+  'because',
+  'before',
+  'below',
+  'between',
+  'both',
+  'but',
+  'down',
+  'during',
+  'each',
+  'either',
+  'else',
+  'even',
+  'every',
+  'except',
+  'from',
+  'further',
+  'however',
+  'into',
+  'just',
+  'like',
+  'more',
+  'most',
+  'much',
+  'next',
+  'often',
+  'only',
+  'other',
+  'over',
+  'part',
+  'rather',
+  'same',
+  'since',
+  'some',
+  'such',
+  'than',
+  'that',
+  'their',
+  'them',
+  'then',
+  'there',
+  'these',
+  'they',
+  'this',
+  'those',
+  'through',
+  'time',
+  'under',
+  'until',
+  'upon',
+  'very',
+  'well',
+  'were',
+  'what',
+  'when',
+  'where',
+  'which',
+  'while',
+  'will',
+  'with',
+  'within',
+  'would',
+  'your',
   // Verbs / modals
-  'been', 'being', 'came', 'come', 'could', 'does', 'done', 'given', 'have',
-  'help', 'know', 'known', 'look', 'make', 'must', 'need', 'provide', 'should',
-  'take', 'used', 'using', 'want',
+  'been',
+  'being',
+  'came',
+  'come',
+  'could',
+  'does',
+  'done',
+  'given',
+  'have',
+  'help',
+  'know',
+  'known',
+  'look',
+  'make',
+  'must',
+  'need',
+  'provide',
+  'should',
+  'take',
+  'used',
+  'using',
+  'want',
   // Nursing-context filler
-  'answer', 'answers', 'area', 'care', 'certain', 'check', 'common', 'course',
-  'example', 'exam', 'high', 'important', 'include', 'includes', 'including',
-  'large', 'last', 'less', 'long', 'note', 'notes', 'nurse', 'nursing',
-  'order', 'patient', 'patients', 'people', 'place', 'practice', 'question',
-  'questions', 'quiz', 'result', 'review', 'silvestri', 'hesl',
+  'answer',
+  'answers',
+  'area',
+  'care',
+  'certain',
+  'check',
+  'common',
+  'course',
+  'example',
+  'exam',
+  'high',
+  'important',
+  'include',
+  'includes',
+  'including',
+  'large',
+  'last',
+  'less',
+  'long',
+  'note',
+  'notes',
+  'nurse',
+  'nursing',
+  'order',
+  'patient',
+  'patients',
+  'people',
+  'place',
+  'practice',
+  'question',
+  'questions',
+  'quiz',
+  'result',
+  'review',
+  'silvestri',
+  'hesl',
 ]);
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -62,10 +174,7 @@ function slugify(text) {
  */
 function extractField(body, heading) {
   const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const re = new RegExp(
-    `###?\\s+${escaped}\\s*\\n+([\\s\\S]*?)(?=\\n###|$)`,
-    'i'
-  );
+  const re = new RegExp(`###?\\s+${escaped}\\s*\\n+([\\s\\S]*?)(?=\\n###|$)`, 'i');
   const m = body.match(re);
   return m ? m[1].trim() : '';
 }
@@ -299,7 +408,12 @@ async function main() {
   const isPracticeTest = issueLabels.includes('practice-test');
 
   // ── 1. Parse fields based on template type ────────────────────────────────
-  const { title: rawTitle, tags, content: noteContent, noteType } = isPracticeTest
+  const {
+    title: rawTitle,
+    tags,
+    content: noteContent,
+    noteType,
+  } = isPracticeTest
     ? parsePracticeTest(issueBody, issueNumber)
     : parseGeneralNote(issueBody, issueTitle, issueNumber);
 
@@ -310,8 +424,7 @@ async function main() {
     : 'public';
 
   const relatedLinksRaw =
-    extractField(issueBody, 'Related Internal Links') ||
-    extractField(issueBody, 'Related Content');
+    extractField(issueBody, 'Related Internal Links') || extractField(issueBody, 'Related Content');
   const relatedLinks = relatedLinksRaw
     ? relatedLinksRaw
         .split(/[,\n]+/)
@@ -428,7 +541,9 @@ confidence: ${confidence}${duplicateOfLine}
   await setOutput('comment_body', comment);
 
   console.log(`✅ Note written: src/content/notes/${filename}`);
-  console.log(`   template=${isPracticeTest ? 'practice-test' : 'general'}  review_state=${reviewState}  confidence=${confidence}`);
+  console.log(
+    `   template=${isPracticeTest ? 'practice-test' : 'general'}  review_state=${reviewState}  confidence=${confidence}`
+  );
   console.log(`   tags=[${tags.join(', ')}]`);
   if (duplicates.length > 0)
     console.log(`   ⚠️ Possible duplicates: ${duplicates.map((d) => d.slug).join(', ')}`);
