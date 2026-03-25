@@ -1684,6 +1684,1325 @@ export const CASES: Case[] = [
         'NCLEX tip: COVID-19 = droplet precautions for routine care + airborne (N95) for AGPs. Know your AGP list. Also note: COVID-19 is in a negative-pressure room when available — this makes it similar to airborne pathogens in practice.',
     },
   },
+
+  // ── Case 6: VRE ───────────────────────────────────────────────────────────
+  {
+    id: 'vre-uti',
+    microbeId: 'vre',
+    title: 'VRE: The Antibiotic-Resistant Gut Bug',
+    vignette:
+      'Mr. Thompson, a 67-year-old kidney transplant recipient, has been in the ICU for 10 days on broad-spectrum antibiotics including vancomycin. He develops a urinary tract infection; urine culture returns positive for Vancomycin-resistant Enterococcus faecium (VRE). He is currently sharing a semi-private room.',
+    setting: 'icu',
+    difficulty: 'basic',
+    tags: ['VRE', 'contact precautions', 'antimicrobial stewardship', 'transplant', 'MDR organism'],
+    modeA: {
+      precautionQuestion: 'Which precautions are required for Mr. Thompson with confirmed VRE?',
+      precautionOptions: [
+        {
+          level: 'standard',
+          label: 'Standard Precautions only',
+          description: 'Standard precautions for all patients.',
+          points: 0,
+          feedback:
+            'Incorrect. VRE is a multi-drug resistant organism (MDRO) requiring Contact Precautions to prevent spread via contaminated hands and surfaces.',
+        },
+        {
+          level: 'contact',
+          label: 'Contact Precautions',
+          description: 'Gloves + gown before room entry; dedicated equipment.',
+          points: 20,
+          feedback:
+            'Correct! VRE is transmitted by direct and indirect contact. Contact Precautions with gloves and gown are required. Move to a private room.',
+        },
+        {
+          level: 'droplet',
+          label: 'Droplet Precautions',
+          description: 'Surgical mask within 3 feet.',
+          points: 0,
+          feedback:
+            'Incorrect. VRE is not transmitted by respiratory droplets — it spreads via the fecal-oral route and contact with contaminated surfaces.',
+        },
+        {
+          level: 'airborne',
+          label: 'Airborne Precautions',
+          description: 'N95 in a negative-pressure room.',
+          points: 0,
+          feedback:
+            'Incorrect. VRE does not spread by the airborne route. Contact Precautions are required.',
+        },
+      ],
+      keyActionsInstruction: 'Select ALL correct actions for Mr. Thompson:',
+      keyActions: [
+        {
+          id: 'vre-a1',
+          text: 'Don gloves AND gown before entering the room',
+          correct: true,
+          chainLink: 'modeOfTransmission',
+          points: 15,
+          feedback:
+            'Correct! Both gloves and gown are required before any room entry for Contact Precautions. VRE can colonize clothing and surfaces.',
+        },
+        {
+          id: 'vre-a2',
+          text: 'Move Mr. Thompson to a private room',
+          correct: true,
+          chainLink: 'reservoir',
+          points: 10,
+          feedback:
+            'Correct! Private room placement prevents transmission to other ICU patients, many of whom are also immunocompromised.',
+        },
+        {
+          id: 'vre-a3',
+          text: 'Dedicate a blood pressure cuff and glucometer to Mr. Thompson',
+          correct: true,
+          chainLink: 'modeOfTransmission',
+          points: 10,
+          feedback:
+            'Correct! Shared equipment is a major vector for VRE transmission. Dedicated equipment eliminates this route.',
+        },
+        {
+          id: 'vre-a4',
+          text: 'Notify the pharmacy and treating team about the VRE result to prompt antimicrobial stewardship review',
+          correct: true,
+          chainLink: 'susceptibleHost',
+          points: 10,
+          feedback:
+            'Correct! Antimicrobial stewardship — optimizing antibiotic selection and duration — is a key strategy to prevent further MDRO emergence and colonization.',
+        },
+        {
+          id: 'vre-a5',
+          text: 'Wear only gloves — a gown is unnecessary since you are just checking his vital signs',
+          correct: false,
+          chainLink: 'modeOfTransmission',
+          points: -15,
+          feedback:
+            'Incorrect. VRE readily colonizes clothing. Both gloves AND gown are required before ANY room contact, regardless of activity.',
+        },
+      ],
+      chainLinkQuestions: [
+        {
+          id: 'vre-clq1',
+          prompt: 'Why is VRE particularly dangerous in Mr. Thompson compared with healthy adults?',
+          chainLink: 'susceptibleHost',
+          options: [
+            {
+              text: 'He is immunocompromised (transplant + corticosteroids) and has depleted gut flora from prolonged broad-spectrum antibiotic exposure',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! Immunosuppression and antibiotic-disrupted microbiome are the two most important VRE risk factors. Transplant recipients on immunosuppressants and broad-spectrum antibiotics are classic high-risk hosts.',
+            },
+            {
+              text: 'VRE is always fatal in ICU patients',
+              correct: false,
+              points: 0,
+              feedback:
+                'VRE is serious but not invariably fatal; mortality depends on infection site, treatment options, and host factors.',
+            },
+            {
+              text: 'VRE is highly contagious in the air',
+              correct: false,
+              points: 0,
+              feedback: 'VRE is not airborne — it spreads by direct and indirect contact.',
+            },
+            {
+              text: 'He has not been vaccinated against VRE',
+              correct: false,
+              points: 0,
+              feedback: 'There is no available VRE vaccine.',
+            },
+          ],
+        },
+        {
+          id: 'vre-clq2',
+          prompt:
+            'Which infection control measure breaks the "Mode of Transmission" link for VRE most effectively?',
+          chainLink: 'modeOfTransmission',
+          options: [
+            {
+              text: 'Hand hygiene with ABHR or soap and water after patient contact, combined with gloves and gown',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! VRE is transmitted via contaminated hands and surfaces. Rigorous hand hygiene combined with Contact Precautions PPE is the most effective transmission barrier.',
+            },
+            {
+              text: 'N95 respirator use',
+              correct: false,
+              points: 0,
+              feedback:
+                'VRE is not airborne — respirators do not address its mode of transmission.',
+            },
+            {
+              text: 'Placing the patient in a negative-pressure room',
+              correct: false,
+              points: 0,
+              feedback:
+                'Negative-pressure rooms are for airborne pathogens, not VRE which spreads by contact.',
+            },
+            {
+              text: 'Isolating all visitors',
+              correct: false,
+              points: 5,
+              feedback:
+                'Visitor restrictions may help in outbreaks but are not the primary transmission-breaking intervention.',
+            },
+          ],
+        },
+      ],
+      maxScore: 85,
+    },
+    modeB: {
+      phases: [
+        {
+          phase: 'before_entry',
+          label: 'Before Entry',
+          description: 'Prepare outside the room',
+        },
+        { phase: 'donning', label: 'Donning', description: 'Don PPE for Contact Precautions' },
+        { phase: 'care', label: 'Patient Care', description: 'Provide care safely' },
+        {
+          phase: 'doffing',
+          label: 'Doffing',
+          description: 'Remove PPE without self-contamination',
+        },
+        { phase: 'exiting', label: 'After Exit', description: 'Hand hygiene and equipment' },
+      ],
+      steps: [
+        {
+          id: 'vre-b1',
+          phase: 'donning',
+          title: 'PPE Selection',
+          narrative: "You are about to enter Mr. Thompson's room to perform a routine assessment.",
+          prompt: 'Which PPE do you don before entering?',
+          options: [
+            {
+              id: 'vre-b1-a',
+              text: 'Gloves and gown',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! Contact Precautions require both gloves and gown before any room entry to prevent contact transmission.',
+            },
+            {
+              id: 'vre-b1-b',
+              text: 'Gloves only',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Gloves alone are insufficient. VRE colonizes clothing — a gown is required to protect your uniform.',
+              contaminationEvent:
+                'Clothing contaminated with VRE — potential spread to other patients.',
+            },
+            {
+              id: 'vre-b1-c',
+              text: 'Surgical mask, gloves, gown',
+              correct: false,
+              points: 5,
+              feedback:
+                'A surgical mask is not required for VRE (contact-only pathogen), but gloves and gown are correct. Extra PPE is not harmful, but mask is unnecessary.',
+            },
+          ],
+        },
+        {
+          id: 'vre-b2',
+          phase: 'care',
+          title: 'Equipment Sharing',
+          narrative:
+            "After examining Mr. Thompson, you need to check his roommate's blood pressure using the shared wall-mounted BP cuff.",
+          prompt: 'What do you do?',
+          options: [
+            {
+              id: 'vre-b2-a',
+              text: 'Use only the dedicated BP cuff labeled for Mr. Thompson; use a separate cuff for his roommate',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! Shared equipment is a key VRE transmission vector. Dedicated equipment for the VRE patient prevents indirect contact transmission.',
+            },
+            {
+              id: 'vre-b2-b',
+              text: "Use the shared cuff and wipe it with an alcohol wipe after — it's quick and convenient",
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. While disinfection is important, the safest practice is dedicated equipment. If sharing is unavoidable, clean and disinfect thoroughly before and after each use.',
+              contaminationEvent: 'VRE transferred via shared BP cuff to another patient.',
+            },
+            {
+              id: 'vre-b2-c',
+              text: "Skip the roommate's assessment until you have time to get a separate cuff",
+              correct: false,
+              points: 0,
+              feedback:
+                'Patient safety requires timely assessment. The correct action is to obtain a separate dedicated cuff, not to skip care.',
+            },
+          ],
+        },
+        {
+          id: 'vre-b3',
+          phase: 'exiting',
+          title: 'Post-Care Hand Hygiene',
+          narrative: 'You have removed gloves and gown after caring for Mr. Thompson.',
+          prompt: 'Which hand hygiene is appropriate for VRE?',
+          options: [
+            {
+              id: 'vre-b3-a',
+              text: 'Alcohol-based hand rub (ABHR) for at least 20 seconds, or soap and water — either is effective for VRE',
+              correct: true,
+              points: 15,
+              feedback:
+                'Correct! Unlike C. diff, VRE does NOT form spores and is susceptible to alcohol-based hand rub. ABHR is preferred per WHO guidelines, but soap and water is also acceptable.',
+            },
+            {
+              id: 'vre-b3-b',
+              text: 'Soap and water only — alcohol is ineffective for drug-resistant organisms',
+              correct: false,
+              points: 5,
+              feedback:
+                'Partially correct (soap and water is fine), but the reasoning is wrong. VRE is susceptible to alcohol. ABHR is the preferred method per WHO guidelines for non-spore-forming bacteria.',
+            },
+            {
+              id: 'vre-b3-c',
+              text: 'No additional hand hygiene — gloves protected your hands',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Hand hygiene is always required after removing gloves. Gloves can have microscopic defects and hands can become contaminated during removal.',
+              contaminationEvent: 'VRE on hands from glove removal — risk of environmental spread.',
+            },
+          ],
+        },
+      ],
+      maxScore: 35,
+    },
+    debrief: {
+      correctPrecaution: 'contact',
+      rationale:
+        'VRE spreads via direct and indirect contact — contaminated hands of HCW and shared equipment are the primary vectors. Contact Precautions (gloves + gown), private room placement, dedicated equipment, and rigorous hand hygiene are the core interventions. Unlike C. diff, VRE is susceptible to alcohol-based hand rub. Antimicrobial stewardship is the key prevention strategy to reduce colonization pressure.',
+      chainOfInfectionSummary:
+        "VRE colonizes Mr. Thompson's GI tract (Reservoir) → exits via feces, urine, wound drainage (Portal of Exit) → travels on HCW hands or shared equipment (Mode of Transmission — contact) → enters next patient's GI tract, urinary tract, or wounds (Portal of Entry) → infects immunocompromised or antibiotic-exposed susceptible hosts (Susceptible Host).",
+      keyLessons: [
+        'VRE requires Contact Precautions: gloves AND gown before any room entry.',
+        'Dedicate equipment (BP cuff, glucometer, stethoscope) to the VRE patient.',
+        'Unlike C. diff, VRE IS susceptible to alcohol-based hand rub.',
+        'Private room placement prevents transmission to other high-risk patients.',
+        'Antimicrobial stewardship reduces the emergence and spread of VRE.',
+        'VRE colonization can persist months to years — clearance cultures are needed before discontinuing precautions.',
+      ],
+      commonErrors: [
+        'Wearing gloves but forgetting the gown.',
+        'Using shared equipment between VRE and non-VRE patients.',
+        'Discontinuing Contact Precautions without clearance surveillance cultures.',
+        'Confusing VRE hand hygiene (ABHR OK) with C. diff (soap and water required).',
+      ],
+      nclexPearl:
+        'NCLEX tip: VRE = Contact Precautions. Key distinguisher: ABHR is OK for VRE (unlike C. diff which requires soap and water). Dedicated equipment and private room are priority actions. Common NCLEX question: "Which action prevents VRE transmission?" — Answer: donning gloves AND gown before entering.',
+    },
+  },
+
+  // ── Case 7: Norovirus ─────────────────────────────────────────────────────
+  {
+    id: 'norovirus-outbreak',
+    microbeId: 'norovirus',
+    title: 'Norovirus: The Cruise Ship Bug Hits the Med-Surg Floor',
+    vignette:
+      'You are working the night shift on a 28-bed medical-surgical floor. Three patients in different rooms have developed acute onset nausea, projectile vomiting, and watery diarrhea within the past 4 hours. Two nursing assistants also report feeling nauseated. You suspect a norovirus outbreak. One of the affected patients, Mr. Alvarez (72 years old), just vomited across the floor of his semi-private room.',
+    setting: 'med-surg',
+    difficulty: 'intermediate',
+    tags: [
+      'norovirus',
+      'contact precautions',
+      'outbreak management',
+      'hand hygiene',
+      'environmental cleaning',
+    ],
+    modeA: {
+      precautionQuestion:
+        'Which precautions are required for Mr. Alvarez with suspected norovirus gastroenteritis?',
+      precautionOptions: [
+        {
+          level: 'standard',
+          label: 'Standard Precautions only',
+          description: 'Standard precautions for all patients.',
+          points: 0,
+          feedback:
+            'Incorrect. Norovirus requires Contact Precautions due to its highly contagious fecal-oral and contact transmission.',
+        },
+        {
+          level: 'contact',
+          label: 'Contact Precautions',
+          description: 'Gloves + gown; soap and water hand hygiene; mask during vomiting events.',
+          points: 20,
+          feedback:
+            'Correct! Norovirus requires Contact Precautions. During active vomiting, add a surgical mask to protect against aerosolized vomitus particles.',
+        },
+        {
+          level: 'droplet',
+          label: 'Droplet Precautions',
+          description: 'Surgical mask within 3 feet.',
+          points: 5,
+          feedback:
+            'Partially correct — a surgical mask is appropriate during active vomiting for the aerosolized component, but full Contact Precautions are the primary requirement.',
+        },
+        {
+          level: 'airborne',
+          label: 'Airborne Precautions',
+          description: 'N95 in a negative-pressure room.',
+          points: 0,
+          feedback:
+            'Incorrect. Norovirus does not spread by true airborne transmission. Contact Precautions are required; mask added only during active vomiting.',
+        },
+      ],
+      keyActionsInstruction:
+        'Select ALL correct outbreak management actions for Mr. Alvarez and the affected floor:',
+      keyActions: [
+        {
+          id: 'noro-a1',
+          text: 'Don gloves, gown, AND surgical mask before cleaning up the vomiting incident',
+          correct: true,
+          chainLink: 'portalOfExit',
+          points: 15,
+          feedback:
+            'Correct! Vomitus aerosols can spread norovirus short-range. Gloves and gown prevent contact transmission; the mask protects from aerosolized vomitus during cleanup.',
+        },
+        {
+          id: 'noro-a2',
+          text: 'Perform hand hygiene with SOAP AND WATER (not just ABHR) after patient contact',
+          correct: true,
+          chainLink: 'modeOfTransmission',
+          points: 15,
+          feedback:
+            'Correct! Norovirus is a non-enveloped virus. ABHR is LESS effective against non-enveloped viruses. Soap and water is the preferred hand hygiene method during norovirus outbreaks.',
+        },
+        {
+          id: 'noro-a3',
+          text: 'Clean the vomiting area with a bleach-based disinfectant (1,000–5,000 ppm sodium hypochlorite)',
+          correct: true,
+          chainLink: 'reservoir',
+          points: 10,
+          feedback:
+            'Correct! Norovirus is resistant to many standard hospital disinfectants. Bleach-based products with adequate contact time are required for effective environmental decontamination.',
+        },
+        {
+          id: 'noro-a4',
+          text: 'Notify infection control immediately about the cluster of GI illness',
+          correct: true,
+          chainLink: 'susceptibleHost',
+          points: 10,
+          feedback:
+            'Correct! A cluster of ≥2 patients with simultaneous GI illness is a potential outbreak and requires immediate infection control notification for investigation and unit-level interventions.',
+        },
+        {
+          id: 'noro-a5',
+          text: 'Instruct the nauseated nursing assistants to continue working but wear gloves',
+          correct: false,
+          chainLink: 'infectiousAgent',
+          points: -15,
+          feedback:
+            'Incorrect and dangerous! Ill staff members are contagious and must not care for patients. Symptomatic HCW should be excluded from patient care for 48–72 hours after symptoms resolve. This is a critical outbreak control measure.',
+        },
+      ],
+      chainLinkQuestions: [
+        {
+          id: 'noro-clq1',
+          prompt:
+            'Why is ABHR less effective for norovirus hand hygiene compared with C. diff or VRE?',
+          chainLink: 'infectiousAgent',
+          options: [
+            {
+              text: 'Norovirus is a non-enveloped virus — alcohol disrupts lipid envelopes but cannot effectively inactivate non-enveloped viruses',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! Enveloped viruses (influenza, COVID-19, RSV) are easily killed by alcohol because it dissolves the lipid envelope. Non-enveloped viruses (norovirus, hepatitis A) are much more resistant to alcohol-based disinfectants.',
+            },
+            {
+              text: 'ABHR has too low an alcohol concentration to kill any viruses',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. ABHR (60–95% alcohol) effectively kills enveloped viruses. The issue is specific to non-enveloped viruses like norovirus.',
+            },
+            {
+              text: 'Norovirus forms spores that resist alcohol, similar to C. diff',
+              correct: false,
+              points: 0,
+              feedback:
+                'Norovirus does not form spores. Its resistance to alcohol is due to its non-enveloped structure, not spore formation.',
+            },
+            {
+              text: 'ABHR is effective against norovirus — soap and water is not needed',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. During norovirus outbreaks, CDC and WHO recommend soap and water as the preferred hand hygiene method due to reduced ABHR efficacy.',
+            },
+          ],
+        },
+        {
+          id: 'noro-clq2',
+          prompt:
+            'Which of the following is the HIGHEST priority action to contain a norovirus outbreak on a hospital unit?',
+          chainLink: 'modeOfTransmission',
+          options: [
+            {
+              text: 'Exclude symptomatic staff from patient care for 48–72 hours after symptom resolution',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! Symptomatic HCW are highly contagious and act as a mobile reservoir — they will spread norovirus to patients and other staff. Staff exclusion is the single highest-impact outbreak control measure.',
+            },
+            {
+              text: 'Administer antiviral therapy to all exposed patients',
+              correct: false,
+              points: 0,
+              feedback:
+                'There are no approved antiviral treatments for norovirus. Supportive care (hydration) is the management approach.',
+            },
+            {
+              text: 'Use N95 respirators for all staff caring for GI illness patients',
+              correct: false,
+              points: 0,
+              feedback:
+                'N95 respirators are not required for norovirus. Contact Precautions (gloves + gown) with a surgical mask during active vomiting are appropriate.',
+            },
+            {
+              text: 'Quarantine the entire hospital floor for 2 weeks',
+              correct: false,
+              points: 0,
+              feedback:
+                'Quarantining the entire floor is disproportionate. Outbreak management focuses on cohorting affected patients, excluding ill staff, and enhanced environmental cleaning.',
+            },
+          ],
+        },
+      ],
+      maxScore: 85,
+    },
+    modeB: {
+      phases: [
+        {
+          phase: 'before_entry',
+          label: 'Before Entry',
+          description: 'Prepare to manage the vomiting incident',
+        },
+        { phase: 'donning', label: 'Donning', description: 'Don PPE for vomiting cleanup' },
+        { phase: 'care', label: 'Cleanup', description: 'Manage vomiting incident safely' },
+        {
+          phase: 'doffing',
+          label: 'Doffing',
+          description: 'Remove PPE without self-contamination',
+        },
+        { phase: 'exiting', label: 'After Exit', description: 'Hand hygiene and notification' },
+      ],
+      steps: [
+        {
+          id: 'noro-b1',
+          phase: 'donning',
+          title: 'PPE for Vomiting Cleanup',
+          narrative:
+            'Mr. Alvarez has just vomited across the floor. You need to clean up the incident and assess him.',
+          prompt: 'Which PPE do you don before entering the room?',
+          options: [
+            {
+              id: 'noro-b1-a',
+              text: 'Gloves, gown, and surgical mask',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! Gloves and gown protect against contact transmission; the surgical mask protects against aerosolized vomitus particles during cleanup of a vomiting incident.',
+            },
+            {
+              id: 'noro-b1-b',
+              text: 'Gloves only — the vomiting has stopped',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Aerosolized vomitus particles remain in the environment after a vomiting incident. Gown and mask are needed for cleanup in addition to gloves.',
+              contaminationEvent: 'Norovirus on clothing and inhaled — risk of self-infection.',
+            },
+            {
+              id: 'noro-b1-c',
+              text: 'Gloves and gown — no mask needed since there is no active vomiting',
+              correct: false,
+              points: 5,
+              feedback:
+                'Partially correct — gloves and gown are essential. However, during cleanup of vomiting incidents, a surgical mask is recommended because vomitus particles may be aerosolized even after the episode ends.',
+            },
+          ],
+        },
+        {
+          id: 'noro-b2',
+          phase: 'care',
+          title: 'Environmental Cleaning Product',
+          narrative: 'Environmental services asks which product to use to clean the vomiting area.',
+          prompt:
+            'Which cleaning product is most appropriate for norovirus environmental decontamination?',
+          options: [
+            {
+              id: 'noro-b2-a',
+              text: 'Bleach solution (1,000–5,000 ppm sodium hypochlorite)',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! Bleach is the recommended sporicidal and virucidal agent for norovirus. Standard quaternary ammonium disinfectants may not be effective against non-enveloped norovirus.',
+            },
+            {
+              id: 'noro-b2-b',
+              text: 'Standard quaternary ammonium ("quat") disinfectant wipes',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Quaternary ammonium compounds may not effectively inactivate norovirus. Bleach-based disinfectants are required for norovirus environmental cleaning.',
+              contaminationEvent: 'Norovirus persists on surfaces — continued transmission risk.',
+            },
+            {
+              id: 'noro-b2-c',
+              text: 'Alcohol-based surface wipes',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Like ABHR, alcohol-based surface wipes are less effective against non-enveloped norovirus. Use bleach-based disinfectants.',
+              contaminationEvent: 'Norovirus persists on surfaces after inadequate disinfection.',
+            },
+          ],
+        },
+        {
+          id: 'noro-b3',
+          phase: 'exiting',
+          title: 'Hand Hygiene After Norovirus Care',
+          narrative: 'You have completed the cleanup and removed your PPE outside the room.',
+          prompt: 'Which hand hygiene method is most appropriate?',
+          options: [
+            {
+              id: 'noro-b3-a',
+              text: 'Wash hands with soap and water for at least 20 seconds',
+              correct: true,
+              points: 15,
+              feedback:
+                'Correct! During norovirus outbreaks, CDC recommends soap and water as the preferred hand hygiene method. Soap and water mechanically removes norovirus particles more effectively than ABHR alone.',
+            },
+            {
+              id: 'noro-b3-b',
+              text: 'Use ABHR — it is faster and equally effective',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect for norovirus. ABHR is LESS effective against non-enveloped norovirus. Soap and water is recommended during outbreaks.',
+              contaminationEvent:
+                'Norovirus particles remain on hands after ABHR — risk of continued spread.',
+            },
+            {
+              id: 'noro-b3-c',
+              text: 'Either method is acceptable — pick whichever is closest',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect during a norovirus outbreak. Soap and water is specifically recommended over ABHR for norovirus due to the non-enveloped structure.',
+            },
+          ],
+        },
+      ],
+      maxScore: 35,
+    },
+    debrief: {
+      correctPrecaution: 'contact',
+      rationale:
+        'Norovirus is a highly contagious non-enveloped virus spread via fecal-oral contact, contaminated surfaces, food, and aerosolized vomitus. Contact Precautions (gloves + gown) are required; add a surgical mask during active vomiting incidents. Unlike enveloped viruses, norovirus is less susceptible to ABHR — soap and water is preferred. Bleach-based disinfectants are required for environmental cleaning. Critically, symptomatic staff must be excluded from patient care to prevent outbreak amplification.',
+      chainOfInfectionSummary:
+        "Norovirus replicates in Mr. Alvarez's GI tract (Reservoir) → exits via vomitus and feces (Portal of Exit) → spreads on HCW hands, contaminated surfaces, or aerosolized vomitus (Mode of Transmission — fecal-oral contact) → enters susceptible hosts via oral ingestion or mucous membranes (Portal of Entry) → infects virtually any unimmune host, especially elderly patients (Susceptible Host).",
+      keyLessons: [
+        'Norovirus requires Contact Precautions; add surgical mask during active vomiting cleanup.',
+        'SOAP AND WATER is preferred for hand hygiene during norovirus outbreaks (ABHR less effective for non-enveloped viruses).',
+        'Bleach-based disinfectants (1,000–5,000 ppm) are required for environmental cleaning.',
+        'Symptomatic staff MUST be excluded from patient care for 48–72 hours after symptom resolution.',
+        'Norovirus requires only ~18 viral particles to cause infection — extremely contagious.',
+        'Cohorting affected patients and notifying infection control are priority outbreak responses.',
+      ],
+      commonErrors: [
+        'Using ABHR instead of soap and water during norovirus outbreak.',
+        'Symptomatic staff continuing to work.',
+        'Using standard disinfectant wipes instead of bleach for environmental cleaning.',
+        'Forgetting surgical mask during cleanup of vomiting incidents.',
+        'Not notifying infection control when ≥2 patients have concurrent GI illness.',
+      ],
+      nclexPearl:
+        'NCLEX tip: Norovirus = Contact Precautions + SOAP AND WATER (just like C. diff, but for different reasons — non-enveloped virus vs. spores). Classic NCLEX scenario: which hand hygiene is correct for norovirus? Answer: soap and water. Also: ill staff must be excluded — this tests professional responsibility as well as infection control.',
+    },
+  },
+
+  // ── Case 8: RSV ───────────────────────────────────────────────────────────
+  {
+    id: 'rsv-pediatric',
+    microbeId: 'rsv',
+    title: 'RSV: Protecting the Premature Infant',
+    vignette:
+      'You are a nurse on a pediatric unit. Baby Elena, a 6-week-old infant born at 28 weeks gestation, is admitted with worsening respiratory distress, nasal flaring, intercostal retractions, and oxygen saturation of 88% on room air. RSV rapid antigen test is POSITIVE. She is in an open-bay room with two other infants, one of whom is also a premature neonate.',
+    setting: 'pediatric',
+    difficulty: 'intermediate',
+    tags: [
+      'RSV',
+      'contact precautions',
+      'droplet precautions',
+      'premature infant',
+      'bronchiolitis',
+      'palivizumab',
+    ],
+    modeA: {
+      precautionQuestion:
+        'Which precautions are required for Baby Elena with confirmed RSV bronchiolitis?',
+      precautionOptions: [
+        {
+          level: 'standard',
+          label: 'Standard Precautions only',
+          description: 'Standard precautions for all patients.',
+          points: 0,
+          feedback:
+            'Incorrect. RSV is transmitted by both contact and droplet routes. Standard precautions alone are insufficient.',
+        },
+        {
+          level: 'contact',
+          label: 'Contact Precautions only',
+          description: 'Gloves + gown only.',
+          points: 10,
+          feedback:
+            'Partially correct. Contact Precautions are required, but RSV also spreads via large respiratory droplets. Droplet Precautions (surgical mask within 3 feet) should be added.',
+        },
+        {
+          level: 'droplet',
+          label: 'Droplet Precautions only',
+          description: 'Surgical mask within 3 feet.',
+          points: 5,
+          feedback:
+            'Partially correct. Droplet Precautions are needed, but RSV also spreads by direct contact with nasal secretions and contaminated surfaces. Both Contact and Droplet Precautions are required.',
+        },
+        {
+          level: 'contact',
+          label: 'Contact + Droplet Precautions',
+          description: 'Gloves, gown, AND surgical mask within 3 feet.',
+          points: 20,
+          feedback:
+            'Correct! RSV spreads via direct contact with nasal secretions AND large respiratory droplets. Both Contact and Droplet Precautions are required: gloves, gown, and surgical mask.',
+        },
+      ],
+      keyActionsInstruction: 'Select ALL correct actions for Baby Elena:',
+      keyActions: [
+        {
+          id: 'rsv-a1',
+          text: 'Move Baby Elena to a private room immediately',
+          correct: true,
+          chainLink: 'reservoir',
+          points: 15,
+          feedback:
+            'Correct! Baby Elena must be moved out of the open bay immediately. The other premature neonate is at extremely high risk for severe RSV disease. Private room or cohorting with other RSV-positive infants is required.',
+        },
+        {
+          id: 'rsv-a2',
+          text: 'Don gloves, gown, AND surgical mask before entering the room',
+          correct: true,
+          chainLink: 'modeOfTransmission',
+          points: 10,
+          feedback:
+            'Correct! RSV requires both Contact and Droplet Precautions: gloves + gown (contact) and surgical mask within 3 feet (droplet).',
+        },
+        {
+          id: 'rsv-a3',
+          text: 'Perform rigorous hand hygiene and avoid touching your eyes, nose, or mouth',
+          correct: true,
+          chainLink: 'portalOfEntry',
+          points: 10,
+          feedback:
+            'Correct! RSV is frequently self-inoculated by touching nasal mucosa or conjunctiva with contaminated hands. Hand hygiene and mucous membrane protection are critical.',
+        },
+        {
+          id: 'rsv-a4',
+          text: 'Assess whether Baby Elena is eligible for palivizumab prophylaxis this RSV season',
+          correct: true,
+          chainLink: 'susceptibleHost',
+          points: 10,
+          feedback:
+            'Correct! Palivizumab (a monoclonal antibody) provides passive immunity against severe RSV disease and is indicated for premature infants <35 weeks GA, infants with congenital heart disease, and infants with bronchopulmonary dysplasia.',
+        },
+        {
+          id: 'rsv-a5',
+          text: 'Allow the parents to visit without any PPE — they likely gave RSV to the baby anyway',
+          correct: false,
+          chainLink: 'modeOfTransmission',
+          points: -10,
+          feedback:
+            'Incorrect. Visitors should be instructed in hand hygiene and may need to wear a mask depending on institutional policy. Parents who are symptomatic with URI should discuss visitation with the care team — they could spread RSV to other vulnerable infants on the unit.',
+        },
+      ],
+      chainLinkQuestions: [
+        {
+          id: 'rsv-clq1',
+          prompt:
+            'Why is Baby Elena at much higher risk for severe RSV disease than a healthy full-term infant?',
+          chainLink: 'susceptibleHost',
+          options: [
+            {
+              text: 'She was born at 28 weeks gestation — she has immature lungs, a limited immune response, and no maternal RSV antibody transfer that typically occurs in the third trimester',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! Premature infants miss the window of passive maternal antibody transfer that occurs late in the third trimester. Combined with immature pulmonary development and immune function, they are at highest risk for severe RSV bronchiolitis requiring mechanical ventilation.',
+            },
+            {
+              text: 'She is a girl — RSV is more severe in female infants',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Sex is not a major RSV severity risk factor. Prematurity, congenital heart disease, and immunocompromise are the key risk factors.',
+            },
+            {
+              text: 'RSV is resistant to all available treatments, making any infection fatal',
+              correct: false,
+              points: 0,
+              feedback:
+                'RSV is not invariably fatal. While there is no approved antiviral for most RSV patients, supportive care (supplemental oxygen, hydration) is effective for most cases.',
+            },
+            {
+              text: 'She was not vaccinated against RSV at birth',
+              correct: false,
+              points: 0,
+              feedback:
+                'Infants are not vaccinated against RSV at birth. Maternal RSV vaccination and palivizumab prophylaxis for high-risk infants are the preventive strategies.',
+            },
+          ],
+        },
+        {
+          id: 'rsv-clq2',
+          prompt:
+            'A nurse caring for Baby Elena develops mild cold symptoms the next day. What is the MOST appropriate action?',
+          chainLink: 'infectiousAgent',
+          options: [
+            {
+              text: 'Notify the charge nurse and occupational health; consider reassignment away from high-risk infants',
+              correct: true,
+              points: 10,
+              feedback:
+                "Correct! Adults with mild URI symptoms are often the source of RSV transmission to vulnerable infants. Even mild symptoms in a nurse can result in severe disease in a premature neonate. Reassignment or additional precautions protect the unit's most vulnerable patients.",
+            },
+            {
+              text: 'Continue working but wear a surgical mask at all times',
+              correct: false,
+              points: 5,
+              feedback:
+                "Partially protective, but the safest action for premature infants is reassignment away from the NICU/pediatric unit when the HCW has active URI symptoms. A mask alone doesn't address hand contact transmission.",
+            },
+            {
+              text: 'Call out sick immediately and do not return for 10 days',
+              correct: false,
+              points: 0,
+              feedback:
+                'RSV shedding typically lasts 3–8 days. The decision on work restrictions should be made with occupational health, not self-determined. 10 days is generally excessive.',
+            },
+            {
+              text: 'Continue normal work — mild colds are not an infection control issue',
+              correct: false,
+              points: 0,
+              feedback:
+                "Incorrect. On units with premature infants, ANY URI symptoms in HCW should be reported and evaluated. What's mild for the nurse can be life-threatening for Baby Elena.",
+            },
+          ],
+        },
+      ],
+      maxScore: 85,
+    },
+    modeB: {
+      phases: [
+        {
+          phase: 'before_entry',
+          label: 'Before Entry',
+          description: 'Select correct PPE for RSV',
+        },
+        {
+          phase: 'donning',
+          label: 'Donning',
+          description: 'Don Contact + Droplet PPE',
+        },
+        { phase: 'care', label: 'Patient Care', description: 'Provide safe infant care' },
+        { phase: 'doffing', label: 'Doffing', description: 'Remove PPE without self-inoculation' },
+        { phase: 'exiting', label: 'After Exit', description: 'Hand hygiene and documentation' },
+      ],
+      steps: [
+        {
+          id: 'rsv-b1',
+          phase: 'donning',
+          title: 'PPE Selection for RSV',
+          narrative: "You are about to enter Baby Elena's room.",
+          prompt: 'Which PPE do you don?',
+          options: [
+            {
+              id: 'rsv-b1-a',
+              text: 'Gloves, gown, and surgical mask',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! RSV requires both Contact Precautions (gloves + gown) and Droplet Precautions (surgical mask within 3 feet).',
+            },
+            {
+              id: 'rsv-b1-b',
+              text: 'Gloves and gown only',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incomplete. RSV also spreads via respiratory droplets, so a surgical mask is required in addition to gloves and gown.',
+              contaminationEvent:
+                'Respiratory droplet exposure without mask — risk of HCW RSV infection and further spread.',
+            },
+            {
+              id: 'rsv-b1-c',
+              text: 'Surgical mask only',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incomplete. RSV spreads heavily via contact with nasal secretions. Gloves and gown are also required.',
+              contaminationEvent:
+                'Nasal secretion contact with clothing and hands — risk of self-inoculation via eye/nose touching.',
+            },
+          ],
+        },
+        {
+          id: 'rsv-b2',
+          phase: 'care',
+          title: 'Self-Inoculation Prevention',
+          narrative:
+            "During your assessment, you accidentally brush your gloved hand against Baby Elena's nasal secretion-soaked blanket. Moments later you feel an itch near your eye.",
+          prompt: 'What is the correct action?',
+          options: [
+            {
+              id: 'rsv-b2-a',
+              text: 'Do NOT touch your eye — complete the assessment, remove gloves, perform hand hygiene, and then address the itch',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! The conjunctiva is a primary portal of entry for RSV. Touching your eye with a contaminated glove would inoculate the virus. Remove gloves and perform hand hygiene before touching your face.',
+            },
+            {
+              id: 'rsv-b2-b',
+              text: "Rub your eye quickly with your gloved finger — it's just a brief touch",
+              correct: false,
+              points: 0,
+              feedback:
+                "Incorrect! Even brief contact with the conjunctiva can inoculate RSV. The conjunctiva is one of RSV's primary portals of entry.",
+              contaminationEvent:
+                'RSV self-inoculation via conjunctiva — high risk of HCW RSV infection.',
+            },
+            {
+              id: 'rsv-b2-c',
+              text: 'Remove your gloves immediately in the room and rub your eye',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Removing gloves mid-care in the room leaves hands potentially contaminated. Complete the safe sequence: finish task, remove gloves, perform hand hygiene, THEN address the itch outside the patient zone.',
+            },
+          ],
+        },
+        {
+          id: 'rsv-b3',
+          phase: 'doffing',
+          title: 'Preventing Self-Inoculation During Doffing',
+          narrative: 'You have finished caring for Baby Elena and are ready to leave.',
+          prompt: 'After removing gloves and gown, what is the MOST critical next action?',
+          options: [
+            {
+              id: 'rsv-b3-a',
+              text: 'Perform thorough hand hygiene with ABHR or soap and water before touching your face or any environmental surface',
+              correct: true,
+              points: 15,
+              feedback:
+                "Correct! RSV's primary transmission mechanism to HCW is self-inoculation via mucous membranes after touching contaminated surfaces. Hand hygiene before touching your face is the most critical protective action.",
+            },
+            {
+              id: 'rsv-b3-b',
+              text: 'Remove your mask first, then gloves, then gown',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect sequence. The standard doffing order is: gloves first, then gown, then hand hygiene, then eye protection/mask. The mask is removed last to maintain protection while removing contaminated items.',
+              contaminationEvent:
+                'Face and mask contaminated by improper doffing sequence — risk of self-inoculation.',
+            },
+            {
+              id: 'rsv-b3-c',
+              text: 'It is safe to touch your face now that gloves and gown are removed',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Hands may be contaminated despite glove use (microscopic glove defects, contamination during removal). Hand hygiene must be performed before touching your face.',
+              contaminationEvent: 'RSV on hands contacts mucous membranes — self-inoculation risk.',
+            },
+          ],
+        },
+      ],
+      maxScore: 35,
+    },
+    debrief: {
+      correctPrecaution: 'contact',
+      rationale:
+        "RSV spreads via two routes: direct contact with nasal secretions and large respiratory droplets. Both Contact Precautions (gloves + gown) and Droplet Precautions (surgical mask within 3 feet) are required. RSV's primary mechanism of HCW infection is self-inoculation — touching one's eyes or nose with contaminated hands. Premature infants are the highest-risk population for severe RSV disease. Palivizumab provides targeted passive protection for high-risk infants.",
+      chainOfInfectionSummary:
+        "RSV replicates in Baby Elena's respiratory tract (Reservoir) → exits via nasal secretions, coughing, and sneezing (Portal of Exit) → spreads to HCW via direct contact with secretions or respiratory droplets (Mode of Transmission) → HCW self-inoculates by touching nasal mucosa or conjunctiva (Portal of Entry) → HCW then transmits to another vulnerable infant — completing the chain (Susceptible Host: premature neonate).",
+      keyLessons: [
+        'RSV requires BOTH Contact AND Droplet Precautions — gloves, gown, AND surgical mask.',
+        "RSV's key mechanism: self-inoculation via nasal mucosa or conjunctiva — avoid touching your face.",
+        'Move RSV-positive infants to private rooms away from other premature neonates.',
+        'Palivizumab prophylaxis protects premature infants (<35 weeks GA), infants with CHD, and infants with BPD.',
+        'HCW with mild URI symptoms should be reassigned from high-risk infant units.',
+        'ABHR and standard disinfectants are effective for RSV (enveloped virus — unlike norovirus).',
+      ],
+      commonErrors: [
+        'Using only Contact Precautions without adding a surgical mask.',
+        'Touching nose or eyes without performing hand hygiene after patient contact.',
+        'Allowing symptomatic HCW to continue caring for premature infants.',
+        'Not cohorting RSV-positive patients away from other vulnerable infants.',
+      ],
+      nclexPearl:
+        'NCLEX tip: RSV = Contact + Droplet Precautions. The key clinical feature: self-inoculation via conjunctiva and nasal mucosa is the HCW infection route. Highest-risk patients: premature infants, those with CHD, BPD. Palivizumab (monthly injections) = passive RSV prophylaxis for high-risk infants. Important: ABHR IS effective for RSV (enveloped) — contrast with norovirus (non-enveloped) where soap and water is preferred.',
+    },
+  },
+
+  // ── Case 9: Neisseria meningitidis ────────────────────────────────────────
+  {
+    id: 'meningitis-ed',
+    microbeId: 'n-meningitidis',
+    title: 'Meningococcal Meningitis: Time Is Brain (and Life)',
+    vignette:
+      'A 19-year-old college student, Marcus, is brought to the ED by his roommate with a 6-hour history of severe headache, high fever (40.1°C), neck stiffness, and photophobia. On examination you note a non-blanching petechial rash spreading across his trunk and legs. You suspect meningococcal meningitis/septicemia. He is currently in an open ED bay, and his roommate is standing nearby asking questions.',
+    setting: 'ed',
+    difficulty: 'advanced',
+    tags: [
+      'meningococcal meningitis',
+      'droplet precautions',
+      'chemoprophylaxis',
+      'petechial rash',
+      'time-critical',
+    ],
+    modeA: {
+      precautionQuestion:
+        'Which precautions are required for Marcus with suspected meningococcal meningitis?',
+      precautionOptions: [
+        {
+          level: 'standard',
+          label: 'Standard Precautions only',
+          description: 'Standard precautions for all patients.',
+          points: 0,
+          feedback:
+            'Incorrect. Suspected meningococcal disease requires immediate Droplet Precautions. This is a life-threatening, notifiable emergency.',
+        },
+        {
+          level: 'contact',
+          label: 'Contact Precautions',
+          description: 'Gloves + gown only.',
+          points: 5,
+          feedback:
+            'Partially correct — gloves are part of standard precautions. However, the primary precaution for N. meningitidis is Droplet Precautions (surgical mask). The petechial rash is not a contact transmission risk.',
+        },
+        {
+          level: 'droplet',
+          label: 'Droplet Precautions',
+          description: 'Surgical mask when within 3 feet; private room.',
+          points: 20,
+          feedback:
+            'Correct! N. meningitidis spreads via respiratory droplets. Droplet Precautions (surgical mask, private room) must be initiated immediately. Do NOT delay antibiotics to place the patient first.',
+        },
+        {
+          level: 'airborne',
+          label: 'Airborne Precautions',
+          description: 'N95 in a negative-pressure room.',
+          points: 0,
+          feedback:
+            'Incorrect. N. meningitidis spreads by droplets (not true airborne transmission). Droplet Precautions are correct. Airborne precautions are not needed.',
+        },
+      ],
+      keyActionsInstruction:
+        'Select ALL correct IMMEDIATE actions for Marcus (time-critical scenario):',
+      keyActions: [
+        {
+          id: 'mening-a1',
+          text: 'Don a surgical mask before approaching Marcus and initiate Droplet Precautions immediately',
+          correct: true,
+          chainLink: 'modeOfTransmission',
+          points: 15,
+          feedback:
+            'Correct! The surgical mask is the critical protective measure for HCW. Meningococcal disease is transmitted by respiratory secretions. Initiate Droplet Precautions without delay.',
+        },
+        {
+          id: 'mening-a2',
+          text: 'Advocate for immediate administration of parenteral antibiotics (ceftriaxone) — do NOT delay treatment to complete workup',
+          correct: true,
+          chainLink: 'infectiousAgent',
+          points: 15,
+          feedback:
+            "Correct! Time is the most critical factor. Every hour of delay in antibiotic therapy increases mortality significantly. Antibiotic treatment also reduces the patient's infectiousness within hours — key for infection control.",
+        },
+        {
+          id: 'mening-a3',
+          text: 'Move Marcus to a private room immediately',
+          correct: true,
+          chainLink: 'reservoir',
+          points: 10,
+          feedback:
+            'Correct! Private room placement (with Droplet Precautions) prevents exposure of other ED patients and staff. If a negative-pressure room is available, it is preferred but not strictly required for droplet transmission.',
+        },
+        {
+          id: 'mening-a4',
+          text: 'Identify and document all close contacts (roommate, EMS crew, HCW within 3 feet) for chemoprophylaxis notification',
+          correct: true,
+          chainLink: 'susceptibleHost',
+          points: 10,
+          feedback:
+            "Correct! Close contacts (within 3 feet for >8 hours, or direct oral secretion contact) require post-exposure chemoprophylaxis (rifampin, ciprofloxacin, or ceftriaxone IM) and public health notification. Marcus's roommate in the ED is a priority contact.",
+        },
+        {
+          id: 'mening-a5',
+          text: 'Wait for blood cultures and LP results before starting antibiotics to avoid affecting culture results',
+          correct: false,
+          chainLink: 'infectiousAgent',
+          points: -15,
+          feedback:
+            'INCORRECT and potentially fatal. In suspected bacterial meningitis/septicemia with classic presentation (fever, meningismus, petechial rash), antibiotic delay is deadly. START ANTIBIOTICS IMMEDIATELY. A single dose of antibiotics does not meaningfully affect culture yield in the first 1–2 hours but substantially reduces mortality.',
+        },
+      ],
+      chainLinkQuestions: [
+        {
+          id: 'mening-clq1',
+          prompt:
+            "Marcus's roommate has been living with him for 3 months and spent several hours studying with him the night before admission. What infection control action is required for the roommate?",
+          chainLink: 'susceptibleHost',
+          options: [
+            {
+              text: 'Arrange post-exposure chemoprophylaxis (single-dose ciprofloxacin, rifampin course, or IM ceftriaxone) and notify public health',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! The roommate meets criteria for a close contact: prolonged exposure (<3 feet, >8 hours cumulatively) and household contact. Chemoprophylaxis dramatically reduces the risk of secondary cases. Public health must be notified for contact tracing and outbreak investigation.',
+            },
+            {
+              text: 'Reassure the roommate — he is vaccinated and does not need prophylaxis',
+              correct: false,
+              points: 0,
+              feedback:
+                'Vaccination status must be verified, and prophylaxis is still recommended for close contacts regardless of vaccination status (vaccines are not 100% effective and may not cover all serogroups).',
+            },
+            {
+              text: 'The roommate only needs monitoring — chemoprophylaxis is only for household members with direct oral contact',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Close contact criteria includes sleeping or living in the same household and prolonged proximity. Chemoprophylaxis is indicated — waiting for direct oral contact evidence puts the roommate at risk.',
+            },
+            {
+              text: 'Hospitalize the roommate for 24 hours of observation',
+              correct: false,
+              points: 0,
+              feedback:
+                'Hospitalization is not required for asymptomatic contacts. Chemoprophylaxis and close follow-up (monitoring for symptoms) are the recommended actions.',
+            },
+          ],
+        },
+        {
+          id: 'mening-clq2',
+          prompt:
+            'The petechial/purpuric rash in meningococcemia is caused by which pathophysiological mechanism?',
+          chainLink: 'infectiousAgent',
+          options: [
+            {
+              text: 'Meningococcal endotoxin triggers disseminated intravascular coagulation (DIC) and damage to small blood vessel walls, causing skin hemorrhage',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! The purpuric rash (non-blanching, skin hemorrhage) results from bacterial endotoxin-driven inflammatory cascade leading to DIC and vascular endothelial damage. This is a sign of septicemia and a medical emergency. Waterhouse-Friderichsen syndrome (bilateral adrenal hemorrhage) is the most severe manifestation.',
+            },
+            {
+              text: 'Meningitis causes increased intracranial pressure that redistributes blood to the skin',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. The petechial rash is due to septicemia and DIC, not intracranial pressure changes.',
+            },
+            {
+              text: 'The rash is a drug reaction to empiric antibiotics',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. The rash appeared before antibiotics were given — it is a sign of meningococcemia.',
+            },
+            {
+              text: 'N. meningitidis directly invades skin cells causing the rash',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. The rash is caused by vascular damage from endotoxin-mediated inflammation, not direct bacterial skin invasion.',
+            },
+          ],
+        },
+      ],
+      maxScore: 85,
+    },
+    modeB: {
+      phases: [
+        {
+          phase: 'before_entry',
+          label: 'Before Entry',
+          description: 'Prepare for time-critical PPE application',
+        },
+        {
+          phase: 'donning',
+          label: 'Donning',
+          description: 'Don Droplet Precautions PPE',
+        },
+        {
+          phase: 'care',
+          label: 'Urgent Care',
+          description: 'Manage meningococcal emergency safely',
+        },
+        {
+          phase: 'doffing',
+          label: 'Doffing',
+          description: 'Remove PPE and complete contact assessment',
+        },
+        {
+          phase: 'exiting',
+          label: 'Post-Care',
+          description: 'HCW exposure assessment and prophylaxis',
+        },
+      ],
+      steps: [
+        {
+          id: 'mening-b1',
+          phase: 'donning',
+          title: 'PPE for Suspected Meningococcal Disease',
+          narrative:
+            "The triage nurse calls you: 'We have a 19-year-old with high fever, stiff neck, and a petechial rash in Bay 3.' You walk toward Bay 3.",
+          prompt: 'Before you approach Marcus, what do you do first?',
+          options: [
+            {
+              id: 'mening-b1-a',
+              text: 'Stop, don a surgical mask and gloves, then approach Marcus — initiate Droplet Precautions immediately',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! The clinical presentation strongly suggests meningococcal disease. Donning a surgical mask before approaching ANY patient with suspected meningococcal meningitis is the priority HCW protective action.',
+            },
+            {
+              id: 'mening-b1-b',
+              text: 'Walk directly to Marcus to assess severity first — PPE can wait until the diagnosis is confirmed',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Do NOT approach a patient with suspected meningococcal meningitis without a surgical mask. The clinical triad (fever + meningismus + petechial rash) is sufficient to initiate Droplet Precautions before confirmation.',
+              contaminationEvent:
+                'Unprotected HCW exposure to meningococcal respiratory secretions — requires chemoprophylaxis.',
+            },
+            {
+              id: 'mening-b1-c',
+              text: 'Don an N95 respirator and move Marcus to a negative-pressure room before any assessment',
+              correct: false,
+              points: 5,
+              feedback:
+                "Partially correct — moving to a private room is right, but N. meningitidis requires Droplet (not Airborne) precautions. An N95 is not required. A surgical mask is sufficient. Don't delay life-saving assessment for an N95.",
+            },
+          ],
+        },
+        {
+          id: 'mening-b2',
+          phase: 'care',
+          title: 'Antibiotic Timing Decision',
+          narrative:
+            "Marcus is now in a private room. The ED physician says: 'Let's get blood cultures and an LP before starting antibiotics to keep our cultures clean.'",
+          prompt: 'As the nurse, what is your responsibility?',
+          options: [
+            {
+              id: 'mening-b2-a',
+              text: 'Advocate strongly for immediate antibiotic administration — delay is life-threatening. Suggest obtaining cultures rapidly, but antibiotics should not be withheld pending LP in a patient with signs of septicemia and likely meningococcemia.',
+              correct: true,
+              points: 10,
+              feedback:
+                'Correct! Nurses have a professional responsibility to advocate for patients. In meningococcal septicemia, antibiotic delay is associated with sharply increased mortality. Blood cultures can be drawn immediately before the first antibiotic dose, but the LP should NOT delay treatment when there are signs of septicemia and raised ICP. A single antibiotic dose does not significantly affect culture yield.',
+            },
+            {
+              id: 'mening-b2-b',
+              text: 'Follow the physician order — it is not your role to question diagnostic sequencing',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Patient advocacy is a core nursing responsibility. Evidence-based guidelines clearly state that antibiotic therapy should not be delayed for LP in patients with suspected bacterial meningitis and signs of septicemia or raised ICP. Speak up.',
+            },
+            {
+              id: 'mening-b2-c',
+              text: 'Give the antibiotics immediately without informing the physician',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect process. Nurses must communicate and advocate, not unilaterally deviate from physician orders without discussion. The correct action is to advocate strongly while following the escalation pathway if needed.',
+            },
+          ],
+        },
+        {
+          id: 'mening-b3',
+          phase: 'exiting',
+          title: 'HCW Exposure Assessment',
+          narrative:
+            'After Marcus is stabilized, infection control asks you to document your exposure. During triage you approached Marcus without a mask for approximately 2 minutes before Droplet Precautions were initiated.',
+          prompt:
+            'You were within 3 feet of Marcus without a surgical mask for ~2 minutes. What is the correct action?',
+          options: [
+            {
+              id: 'mening-b3-a',
+              text: 'Report the exposure to occupational health and infection control; receive evaluation for post-exposure chemoprophylaxis per local protocol',
+              correct: true,
+              points: 15,
+              feedback:
+                'Correct! HCW with unprotected close contact (<3 feet) with a meningococcal patient, even briefly, should be evaluated for chemoprophylaxis. In most protocols, >5–10 minutes of unprotected exposure triggers prophylaxis, but individual risk assessment by occupational health is required. Report all exposures promptly.',
+            },
+            {
+              id: 'mening-b3-b',
+              text: "It was only 2 minutes — don't report it since it doesn't meet the exposure threshold",
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Even brief unprotected exposure warrants reporting and occupational health evaluation. Duration thresholds vary by protocol, and individual risk factors matter. All potential exposures should be reported — the decision on prophylaxis is made by occupational health, not the exposed HCW.',
+            },
+            {
+              id: 'mening-b3-c',
+              text: 'Take ciprofloxacin from the unit medication supply as self-prophylaxis',
+              correct: false,
+              points: 0,
+              feedback:
+                'Incorrect. Self-medication is not appropriate. Chemoprophylaxis should be prescribed through occupational health following proper exposure assessment to ensure appropriate drug selection, dosing, and documentation.',
+            },
+          ],
+        },
+      ],
+      maxScore: 35,
+    },
+    debrief: {
+      correctPrecaution: 'droplet',
+      rationale:
+        'Neisseria meningitidis spreads via respiratory droplets requiring close contact (<3 feet, prolonged exposure). Droplet Precautions (surgical mask, private room) must be initiated immediately upon clinical suspicion — before diagnostic confirmation. The classic triad of fever + meningismus + petechial rash is sufficient to trigger both Droplet Precautions AND immediate antibiotic administration. Chemoprophylaxis for close contacts (including HCW) and public health notification are mandatory. Droplet Precautions can be discontinued 24 hours after effective antibiotic therapy begins.',
+      chainOfInfectionSummary:
+        "N. meningitidis colonizes Marcus's nasopharynx (Reservoir) → exits via respiratory secretions during close contact (Portal of Exit) → spreads as respiratory droplets (Mode of Transmission — droplet; requires close, prolonged contact) → enters susceptible host via nasopharyngeal mucosa (Portal of Entry) → causes invasive disease in unvaccinated, asplenic, or complement-deficient hosts (Susceptible Host).",
+      keyLessons: [
+        'Meningococcal meningitis = Droplet Precautions — surgical mask is the critical HCW protection.',
+        'DO NOT delay antibiotics for LP or cultures when septicemia signs are present — time is life.',
+        'Droplet Precautions can be discontinued 24 hours after effective antibiotic therapy.',
+        'All close contacts require chemoprophylaxis evaluation and public health must be notified.',
+        'Non-blanching petechial/purpuric rash = meningococcemia emergency (DIC, endotoxin).',
+        'HCW with unprotected exposure must report to occupational health for chemoprophylaxis evaluation.',
+      ],
+      commonErrors: [
+        'Approaching suspected meningococcal patients without a surgical mask.',
+        'Delaying antibiotics to obtain LP results.',
+        'Not identifying and notifying close contacts (including the roommate in the ED).',
+        'Failing to notify public health for outbreak investigation.',
+        'Confusing meningococcal (droplet) with TB or varicella (airborne) precaution requirements.',
+      ],
+      nclexPearl:
+        'NCLEX tip: Meningococcal meningitis = Droplet Precautions (surgical mask, private room). Key NCLEX priority: antibiotics FIRST before LP if signs of septicemia. Chemoprophylaxis for contacts = rifampin (2 days), single-dose ciprofloxacin, or single-dose IM ceftriaxone. Precautions can be stopped 24 hours after effective antibiotics. Classic NCLEX distractor: choosing Airborne instead of Droplet — N. meningitidis is droplet only.',
+    },
+  },
 ];
 
 export function getCaseById(id: string): Case | undefined {

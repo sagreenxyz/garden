@@ -362,7 +362,6 @@ export const MICROBES: Microbe[] = [
       ],
     },
   },
-];
 
   // ── 6. VRE (Vancomycin-resistant Enterococcus) ───────────────────────────
   {
@@ -376,8 +375,7 @@ export const MICROBES: Microbe[] = [
     chainOfInfection: {
       infectiousAgent:
         'Enterococcus faecalis or faecium — Gram-positive cocci resistant to vancomycin via vanA/vanB genes',
-      reservoir:
-        'GI tract of colonized/infected patients; contaminated environment and surfaces',
+      reservoir: 'GI tract of colonized/infected patients; contaminated environment and surfaces',
       portalOfExit: 'Feces, wound drainage, urine (UTI)',
       modeOfTransmission:
         'Direct contact (hands of HCW) or indirect contact (contaminated surfaces/equipment)',
@@ -398,8 +396,7 @@ export const MICROBES: Microbe[] = [
         'Intrinsically resistant to several antibiotics; acquired vancomycin resistance leaves few treatment options (linezolid, daptomycin)',
       colonization:
         'GI colonization can persist for months to years; patient remains a reservoir even when asymptomatic',
-      biofilm:
-        'Forms biofilm on urinary catheters, central lines, and prosthetic devices',
+      biofilm: 'Forms biofilm on urinary catheters, central lines, and prosthetic devices',
       typicalSyndromes: [
         'Urinary tract infections (most common)',
         'Bacteremia',
@@ -447,13 +444,11 @@ export const MICROBES: Microbe[] = [
     chainOfInfection: {
       infectiousAgent:
         'Norovirus — non-enveloped, single-stranded RNA calicivirus; extremely stable in the environment',
-      reservoir:
-        'Infected humans (symptomatic and asymptomatic); contaminated food and water',
+      reservoir: 'Infected humans (symptomatic and asymptomatic); contaminated food and water',
       portalOfExit: 'Vomitus and feces; aerosolized vomitus during vomiting episodes',
       modeOfTransmission:
         'Fecal-oral route; contact with contaminated surfaces or food; aerosolized vomitus (short-range)',
-      portalOfEntry:
-        'Oral ingestion of contaminated material; mucous membranes',
+      portalOfEntry: 'Oral ingestion of contaminated material; mucous membranes',
       susceptibleHost:
         'Nearly universal — no lasting immunity; elderly and immunocompromised at risk for severe disease',
     },
@@ -469,7 +464,8 @@ export const MICROBES: Microbe[] = [
       virulence:
         'Extremely low infectious dose (~18 viral particles); non-enveloped structure resists many disinfectants; rapid replication in GI tract',
       colonization: 'No persistent colonization; shedding continues up to 2 weeks after recovery',
-      biofilm: 'Adheres tenaciously to surfaces; standard hospital disinfectants may be ineffective',
+      biofilm:
+        'Adheres tenaciously to surfaces; standard hospital disinfectants may be ineffective',
       typicalSyndromes: [
         'Acute gastroenteritis (nausea, vomiting, watery diarrhea)',
         'Dehydration and electrolyte imbalances',
@@ -537,7 +533,8 @@ export const MICROBES: Microbe[] = [
     background: {
       virulence:
         'F (fusion) protein promotes cell-cell fusion → syncytia formation → severe bronchiolitis; re-infection common throughout life',
-      colonization: 'No persistent colonization; shedding typically 3–8 days (up to 4 weeks in immunocompromised)',
+      colonization:
+        'No persistent colonization; shedding typically 3–8 days (up to 4 weeks in immunocompromised)',
       biofilm: 'Does not form biofilm; inactivated by standard hospital disinfectants',
       typicalSyndromes: [
         'Bronchiolitis (infants)',
@@ -546,7 +543,8 @@ export const MICROBES: Microbe[] = [
         'Upper respiratory infection (adults)',
         'Severe respiratory failure in premature infants',
       ],
-      reservoir: 'Infected humans — often mildly symptomatic adults carrying and transmitting to infants',
+      reservoir:
+        'Infected humans — often mildly symptomatic adults carrying and transmitting to infants',
       portalsOfExit: ['Nasal secretions', 'Cough', 'Sneeze'],
       modesOfTransmission: [
         'Direct inoculation via nasal secretions or conjunctiva',
@@ -621,7 +619,8 @@ export const MICROBES: Microbe[] = [
         'Direct contact with oral secretions',
       ],
       portalsOfEntry: ['Nasopharyngeal mucosa'],
-      infectiousDose: 'Low; host factors (complement deficiency, asplenia) dramatically increase risk',
+      infectiousDose:
+        'Low; host factors (complement deficiency, asplenia) dramatically increase risk',
       contagiousness:
         'Low attack rate (most exposures do not lead to disease); close contacts at highest risk',
       environmentalPersistence:
