@@ -1,0 +1,62 @@
+---
+/**
+ * Callout component — renders a styled callout box for contextual notes in MDX content.
+ *
+ * @prop type {'tip' | 'note' | 'warning' | 'clinical-alert'} - Visual variant of the callout.
+ *
+ * Slot: default — the callout body content (prose or inline markdown).
+ *
+ * @example
+ * <Callout type="clinical-alert">
+ *   Monitor for signs of fluid overload: crackles, JVD, peripheral edema.
+ * </Callout>
+ */
+
+export interface Props {
+  type: 'tip' | 'note' | 'warning' | 'clinical-alert';
+}
+
+const { type } = Astro.props;
+
+const config: Record<
+  string,
+  { label: string; icon: string; alertClass: string; iconClass: string }
+> = {
+  tip: {
+    label: 'Tip',
+    icon: '💡',
+    alertClass: 'alert-success',
+    iconClass: 'text-success',
+  },
+  note: {
+    label: 'Note',
+    icon: '📝',
+    alertClass: 'alert-info',
+    iconClass: 'text-info',
+  },
+  warning: {
+    label: 'Warning',
+    icon: '⚠️',
+    alertClass: 'alert-warning',
+    iconClass: 'text-warning',
+  },
+  'clinical-alert': {
+    label: 'Clinical Alert',
+    icon: '🚨',
+    alertClass: 'alert-error',
+    iconClass: 'text-error',
+  },
+};
+
+const { label, icon, alertClass, iconClass } = config[type] ?? config['note'];
+---
+
+<div role="alert" class={`alert ${alertClass} my-4 flex items-start gap-3 rounded-lg`}>
+  <span class={`text-xl ${iconClass}`} aria-hidden="true">{icon}</span>
+  <div>
+    <p class="font-bold font-sans">{label}</p>
+    <div class="font-sans text-sm prose prose-sm max-w-none">
+      <slot />
+    </div>
+  </div>
+</div>
