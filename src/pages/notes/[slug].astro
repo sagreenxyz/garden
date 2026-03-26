@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import ContentLayout from '../../layouts/ContentLayout.astro';
+import { getReadingTime } from '../../utils/readingTime';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection(
@@ -16,6 +17,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const { entry } = Astro.props;
 const { Content } = await entry.render();
+const readingTime = getReadingTime(entry.body);
 
 const base = import.meta.env.BASE_URL;
 const { reviewReason, duplicateOf, sourceIssue, sourceUrl, relatedLinks } = entry.data;
@@ -29,6 +31,7 @@ const { reviewReason, duplicateOf, sourceIssue, sourceUrl, relatedLinks } = entr
   collection="notes"
   backLabel="Notes"
   backHref={`${base}notes/`}
+  readingTime={readingTime}
 >
   {
     duplicateOf && (

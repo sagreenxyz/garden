@@ -1,0 +1,84 @@
+---
+export interface Props {
+  /** Estimated reading time in minutes */
+  readingTime?: number;
+  /** Difficulty level */
+  level?: 'beginner' | 'intermediate' | 'advanced';
+  /** Publication date */
+  publishedAt?: Date;
+  /** Last updated date */
+  updatedAt?: Date;
+  /** Content tags */
+  tags?: string[];
+}
+
+const { readingTime, level, publishedAt, updatedAt, tags = [] } = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+
+const levelColor: Record<NonNullable<Props['level']>, string> = {
+  beginner: 'badge-success',
+  intermediate: 'badge-warning',
+  advanced: 'badge-error',
+};
+---
+
+<div class="flex flex-wrap items-center gap-3 mt-3 text-xs text-base-content/50 font-sans">
+  {
+    level && (
+      <span class={`badge badge-sm capitalize font-semibold ${levelColor[level]}`}>{level}</span>
+    )
+  }
+
+  {
+    readingTime && (
+      <span class="inline-flex items-center gap-1">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="10" />
+          <polyline points="12 6 12 12 16 14" />
+        </svg>
+        {readingTime} min read
+      </span>
+    )
+  }
+
+  {
+    publishedAt && (
+      <time datetime={publishedAt.toISOString()}>
+        Published: {publishedAt.toLocaleDateString()}
+      </time>
+    )
+  }
+
+  {
+    updatedAt && (
+      <time datetime={updatedAt.toISOString()}>Updated: {updatedAt.toLocaleDateString()}</time>
+    )
+  }
+
+  {
+    tags.length > 0 && (
+      <div class="flex flex-wrap gap-1">
+        {tags.map((tag) => (
+          <a
+            href={`${base}tags/${tag}/`}
+            class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100 uppercase tracking-wide hover:bg-indigo-100 transition-colors"
+          >
+            {tag}
+          </a>
+        ))}
+      </div>
+    )
+  }
+</div>
