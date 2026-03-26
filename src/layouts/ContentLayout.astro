@@ -1,6 +1,7 @@
 ---
 import BaseLayout from './BaseLayout.astro';
 import RelatedContent from '../components/lms/RelatedContent.astro';
+import ContentMeta from '../components/common/ContentMeta.astro';
 import type { CurriculumAlignment } from '../types/nursing';
 import type { RelatedItem } from '../utils/related';
 
@@ -16,6 +17,10 @@ export interface Props {
   /** Back link label and href */
   backLabel?: string;
   backHref?: string;
+  /** Estimated reading time in minutes */
+  readingTime?: number;
+  /** Difficulty level (from courses schema) */
+  level?: 'beginner' | 'intermediate' | 'advanced';
   /** Related content from other collections, keyed by collection name */
   relatedEncyclopedia?: RelatedItem[];
   relatedCourses?: RelatedItem[];
@@ -32,6 +37,8 @@ const {
   curriculum,
   backLabel,
   backHref,
+  readingTime,
+  level,
   relatedEncyclopedia = [],
   relatedCourses = [],
   relatedNotes = [],
@@ -137,39 +144,19 @@ const base = import.meta.env.BASE_URL;
     <article>
       <!-- Article header -->
       <header class="mb-6 pb-5 border-b border-base-300">
-        {
-          tags.length > 0 && (
-            <div class="flex flex-wrap gap-1.5 mb-3">
-              {tags.map((tag) => (
-                <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100 uppercase tracking-wide">
-                  {tag}
-                </span>
-              ))}
-            </div>
-          )
-        }
         <h1 class="text-3xl font-extrabold mb-2" style="color:#1a1a2e;">{title}</h1>
         {
           description && (
             <p class="text-base-content/65 mt-1 text-base leading-relaxed">{description}</p>
           )
         }
-        <div class="flex flex-wrap gap-4 mt-3 text-xs text-base-content/40">
-          {
-            publishedAt && (
-              <time datetime={publishedAt.toISOString()}>
-                Published: {publishedAt.toLocaleDateString()}
-              </time>
-            )
-          }
-          {
-            updatedAt && (
-              <time datetime={updatedAt.toISOString()}>
-                Updated: {updatedAt.toLocaleDateString()}
-              </time>
-            )
-          }
-        </div>
+        <ContentMeta
+          readingTime={readingTime}
+          level={level}
+          publishedAt={publishedAt}
+          updatedAt={updatedAt}
+          tags={tags}
+        />
       </header>
 
       <div class="prose prose-lms max-w-none font-prose">

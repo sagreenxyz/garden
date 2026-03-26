@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const entries = await getCollection('paths', ({ data }) => !data.draft);
+entries.sort((a, b) => a.data.order - b.data.order);
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout
+  title="Learning Paths"
+  description="Curated curriculum tracks grouping courses into ordered sequences"
+>
+  <h1 class="text-3xl font-bold mb-2">Learning Paths</h1>
+  <p class="text-base-content/60 font-sans mb-6">
+    Curated curriculum tracks that guide you through courses in a structured sequence.
+  </p>
+
+  {
+    entries.length === 0 ? (
+      <div class="alert font-sans">
+        <span>
+          No paths yet. Add <code>.mdx</code> files to <code>src/content/paths/</code>.
+        </span>
+      </div>
+    ) : (
+      <ul class="space-y-4">
+        {entries.map((entry) => (
+          <li>
+            <a
+              href={`${base}paths/${entry.slug}/`}
+              class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans block"
+            >
+              <div class="card-body py-4">
+                <h2 class="card-title text-base">
+                  {entry.data.title}
+                  <span class="badge badge-secondary badge-sm ml-2">
+                    {entry.data.courseOrder.length}{' '}
+                    {entry.data.courseOrder.length === 1 ? 'course' : 'courses'}
+                  </span>
+                </h2>
+                <p class="text-sm text-base-content/60 mt-1">{entry.data.description}</p>
+                {entry.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    {entry.data.tags.map((tag) => (
+                      <span class="badge badge-outline badge-sm">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>

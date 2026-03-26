@@ -13,6 +13,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 const { entry } = Astro.props;
 const quiz = entry.data;
+const quizId = entry.id;
 ---
 
 <BaseLayout title={quiz.title} description={quiz.description}>
@@ -80,7 +81,7 @@ const quiz = entry.data;
   </div>
 </BaseLayout>
 
-<script define:vars={{ quiz }}>
+<script define:vars={{ quiz, quizId }}>
   const form = document.getElementById('quiz-form');
   const resultDiv = document.getElementById('quiz-result');
   const alertEl = document.getElementById('quiz-alert');
@@ -110,5 +111,23 @@ const quiz = entry.data;
     }
     if (resultDiv) resultDiv.hidden = false;
     if (form) form.hidden = true;
+
+    // Persist attempt to localStorage
+    if (typeof localStorage !== 'undefined') {
+      const STORAGE_KEY = 'lms_quiz_history';
+      let history = [];
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (raw) history = JSON.parse(raw);
+      } catch {}
+      history.push({
+        quizId: quizId,
+        title: quiz.title,
+        score: pct,
+        passed,
+        date: new Date().toISOString(),
+      });
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+    }
   });
 </script>

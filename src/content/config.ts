@@ -142,9 +142,25 @@ const quizzesCollection = defineCollection({
   }),
 });
 
+// ── Paths ────────────────────────────────────────────────────────────────────
+const pathsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    tags: z.array(z.string()).default([]),
+    order: z.number().default(0),
+    draft: z.boolean().default(false),
+    publishedAt: z.date(),
+    /** Ordered array of course slugs that make up this learning path */
+    courseOrder: z.array(z.string()),
+  }),
+});
+
 export const collections = {
   encyclopedia: encyclopediaCollection,
   courses: coursesCollection,
   notes: notesCollection,
   quizzes: quizzesCollection,
+  paths: pathsCollection,
 };

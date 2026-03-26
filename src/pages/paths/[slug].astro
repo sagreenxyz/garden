@@ -1,0 +1,91 @@
+---
+import { getCollection, getEntry } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const entries = await getCollection('paths', ({ data }) => !data.draft);
+  return entries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+};
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+
+const base = import.meta.env.BASE_URL;
+
+// Resolve each course slug to its full entry (skip missing ones)
+const allCourses = await getCollection('courses', ({ data }) => !data.draft);
+const courseMap = new Map(allCourses.map((c) => [c.slug, c]));
+const orderedCourses = entry.data.courseOrder
+  .map((slug: string) => courseMap.get(slug))
+  .filter(Boolean);
+---
+
+<BaseLayout title={entry.data.title} description={entry.data.description}>
+  <div class="mb-4">
+    <a href={`${base}paths/`} class="btn btn-ghost btn-sm font-sans gap-2"> &larr; All Paths </a>
+  </div>
+
+  <h1 class="text-3xl font-bold mb-2">{entry.data.title}</h1>
+  <p class="text-base-content/60 font-sans mb-4">{entry.data.description}</p>
+
+  <div class="flex flex-wrap gap-2 mb-6">
+    <span class="badge badge-secondary font-sans">
+      {entry.data.courseOrder.length}{' '}
+      {entry.data.courseOrder.length === 1 ? 'course' : 'courses'}
+    </span>
+    {entry.data.tags.map((tag: string) => <span class="badge badge-outline font-sans">{tag}</span>)}
+  </div>
+
+  <div class="prose prose-sm max-w-none mb-10 font-sans">
+    <Content />
+  </div>
+
+  <h2 class="text-xl font-bold mb-4">Courses in This Path</h2>
+
+  {
+    orderedCourses.length === 0 ? (
+      <div class="alert font-sans">
+        <span>No matching courses found for this path.</span>
+      </div>
+    ) : (
+      <ol class="space-y-3">
+        {orderedCourses.map((course, index) => (
+          <li>
+            <a
+              href={`${base}courses/${course.slug}/`}
+              class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans block"
+            >
+              <div class="card-body py-3">
+                <div class="flex items-start gap-3">
+                  <span class="flex-shrink-0 w-7 h-7 rounded-full bg-primary text-primary-content text-sm font-bold flex items-center justify-center">
+                    {index + 1}
+                  </span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span class="font-semibold text-sm">{course.data.title}</span>
+                      <span class="badge badge-primary badge-sm capitalize">
+                        {course.data.level}
+                      </span>
+                    </div>
+                    <p class="text-xs text-base-content/60 mt-0.5">{course.data.description}</p>
+                    {course.data.tags.length > 0 && (
+                      <div class="flex flex-wrap gap-1 mt-1">
+                        {course.data.tags.map((tag: string) => (
+                          <span class="badge badge-outline badge-xs">{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </a>
+          </li>
+        ))}
+      </ol>
+    )
+  }
+</BaseLayout>

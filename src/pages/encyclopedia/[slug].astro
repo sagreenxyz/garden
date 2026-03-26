@@ -4,6 +4,7 @@ import type { GetStaticPaths } from 'astro';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 import { getRelatedContent } from '../../utils/related';
 import type { RelatedItem } from '../../utils/related';
+import { getReadingTime } from '../../utils/readingTime';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const base = import.meta.env.BASE_URL;
@@ -57,6 +58,7 @@ const {
   relatedNotes: RelatedItem[];
 } = Astro.props;
 const { Content } = await entry.render();
+const readingTime = getReadingTime(entry.body);
 ---
 
 <ContentLayout
@@ -67,6 +69,7 @@ const { Content } = await entry.render();
   tags={entry.data.tags}
   curriculum={entry.data.curriculum}
   collection="encyclopedia"
+  readingTime={readingTime}
   relatedEncyclopedia={relatedEncyclopedia}
   relatedCourses={relatedCourses}
   relatedNotes={relatedNotes}
