@@ -1,0 +1,156 @@
+name: Notify and Close Published Note Issues
+
+# Triggered on every push to main (e.g. after a deploy).
+# Finds notes that are published and have a sourceIssue URL, then:
+#   1. Posts a comment with the live URL.
+#   2. Adds the 'published' label (used as a deduplication sentinel).
+#   3. Closes the issue.
+# Issues that already carry the 'published' label are skipped.
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  notify-published:
+    name: Notify and Close Published Note Issues
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Process published notes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs   = require('fs');
+            const path = require('path');
+
+            const NOTES_DIR = 'src/content/notes';
+            const SITE_BASE = 'https://sagreenxyz.github.io/astro2/';
+            const LABEL    = 'published';
+
+            // ── helpers ────────────────────────────────────────────────────────
+
+            /** Extract specific frontmatter fields from raw MDX text. */
+            function parseFrontmatter(raw) {
+              const match = raw.match(/^---[\r\n]([\s\S]*?)[\r\n]---/);
+              if (!match) return {};
+              const yaml = match[1];
+
+              const get = (key) => {
+                const m = yaml.match(new RegExp(`^${key}:\\s*(.+)$`, 'm'));
+                return m ? m[1].trim().replace(/^['"]|['"]$/g, '') : undefined;
+              };
+
+              return {
+                reviewState: get('reviewState'),
+                draft:       get('draft') === 'false' ? false : true,
+                sourceIssue: get('sourceIssue'),
+              };
+            }
+
+            /** Ensure the deduplication label exists in the repo. */
+            async function ensureLabel() {
+              try {
+                await github.rest.issues.getLabel({
+                  owner: context.repo.owner,
+                  repo:  context.repo.repo,
+                  name:  LABEL,
+                });
+              } catch {
+                // Label does not exist — create it.
+                await github.rest.issues.createLabel({
+                  owner:       context.repo.owner,
+                  repo:        context.repo.repo,
+                  name:        LABEL,
+                  color:       '0e8a16',
+                  description: 'Note has been published and the source issue notified',
+                });
+                console.log(`Created label '${LABEL}'.`);
+              }
+            }
+
+            // ── main ───────────────────────────────────────────────────────────
+
+            await ensureLabel();
+
+            let files;
+            try {
+              files = fs.readdirSync(NOTES_DIR).filter(f => f.endsWith('.mdx'));
+            } catch (err) {
+              console.log(`Notes directory '${NOTES_DIR}' could not be read: ${err.message}`);
+              return;
+            }
+
+            for (const file of files) {
+              const raw = fs.readFileSync(path.join(NOTES_DIR, file), 'utf8');
+              const fm  = parseFrontmatter(raw);
+
+              // Must be published, not a draft, and linked to an issue.
+              if (fm.reviewState !== 'published' || fm.draft !== false || !fm.sourceIssue) {
+                continue;
+              }
+
+              // Extract issue number from the sourceIssue URL.
+              const issueNumber = parseInt(fm.sourceIssue.split('/').pop(), 10);
+              if (Number.isNaN(issueNumber) || issueNumber <= 0) {
+                console.log(`Skipping ${file}: could not parse issue number from '${fm.sourceIssue}'.`);
+                continue;
+              }
+
+              // Fetch the issue; skip gracefully if it doesn't exist.
+              let issue;
+              try {
+                issue = await github.rest.issues.get({
+                  owner:        context.repo.owner,
+                  repo:         context.repo.repo,
+                  issue_number: issueNumber,
+                });
+              } catch (err) {
+                console.log(`Skipping issue #${issueNumber} (${file}): ${err.message}`);
+                continue;
+              }
+
+              // Skip issues that have already been notified.
+              const alreadyLabelled = issue.data.labels.some(l => l.name === LABEL);
+              if (alreadyLabelled) {
+                console.log(`Issue #${issueNumber} already has '${LABEL}' label — skipping.`);
+                continue;
+              }
+
+              const slug    = file.replace(/\.mdx$/, '');
+              const liveUrl = `${SITE_BASE}notes/${slug}/`;
+
+              // 1. Post a comment with the live URL.
+              await github.rest.issues.createComment({
+                owner:        context.repo.owner,
+                repo:         context.repo.repo,
+                issue_number: issueNumber,
+                body:         `🎉 This note has been published and is now live!\n\n👉 ${liveUrl}`,
+              });
+
+              // 2. Add the deduplication label.
+              await github.rest.issues.addLabels({
+                owner:        context.repo.owner,
+                repo:         context.repo.repo,
+                issue_number: issueNumber,
+                labels:       [LABEL],
+              });
+
+              // 3. Close the issue.
+              await github.rest.issues.update({
+                owner:        context.repo.owner,
+                repo:         context.repo.repo,
+                issue_number: issueNumber,
+                state:        'closed',
+              });
+
+              console.log(`✅ Notified and closed issue #${issueNumber} for note '${slug}'.`);
+            }
