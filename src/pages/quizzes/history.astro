@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import QuizHistory from '../../components/lms/QuizHistory.svelte';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="Quiz History" description="Your past quiz attempts and scores">
+  <div class="max-w-3xl">
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-3xl font-bold">Quiz History</h1>
+      <a href={`${base}quizzes/`} class="btn btn-ghost btn-sm font-sans gap-2"> ← All Quizzes </a>
+    </div>
+    <QuizHistory client:load />
+  </div>
+</BaseLayout>

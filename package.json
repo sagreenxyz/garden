@@ -8,6 +8,7 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
+    "postbuild": "npx pagefind --site dist",
     "preview": "astro preview",
     "astro": "astro",
     "format": "prettier --write .",
@@ -17,6 +18,7 @@
     "@astrojs/mdx": "^4.3.14",
     "@astrojs/rss": "^4.0.17",
     "@astrojs/svelte": "^7.2.5",
+    "@pagefind/default-ui": "^1.4.0",
     "astro": "^5.18.1",
     "svelte": "^5.55.0"
   },

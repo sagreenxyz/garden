@@ -9,7 +9,12 @@ const entries = glossary as GlossaryEntry[];
 ---
 
 <BaseLayout title="Glossary" description="Keywords and keyphrases used throughout the LMS">
-  <h1 class="text-3xl font-bold mb-2">Glossary</h1>
+  <div class="mb-2 flex items-center justify-between">
+    <h1 class="text-3xl font-bold">Glossary</h1>
+    <a href={`${base}glossary/flashcards/`} class="btn btn-primary btn-sm font-sans gap-2">
+      🃏 Flashcards
+    </a>
+  </div>
   <p class="text-base-content/60 font-sans mb-6">
     Keywords and keyphrases defined for this project. Terms are drawn from
     <code>src/data/glossary.json</code> and used as tooltips throughout the content.

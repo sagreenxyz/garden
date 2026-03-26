@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getReadingTime } from '../../utils/readingTime';
 
 const entries = await getCollection('encyclopedia', ({ data }) => !data.draft);
 entries.sort((a, b) => a.data.title.localeCompare(b.data.title));
@@ -34,13 +35,33 @@ const base = import.meta.env.BASE_URL;
                   {entry.data.title}
                 </h2>
                 <p class="text-sm text-base-content/60 mt-1">{entry.data.summary}</p>
-                {entry.data.tags.length > 0 && (
-                  <div class="flex flex-wrap gap-1 mt-2">
-                    {entry.data.tags.map((tag) => (
-                      <span class="badge badge-outline badge-sm">{tag}</span>
-                    ))}
-                  </div>
-                )}
+                <div class="flex flex-wrap items-center gap-2 mt-2 text-xs text-base-content/50 font-sans">
+                  <span class="inline-flex items-center gap-1">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="11"
+                      height="11"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <circle cx="12" cy="12" r="10" />
+                      <polyline points="12 6 12 12 16 14" />
+                    </svg>
+                    {getReadingTime(entry.body)} min read
+                  </span>
+                  {entry.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-1">
+                      {entry.data.tags.map((tag) => (
+                        <span class="badge badge-outline badge-sm">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </a>
           </li>
