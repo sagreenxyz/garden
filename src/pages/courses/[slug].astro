@@ -2,16 +2,60 @@
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import ContentLayout from '../../layouts/ContentLayout.astro';
+import { getRelatedContent } from '../../utils/related';
+import type { RelatedItem } from '../../utils/related';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const entries = await getCollection('courses', ({ data }) => !data.draft);
-  return entries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  const base = import.meta.env.BASE_URL;
+  const [entries, allEncyclopedia, allNotes] = await Promise.all([
+    getCollection('courses', ({ data }) => !data.draft),
+    getCollection('encyclopedia', ({ data }) => !data.draft),
+    getCollection(
+      'notes',
+      ({ data }) => !data.draft && data.visibility === 'public' && data.reviewState === 'published'
+    ),
+  ]);
+
+  return entries.map((entry) => {
+    const currentTags = entry.data.tags ?? [];
+    return {
+      params: { slug: entry.slug },
+      props: {
+        entry,
+        relatedEncyclopedia: getRelatedContent(
+          entry.slug,
+          currentTags,
+          allEncyclopedia,
+          (slug) => `${base}encyclopedia/${slug}/`
+        ),
+        relatedCourses: getRelatedContent(
+          entry.slug,
+          currentTags,
+          entries,
+          (slug) => `${base}courses/${slug}/`
+        ),
+        relatedNotes: getRelatedContent(
+          entry.slug,
+          currentTags,
+          allNotes,
+          (slug) => `${base}notes/${slug}/`
+        ),
+      },
+    };
+  });
 };
 
-const { entry } = Astro.props;
+const {
+  entry,
+  relatedEncyclopedia,
+  relatedCourses,
+  relatedNotes,
+}: {
+  entry: Awaited<ReturnType<typeof getCollection<'courses'>>>[number];
+  relatedEncyclopedia: RelatedItem[];
+  relatedCourses: RelatedItem[];
+  relatedNotes: RelatedItem[];
+} = Astro.props;
 const { Content } = await entry.render();
 ---
 
@@ -21,6 +65,10 @@ const { Content } = await entry.render();
   publishedAt={entry.data.publishedAt}
   tags={entry.data.tags}
   curriculum={entry.data.curriculum}
+  collection="courses"
+  relatedEncyclopedia={relatedEncyclopedia}
+  relatedCourses={relatedCourses}
+  relatedNotes={relatedNotes}
 >
   <div class="mb-4 font-sans">
     <span class="badge badge-primary capitalize">{entry.data.level}</span>

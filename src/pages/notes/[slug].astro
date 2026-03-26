@@ -2,19 +2,60 @@
 import { getCollection } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import ContentLayout from '../../layouts/ContentLayout.astro';
+import { getRelatedContent } from '../../utils/related';
+import type { RelatedItem } from '../../utils/related';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const entries = await getCollection(
-    'notes',
-    ({ data }) => !data.draft && data.visibility === 'public' && data.reviewState === 'published'
-  );
-  return entries.map((entry) => ({
-    params: { slug: entry.slug },
-    props: { entry },
-  }));
+  const base = import.meta.env.BASE_URL;
+  const [entries, allEncyclopedia, allCourses] = await Promise.all([
+    getCollection(
+      'notes',
+      ({ data }) => !data.draft && data.visibility === 'public' && data.reviewState === 'published'
+    ),
+    getCollection('encyclopedia', ({ data }) => !data.draft),
+    getCollection('courses', ({ data }) => !data.draft),
+  ]);
+
+  return entries.map((entry) => {
+    const currentTags = entry.data.tags ?? [];
+    return {
+      params: { slug: entry.slug },
+      props: {
+        entry,
+        relatedEncyclopedia: getRelatedContent(
+          entry.slug,
+          currentTags,
+          allEncyclopedia,
+          (slug) => `${base}encyclopedia/${slug}/`
+        ),
+        relatedCourses: getRelatedContent(
+          entry.slug,
+          currentTags,
+          allCourses,
+          (slug) => `${base}courses/${slug}/`
+        ),
+        relatedNotes: getRelatedContent(
+          entry.slug,
+          currentTags,
+          entries,
+          (slug) => `${base}notes/${slug}/`
+        ),
+      },
+    };
+  });
 };
 
-const { entry } = Astro.props;
+const {
+  entry,
+  relatedEncyclopedia,
+  relatedCourses,
+  relatedNotes,
+}: {
+  entry: Awaited<ReturnType<typeof getCollection<'notes'>>>[number];
+  relatedEncyclopedia: RelatedItem[];
+  relatedCourses: RelatedItem[];
+  relatedNotes: RelatedItem[];
+} = Astro.props;
 const { Content } = await entry.render();
 
 const base = import.meta.env.BASE_URL;
@@ -29,6 +70,9 @@ const { reviewReason, duplicateOf, sourceIssue, sourceUrl, relatedLinks } = entr
   collection="notes"
   backLabel="Notes"
   backHref={`${base}notes/`}
+  relatedEncyclopedia={relatedEncyclopedia}
+  relatedCourses={relatedCourses}
+  relatedNotes={relatedNotes}
 >
   {
     duplicateOf && (

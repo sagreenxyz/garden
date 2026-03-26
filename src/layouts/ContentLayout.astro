@@ -1,6 +1,8 @@
 ---
 import BaseLayout from './BaseLayout.astro';
+import RelatedContent from '../components/lms/RelatedContent.astro';
 import type { CurriculumAlignment } from '../types/nursing';
+import type { RelatedItem } from '../utils/related';
 
 export interface Props {
   title: string;
@@ -14,6 +16,10 @@ export interface Props {
   /** Back link label and href */
   backLabel?: string;
   backHref?: string;
+  /** Related content from other collections, keyed by collection name */
+  relatedEncyclopedia?: RelatedItem[];
+  relatedCourses?: RelatedItem[];
+  relatedNotes?: RelatedItem[];
 }
 
 const {
@@ -26,6 +32,9 @@ const {
   curriculum,
   backLabel,
   backHref,
+  relatedEncyclopedia = [],
+  relatedCourses = [],
+  relatedNotes = [],
 } = Astro.props;
 
 const base = import.meta.env.BASE_URL;
@@ -166,6 +175,12 @@ const base = import.meta.env.BASE_URL;
       <div class="prose prose-lms max-w-none font-prose">
         <slot />
       </div>
+
+      <RelatedContent
+        relatedEncyclopedia={relatedEncyclopedia}
+        relatedCourses={relatedCourses}
+        relatedNotes={relatedNotes}
+      />
     </article>
 
     <!-- Right sidebar: Table of Contents (client-side populated) -->
