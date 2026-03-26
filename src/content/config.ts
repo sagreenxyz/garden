@@ -157,10 +157,28 @@ const pathsCollection = defineCollection({
   }),
 });
 
+// ── Changelog ────────────────────────────────────────────────────────────────
+const changelogCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    summary: z.string(),
+    publishedAt: z.date(),
+    tags: z.array(z.string()).default([]),
+    draft: z.boolean().default(false),
+    contentType: z
+      .enum(['encyclopedia', 'course', 'note', 'quiz', 'presentation', 'other'])
+      .default('other'),
+    /** Internal link to the new content */
+    relatedUrl: z.string().optional(),
+  }),
+});
+
 export const collections = {
   encyclopedia: encyclopediaCollection,
   courses: coursesCollection,
   notes: notesCollection,
   quizzes: quizzesCollection,
   paths: pathsCollection,
+  changelog: changelogCollection,
 };

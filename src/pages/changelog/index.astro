@@ -1,0 +1,101 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const entries = await getCollection('changelog', ({ data }) => !data.draft);
+entries.sort((a, b) => b.data.publishedAt.getTime() - a.data.publishedAt.getTime());
+
+const base = import.meta.env.BASE_URL;
+
+const contentTypeColors: Record<string, string> = {
+  encyclopedia: 'badge-info',
+  course: 'badge-success',
+  note: 'badge-warning',
+  quiz: 'badge-error',
+  presentation: 'badge-secondary',
+  other: 'badge-neutral',
+};
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+}
+---
+
+<BaseLayout title="What's New" description="Track new content and updates added to the Root LMS.">
+  <div class="flex items-center justify-between mb-2">
+    <h1 class="text-3xl font-extrabold" style="color:#1a1a2e;">What's New</h1>
+    <a
+      href={`${base}changelog/rss.xml`}
+      title="Subscribe via RSS"
+      class="btn btn-ghost btn-sm gap-2 font-sans"
+      aria-label="RSS feed"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        aria-hidden="true"
+        class="text-orange-500"
+      >
+        <circle cx="5" cy="19" r="2"></circle>
+        <path d="M4 4a16 16 0 0 1 16 16h-3A13 13 0 0 0 4 7V4z"></path>
+        <path d="M4 11a9 9 0 0 1 9 9H10a6 6 0 0 0-6-6v-3z"></path>
+      </svg>
+      RSS
+    </a>
+  </div>
+  <p class="text-base-content/60 mb-8">
+    New content and updates, newest first. Subscribe via the RSS feed to stay up to date.
+  </p>
+
+  {
+    entries.length === 0 ? (
+      <div class="alert">
+        <span>No changelog entries yet.</span>
+      </div>
+    ) : (
+      <ul class="space-y-4">
+        {entries.map((entry) => (
+          <li>
+            <div class="card bg-white border border-base-300 hover:shadow-md transition-shadow rounded-xl">
+              <div class="card-body py-4 px-5">
+                <div class="flex flex-wrap items-center gap-2 mb-1">
+                  <span
+                    class={`badge badge-sm ${contentTypeColors[entry.data.contentType] ?? 'badge-neutral'}`}
+                  >
+                    {entry.data.contentType}
+                  </span>
+                  <time
+                    datetime={entry.data.publishedAt.toISOString()}
+                    class="text-xs text-base-content/50"
+                  >
+                    {formatDate(entry.data.publishedAt)}
+                  </time>
+                </div>
+                <h2 class="card-title text-base" style="color:#1a1a2e;">
+                  {entry.data.relatedUrl ? (
+                    <a href={entry.data.relatedUrl} class="hover:underline">
+                      {entry.data.title}
+                    </a>
+                  ) : (
+                    entry.data.title
+                  )}
+                </h2>
+                <p class="text-sm text-base-content/60 mt-1">{entry.data.summary}</p>
+                {entry.data.tags.length > 0 && (
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    {entry.data.tags.map((tag) => (
+                      <span class="badge badge-outline badge-sm">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</BaseLayout>
