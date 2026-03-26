@@ -1,0 +1,120 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const entries = await getCollection(
+  'notes',
+  ({ data }) =>
+    !data.draft &&
+    data.visibility === 'public' &&
+    data.reviewState === 'published' &&
+    data.noteType === 'educational'
+);
+entries.sort((a, b) => b.data.createdAt.getTime() - a.data.createdAt.getTime());
+
+const base = import.meta.env.BASE_URL;
+
+const reviewBadge: Record<string, { label: string; cls: string }> = {
+  pending: { label: 'Review Pending', cls: 'badge-warning' },
+  'in-progress': { label: 'Under Review', cls: 'badge-info' },
+  reviewed: { label: 'Reviewed', cls: 'badge-success' },
+  approved: { label: 'Expert Approved', cls: 'badge-success' },
+};
+---
+
+<BaseLayout
+  title="Educational Notes"
+  description="BSN-focused educational notes reviewed by expert personas"
+>
+  <div class="mb-6 flex items-center gap-2 font-sans text-sm text-base-content/60">
+    <a href={`${base}notes/`} class="hover:underline">Notes</a>
+    <span>/</span>
+    <span>Educational</span>
+  </div>
+
+  <h1 class="text-3xl font-bold mb-2">Educational Notes</h1>
+  <p class="text-base-content/60 font-sans mb-6">
+    BSN-focused study notes structured for NCLEX preparation, aligned to AACN Essentials and
+    reviewed by expert personas.
+  </p>
+
+  {
+    entries.length === 0 ? (
+      <div class="alert font-sans">
+        <span>
+          No educational notes yet. Add <code>.mdx</code> files with{' '}
+          <code>noteType: educational</code> to <code>src/content/notes/</code>.
+        </span>
+      </div>
+    ) : (
+      <ul class="space-y-6">
+        {entries.map((entry) => {
+          const meta = entry.data.educationalMeta;
+          const reviewStatus = meta?.expertReviewStatus ?? 'pending';
+          const badge = reviewBadge[reviewStatus] ?? reviewBadge.pending;
+          const takeaways = meta?.keyTakeaways?.slice(0, 2) ?? [];
+
+          return (
+            <li>
+              <a
+                href={`${base}notes/${entry.slug}/`}
+                class="card card-border bg-base-100 hover:shadow-md transition-shadow no-underline font-sans block"
+              >
+                <div class="card-body py-4">
+                  {/* Title row */}
+                  <div class="flex items-start justify-between gap-2 flex-wrap">
+                    <h2 class="card-title text-base">{entry.data.title}</h2>
+                    <span class={`badge badge-sm font-sans ${badge.cls}`}>{badge.label}</span>
+                  </div>
+
+                  {/* Meta row */}
+                  <div class="flex flex-wrap gap-3 mt-1 text-xs text-base-content/60">
+                    {meta?.subjectArea && (
+                      <span>
+                        📚 <strong>Subject:</strong> {meta.subjectArea}
+                      </span>
+                    )}
+                    {meta?.audienceLevel && (
+                      <span>
+                        🎓 <strong>Level:</strong> {meta.audienceLevel}
+                      </span>
+                    )}
+                    {meta?.studyTimeMinutes && <span>⏱ {meta.studyTimeMinutes} min study</span>}
+                    <time datetime={entry.data.createdAt.toISOString()}>
+                      {entry.data.createdAt.toLocaleDateString()}
+                    </time>
+                  </div>
+
+                  {/* Key takeaways */}
+                  {takeaways.length > 0 && (
+                    <ul class="mt-2 space-y-0.5 text-sm text-base-content/70">
+                      {takeaways.map((t) => (
+                        <li class="flex gap-1">
+                          <span class="shrink-0">✔</span>
+                          <span>{t}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {/* Tags */}
+                  {entry.data.tags.length > 0 && (
+                    <div class="flex flex-wrap gap-1 mt-2">
+                      {entry.data.tags.map((tag) => (
+                        <span class="badge badge-outline badge-sm">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </a>
+            </li>
+          );
+        })}
+      </ul>
+    )
+  }
+
+  <div class="mt-8">
+    <a href={`${base}notes/`} class="btn btn-ghost btn-sm font-sans gap-2"> ← Back to all Notes </a>
+  </div>
+</BaseLayout>

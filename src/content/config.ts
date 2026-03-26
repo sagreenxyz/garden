@@ -93,7 +93,7 @@ const notesCollection = defineCollection({
     visibility: z.enum(['public', 'private', 'protected']).default('public'),
     /** Note type for categorisation */
     noteType: z
-      .enum(['meeting', 'idea', 'reference', 'task', 'research', 'general'])
+      .enum(['meeting', 'idea', 'reference', 'task', 'research', 'general', 'educational', 'blog'])
       .default('general'),
     /** Review state — notes with 'needs-review' are kept as drafts pending confirmation */
     reviewState: z.enum(['draft', 'needs-review', 'published']).default('published'),
@@ -116,6 +116,31 @@ const notesCollection = defineCollection({
       .default([]),
     /** Slug of another note this may duplicate */
     duplicateOf: z.string().optional(),
+    /** Educational metadata — only relevant when noteType is 'educational' */
+    educationalMeta: z
+      .object({
+        /** BSN subject area, e.g. "Foundations of Care", "Pharmacology", "Med-Surg" */
+        subjectArea: z.string().optional(),
+        /** Target audience / level */
+        audienceLevel: z
+          .enum(['pre-nursing', 'BSN-1', 'BSN-2', 'BSN-3', 'BSN-4', 'RN-refresher'])
+          .optional(),
+        /** NCLEX-NG Client Needs categories this post addresses */
+        nclexCategories: z.array(nclexCategoryRef).default([]),
+        /** AACN Essentials domains this post addresses */
+        aacnEssentials: z.array(aacnEssentialRef).default([]),
+        /** Estimated reading / study time in minutes */
+        studyTimeMinutes: z.number().optional(),
+        /** Key takeaways — short bullet phrases */
+        keyTakeaways: z.array(z.string()).default([]),
+        /** Expert review status */
+        expertReviewStatus: z
+          .enum(['pending', 'in-progress', 'reviewed', 'approved'])
+          .default('pending'),
+        /** URL of the GitHub Issue where expert feedback was posted */
+        expertReviewIssueUrl: z.string().url().optional(),
+      })
+      .optional(),
   }),
 });
 
