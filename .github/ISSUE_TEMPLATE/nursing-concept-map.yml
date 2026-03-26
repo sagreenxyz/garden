@@ -1,0 +1,303 @@
+name: Nursing Clinical Concept Map (WGU Format)
+description: >
+  Generate an AI-assisted clinical concept map following the WGU Nursing Concept Map rubric
+  (revised 11/21/2025). Provide your clinical experience details and focus condition; the BSN
+  Curriculum Agent will organize and populate all required sections (A–G) using evidence-based,
+  NCLEX-NG–aligned content.
+title: '[Concept Map]: '
+labels:
+  - bsn
+  - nursing-concept-map
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to request an **AI-assisted Nursing Clinical Concept Map** aligned with the
+        WGU Nursing Concept Map assignment (revised 11/21/2025).
+
+        Provide as much clinical context as you can. The more detail you supply, the more accurate the
+        agent's suggestions will be. Fields you leave blank will be populated with **[AI Suggested — Review
+        Before Submission]** content based on your chosen focus condition.
+
+        > **Privacy reminder:** Do NOT include any patient-identifying information (name, date of birth,
+        > MRN, or other identifiers) in any field.
+
+  # ── Clinical Experience Information ──────────────────────────────────────────
+
+  - type: markdown
+    attributes:
+      value: '## Clinical Experience Information'
+
+  - type: input
+    id: facility_name
+    attributes:
+      label: Facility Name *
+      description: Name of the clinical facility.
+      placeholder: 'e.g., St. Mary''s Medical Center'
+    validations:
+      required: true
+
+  - type: input
+    id: facility_unit
+    attributes:
+      label: Hospital Unit (if applicable)
+      description: Specific unit within the facility.
+      placeholder: 'e.g., Medical-Surgical Unit 3B, ICU, Labor & Delivery'
+
+  - type: input
+    id: city_state
+    attributes:
+      label: City and State *
+      description: City and state of the clinical experience.
+      placeholder: 'e.g., Denver, CO'
+    validations:
+      required: true
+
+  - type: input
+    id: dates
+    attributes:
+      label: Dates of Clinical Experience *
+      description: 'Use the format MM/DD/YYYY – MM/DD/YYYY, or MM/DD/YYYY – Present if still in progress.'
+      placeholder: 'e.g., 01/15/2026 – Present'
+    validations:
+      required: true
+
+  - type: dropdown
+    id: patient_type
+    attributes:
+      label: Type of Patients Encountered *
+      description: Select the primary patient population for this clinical rotation.
+      options:
+        - Adult (general)
+        - Adult (critical care / ICU)
+        - Adult (medical-surgical)
+        - Adult (telemetry / step-down)
+        - Pediatric
+        - Obstetric / Labor & Delivery
+        - Postpartum / Mother-Baby
+        - Neonatal
+        - Psychiatric / Mental Health
+        - Community / Public Health
+        - Geriatric / Long-term care
+        - Ambulatory / Outpatient
+        - Emergency
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: patient_type_other
+    attributes:
+      label: Patient Type — Other (if "Other" selected above)
+      placeholder: 'e.g., Oncology, Rehabilitation'
+
+  # ── Approved Focus Topic ──────────────────────────────────────────────────────
+
+  - type: markdown
+    attributes:
+      value: '## Approved Focus Topic'
+
+  - type: input
+    id: focus_topic
+    attributes:
+      label: Primary Disease Process, Disorder, or Injury *
+      description: >
+        Identify the focus concept for the concept map. Do not list a symptom (e.g., fever, pain) —
+        list the underlying condition (e.g., pneumonia, heart failure, gestational diabetes).
+        You are encouraged to confirm this with your Clinical Instructor before submitting.
+      placeholder: 'e.g., Community-acquired pneumonia, Type 2 diabetes mellitus, Congestive heart failure'
+    validations:
+      required: true
+
+  # ── Section A — Disease Process / Pathophysiology / Risk Factors ─────────────
+
+  - type: markdown
+    attributes:
+      value: '## Section A — Disease Process / Pathophysiology / Risk Factors'
+
+  - type: textarea
+    id: pathophysiology
+    attributes:
+      label: Pathophysiology (optional — agent will suggest if blank)
+      description: >
+        Explain how the disease process, disorder, or injury affects body system functions.
+        Focus on mechanisms of disease rather than definitions.
+      placeholder: |
+        e.g., In community-acquired pneumonia, bacterial invasion of the lower respiratory tract
+        triggers an inflammatory response in the alveoli. Neutrophil infiltration and exudate
+        accumulation impair gas exchange, leading to hypoxemia and increased work of breathing...
+
+  - type: textarea
+    id: risk_factors
+    attributes:
+      label: Risk Factors (optional — agent will suggest if blank)
+      description: >
+        List factors that increase a patient's likelihood of developing the focus condition.
+      placeholder: |
+        e.g., Age > 65, immunocompromised state, smoking history, COPD, aspiration risk,
+        recent viral upper respiratory infection, crowded living conditions...
+
+  # ── Section B — Recognizing Cues ─────────────────────────────────────────────
+
+  - type: markdown
+    attributes:
+      value: '## Section B — Recognizing Cues (minimum 4 required)'
+
+  - type: textarea
+    id: recognizing_cues
+    attributes:
+      label: Recognizing Cues (optional — agent will suggest if blank)
+      description: >
+        List at least four cues observed during patient assessment. Draw from appearance,
+        complaints, medical history, vital signs, lab values, and medical records.
+        One cue per line. Leave blank and the agent will generate relevant cues for your focus condition.
+      placeholder: |
+        1. Patient appears in moderate respiratory distress, using accessory muscles to breathe
+        2. Patient reports productive cough with yellow-green sputum for 5 days
+        3. History of COPD and 30 pack-year smoking history
+        4. SpO₂ 88% on room air; RR 24 breaths/min; Temp 38.9°C
+        5. CXR shows right lower lobe consolidation
+        6. WBC 14,200 cells/µL with left shift
+
+  # ── Section C — Analyzing Cues — Supporting ──────────────────────────────────
+
+  - type: markdown
+    attributes:
+      value: '## Section C — Analyzing Cues — Supporting Statements'
+
+  - type: textarea
+    id: analyzing_cues_supporting
+    attributes:
+      label: Supporting Analysis Statements (optional — agent will suggest if blank)
+      description: >
+        Select three cues from Section B and write an analysis statement for each, explaining
+        how the cue connects to the focus disease process. One statement per line.
+      placeholder: |
+        1. The SpO₂ of 88% on room air is consistent with impaired gas exchange caused by alveolar
+           consolidation and exudate accumulation, hallmarks of bacterial pneumonia.
+        2. The productive cough with purulent sputum reflects the neutrophilic inflammatory
+           response and increased mucus production triggered by lower respiratory tract infection.
+        3. The elevated WBC with left shift indicates an acute bacterial immune response, supporting
+           the diagnosis of community-acquired pneumonia.
+
+  # ── Section C1 — Analyzing Cues — Concerning ─────────────────────────────────
+
+  - type: markdown
+    attributes:
+      value: '## Section C1 — Analyzing Cues — Concerning (top 2)'
+
+  - type: textarea
+    id: analyzing_cues_concerning
+    attributes:
+      label: Top Two Cues of Concern (optional — agent will suggest if blank)
+      description: >
+        From the three supporting analysis statements in Section C, identify the two cues
+        that represent the greatest clinical concern for this patient.
+      placeholder: |
+        1. SpO₂ 88% on room air — risk of acute hypoxemic respiratory failure
+        2. RR 24 breaths/min with accessory muscle use — impending respiratory fatigue
+
+  # ── Section D — Prioritized Hypotheses ───────────────────────────────────────
+
+  - type: markdown
+    attributes:
+      value: '## Section D — Prioritized Hypotheses (3, in priority order)'
+
+  - type: textarea
+    id: hypotheses
+    attributes:
+      label: Prioritized Nursing Hypotheses (optional — agent will suggest if blank)
+      description: >
+        List three predictive hypotheses in priority order. Each should state a nursing
+        intervention and its anticipated positive impact. Focus on nursing interventions
+        (oxygen therapy, positioning, education, fluid management, etc.) — not physician-performed actions.
+      placeholder: |
+        1. If supplemental oxygen is applied and titrated to maintain SpO₂ ≥ 94%, the patient's
+           hypoxemia will improve and respiratory distress will decrease.
+        2. If the patient is positioned in high Fowler's position and encouraged to perform incentive
+           spirometry every hour, alveolar expansion will improve and atelectasis will be reduced.
+        3. If the patient receives thorough education on medication adherence and follow-up care,
+           the risk of treatment failure and hospital readmission will be reduced.
+
+  # ── Section E — Generated Solutions / Goals ──────────────────────────────────
+
+  - type: markdown
+    attributes:
+      value: '## Section E — Generated Solutions / Goals (4)'
+
+  - type: textarea
+    id: solutions
+    attributes:
+      label: Nursing Solutions and Goals (optional — agent will suggest if blank)
+      description: >
+        List four nursing interventions with their desired outcomes or goals. Each should correspond
+        to a Take Action (F) and Outcome Evaluation (G) statement. Focus on nursing actions only.
+      placeholder: |
+        1. Apply supplemental O₂ via nasal cannula at 2–4 L/min → Goal: SpO₂ ≥ 94% within 30 minutes.
+        2. Position patient in high Fowler's; teach and coach incentive spirometry q1h → Goal: Improved
+           breath sounds and reduced WOB within 4 hours.
+        3. Administer prescribed antipyretics and monitor temperature q4h → Goal: Fever resolved
+           (Temp < 38°C) within 8 hours.
+        4. Provide discharge teaching on antibiotic adherence, rest, hydration, and follow-up → Goal:
+           Patient verbalizes understanding of home care plan before discharge.
+
+  # ── Section F — Take Actions ──────────────────────────────────────────────────
+
+  - type: markdown
+    attributes:
+      value: '## Section F — Take Actions (4, in priority order)'
+
+  - type: textarea
+    id: actions
+    attributes:
+      label: Nursing Actions Performed (optional — agent will suggest if blank)
+      description: >
+        Describe four nursing actions observed or performed during the clinical shift, in priority order.
+        These should correspond 1-to-1 with Section E and G. Focus on nursing actions only.
+      placeholder: |
+        1. Applied nasal cannula O₂ at 3 L/min; titrated per SpO₂ readings; reassessed every 30 minutes.
+        2. Elevated HOB to 45°; demonstrated incentive spirometry use; coached patient through 10 breaths
+           each hour; auscultated lung sounds before and after each session.
+        3. Administered acetaminophen 650 mg PO per order at 0800; monitored and documented temperature
+           at 0800, 1200, and 1600.
+        4. Conducted structured discharge teaching session using teach-back method covering antibiotic
+           schedule, hydration, activity restrictions, and follow-up appointment.
+
+  # ── Section G — Evaluation Outcomes ─────────────────────────────────────────
+
+  - type: markdown
+    attributes:
+      value: '## Section G — Evaluation Outcomes (4)'
+
+  - type: textarea
+    id: outcomes
+    attributes:
+      label: Outcome Evaluation Statements (optional — agent will suggest if blank)
+      description: >
+        Write four outcome statements evaluating goal progress after completing the nursing actions.
+        Include whether each goal was met, partially met, or not met. Reflect the patient's true
+        status at the end of your clinical shift.
+      placeholder: |
+        1. Goal partially met: SpO₂ improved to 92% on 3 L/min O₂; patient remains mildly hypoxic
+           but reports reduced dyspnea. O₂ therapy will continue; physician notified of persistent
+           hypoxemia.
+        2. Goal partially met: Patient performed incentive spirometry 6 of 8 scheduled times; lung
+           sounds remain diminished at right base; no improvement in consolidation during shift.
+        3. Goal met: Temperature decreased from 38.9°C to 37.8°C by 1600; patient reports feeling
+           less uncomfortable.
+        4. Goal met: Patient correctly verbalized antibiotic name, dose, schedule, and importance of
+           completing the full course during teach-back; received printed instructions.
+
+  # ── Special Instructions ──────────────────────────────────────────────────────
+
+  - type: textarea
+    id: special_instructions
+    attributes:
+      label: Special Instructions for the Agent
+      description: >
+        Any additional guidance for the BSN Curriculum Agent — e.g., specific NCLEX-NG formats,
+        QSEN competency emphasis, Bloom's level targets, or output preferences.
+      placeholder: |
+        e.g., Emphasize patient safety and QSEN Safety competency in the hypotheses.
+        Use NCLEX-NG CJMM layer labels for each section heading.
+        Flag any section where real patient data is needed to replace AI-suggested content.

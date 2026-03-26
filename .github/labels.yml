@@ -44,3 +44,7 @@
 - name: practice-test
   color: '0052cc'
   description: Note sourced from a practice quiz (HESL or Silvestri)
+
+- name: nursing-concept-map
+  color: '006b75'
+  description: Issue is a WGU nursing clinical concept map request
