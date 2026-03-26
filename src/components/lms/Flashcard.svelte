@@ -104,13 +104,13 @@
 
   <!-- Navigation & Shuffle -->
   <div class="flex items-center gap-3 font-sans">
-    <button class="btn btn-ghost btn-sm gap-2" onclick={prev} aria-label="Previous card">
+    <button class="btn btn-soft btn-primary btn-sm gap-2 font-sans" onclick={prev} aria-label="Previous card">
       ← Previous
     </button>
-    <button class="btn btn-primary btn-sm gap-2" onclick={shuffle} aria-label="Shuffle deck">
+    <button class="btn btn-primary btn-sm gap-2 font-sans" onclick={shuffle} aria-label="Shuffle deck">
       🔀 Shuffle
     </button>
-    <button class="btn btn-ghost btn-sm gap-2" onclick={next} aria-label="Next card">
+    <button class="btn btn-soft btn-primary btn-sm gap-2 font-sans" onclick={next} aria-label="Next card">
       Next →
     </button>
   </div>

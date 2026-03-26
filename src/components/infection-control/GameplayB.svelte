@@ -62,7 +62,7 @@
 <div class="space-y-6">
   <!-- Header -->
   <div class="flex items-center gap-2">
-    <button class="btn btn-ghost btn-sm font-sans gap-1" onclick={onBack}>← Back</button>
+    <button class="btn btn-soft btn-primary btn-sm font-sans gap-1" onclick={onBack}>← Back</button>
     <h2 class="text-lg font-bold">Mode B — {c.title}</h2>
   </div>
 

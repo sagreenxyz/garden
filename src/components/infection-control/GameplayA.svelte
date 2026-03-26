@@ -93,7 +93,7 @@
 <div class="space-y-6">
   <!-- Header -->
   <div class="flex items-center gap-2">
-    <button class="btn btn-ghost btn-sm font-sans gap-1" onclick={onBack}>← Back</button>
+    <button class="btn btn-soft btn-primary btn-sm font-sans gap-1" onclick={onBack}>← Back</button>
     <h2 class="text-lg font-bold">Mode A — {c.title}</h2>
   </div>
 
@@ -159,7 +159,7 @@
         </div>
         <div class="card-actions justify-end mt-4">
           <button
-            class="btn btn-primary font-sans"
+            class="btn btn-primary btn-sm font-sans"
             disabled={!precautionChoice}
             onclick={submitPrecaution}
           >
@@ -195,10 +195,10 @@
           {/each}
         </div>
         <div class="card-actions justify-between mt-4">
-          <button class="btn btn-ghost btn-sm font-sans" onclick={() => (phase = 'precaution')}
+          <button class="btn btn-soft btn-primary btn-sm font-sans" onclick={() => (phase = 'precaution')}
             >← Back</button
           >
-          <button class="btn btn-primary font-sans" onclick={submitActions}>Next →</button>
+          <button class="btn btn-primary btn-sm font-sans" onclick={submitActions}>Next →</button>
         </div>
       </div>
     </div>
@@ -236,11 +236,11 @@
           {/each}
         </div>
         <div class="card-actions justify-between mt-4">
-          <button class="btn btn-ghost btn-sm font-sans" onclick={() => (phase = 'actions')}
+          <button class="btn btn-soft btn-primary btn-sm font-sans" onclick={() => (phase = 'actions')}
             >← Back</button
           >
           <button
-            class="btn btn-primary font-sans"
+            class="btn btn-primary btn-sm font-sans"
             disabled={!escalationChoice}
             onclick={submitEscalation}>Next →</button
           >
@@ -283,12 +283,12 @@
         {/each}
         <div class="card-actions justify-between">
           <button
-            class="btn btn-ghost btn-sm font-sans"
+            class="btn btn-soft btn-primary btn-sm font-sans"
             onclick={() => (phase = c.modeA.escalationScenario ? 'escalation' : 'actions')}
             >← Back</button
           >
           <button
-            class="btn btn-primary font-sans"
+            class="btn btn-primary btn-sm font-sans"
             disabled={!c.modeA.chainLinkQuestions.every((q) => chainAnswers[q.id])}
             onclick={submitChain}
           >

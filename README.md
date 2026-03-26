@@ -919,12 +919,24 @@ The goal is for each session's hard-won lessons to become the next session's sta
 
 ### Button / DaisyUI styling conventions
 
-- Navigation / back-link buttons use `btn btn-ghost btn-sm` — no visible border at rest.
-- Primary action buttons (submit, quiz) use `btn btn-primary`.
-- `btn-outline btn-neutral` produces a **dark/black boxed border** in the DaisyUI v5 `corporate` theme and should be avoided for subtle navigation controls.
+The project uses a consistent four-tier button system based on DaisyUI v5 with the Corporate theme:
+
+| Button type | Classes | Use for |
+|---|---|---|
+| **Primary action** | `btn btn-primary btn-sm font-sans` | Submit, Start, Next (forward flow) |
+| **Back / secondary navigation** | `btn btn-soft btn-primary btn-sm font-sans` | ← Back, ← All X links |
+| **Destructive** | `btn btn-soft btn-error btn-sm font-sans` | Clear History |
+| **Sign In / Sign Out (navbar)** | `btn btn-neutral btn-sm font-sans` | Auth actions in navbar |
+
+Additional notes:
+- All buttons should include `btn-sm` and `font-sans` for consistent sizing and typography.
+- Add `gap-2` (or `gap-1`) when a button contains an icon alongside text.
+- `btn-ghost` is **not used** — it is indistinguishable from plain text.
+- `btn-outline` is **not used** — it appears too boxy in the Corporate theme.
+- `btn-outline btn-neutral` produces a **dark/black boxed border** and must be avoided.
 - The preferred pattern for Previous/Next pagination controls is:
-  - **Previous** → `btn btn-sm btn-ghost gap-2 font-sans` (subtle, no border)
-  - **Next** → `btn btn-sm btn-outline btn-primary gap-2 font-sans` (primary-coloured outline)
+  - **Previous** → `btn btn-soft btn-primary btn-sm gap-2 font-sans` (soft primary)
+  - **Next** → `btn btn-primary btn-sm gap-2 font-sans` (solid primary)
 - All interactive text links in the site use `hover:text-indigo-600 transition-colors` as the hover style.
 
 ### Pagination implementation location

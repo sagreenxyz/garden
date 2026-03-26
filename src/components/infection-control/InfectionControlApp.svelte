@@ -115,7 +115,7 @@
       {#if screen === 'lobby'}
         <CaseGrid cases={CASES} progress={playerProgress.caseProgress} onSelect={selectCase} />
       {:else if screen === 'select' && activeCase}
-        <button class="btn btn-ghost btn-sm font-sans gap-1 mb-2" onclick={goToLobby}
+        <button class="btn btn-soft btn-primary btn-sm font-sans gap-1 mb-2" onclick={goToLobby}
           >← All Cases</button
         >
         <ModeSelector
