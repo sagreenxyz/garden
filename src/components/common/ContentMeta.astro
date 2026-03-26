@@ -73,6 +73,7 @@ const levelColor: Record<NonNullable<Props['level']>, string> = {
         {tags.map((tag) => (
           <a
             href={`${base}tags/${tag}/`}
+            aria-label={`View all content tagged with ${tag}`}
             class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-semibold bg-indigo-50 text-indigo-700 border border-indigo-100 uppercase tracking-wide hover:bg-indigo-100 transition-colors"
           >
             {tag}
