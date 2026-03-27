@@ -8,7 +8,7 @@
     tags: string[];
   }
 
-  let { drugs }: { drugs: Drug[] } = $props();
+  let { drugs, classDescriptions = {} }: { drugs: Drug[]; classDescriptions?: Record<string, string> } = $props();
 
   let query = $state('');
   let selectedClass = $state('');
@@ -28,6 +28,10 @@
       const matchesClass = !selectedClass || d.drugClass === selectedClass;
       return matchesQuery && matchesClass;
     })
+  );
+
+  const selectedClassDescription = $derived(
+    selectedClass ? (classDescriptions[selectedClass] ?? null) : null
   );
 
   const base = typeof window !== 'undefined' ? (window as any).__ASTRO_BASE__ || '' : '';
@@ -52,6 +56,13 @@
   <p class="text-sm text-base-content/60 font-sans">
     Showing {filtered.length} of {drugs.length} drugs
   </p>
+
+  {#if selectedClassDescription}
+    <div class="bg-base-200 border border-base-300 rounded-xl px-5 py-4 text-sm text-base-content/80 leading-relaxed">
+      <p class="font-semibold text-base-content mb-1">{selectedClass}</p>
+      <p>{selectedClassDescription}</p>
+    </div>
+  {/if}
 
   {#if filtered.length === 0}
     <div class="alert">

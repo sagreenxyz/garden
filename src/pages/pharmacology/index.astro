@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import DrugBrowser from '../../components/pharmacology/DrugBrowser.svelte';
+import classDescriptionsRaw from '../../data/drug-class-descriptions.json';
 
 const entries = await getCollection('pharmacology', ({ data }) => !data.draft);
 entries.sort((a, b) => a.data.title.localeCompare(b.data.title));
@@ -16,6 +17,8 @@ const drugs = entries.map((e) => ({
   drugClass: e.data.drugClass,
   tags: e.data.tags,
 }));
+
+const classDescriptions = classDescriptionsRaw as Record<string, string>;
 ---
 
 <BaseLayout
@@ -31,5 +34,5 @@ const drugs = entries.map((e) => ({
     window.__ASTRO_BASE__ = base;
   </script>
 
-  <DrugBrowser drugs={drugs} client:load />
+  <DrugBrowser drugs={drugs} classDescriptions={classDescriptions} client:load />
 </BaseLayout>
