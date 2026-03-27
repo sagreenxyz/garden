@@ -1,0 +1,271 @@
+{
+  "title": "Community-Acquired Pneumonia — NCLEX-NG Practice Quiz",
+  "description": "NCLEX-NG formative assessment for BSN nursing students covering Community-Acquired Pneumonia (CAP) risk stratification, pathogen identification, antibiotic selection, oxygenation management, complications, prevention, and clinical judgment. Based on the Mr. Hannigan CAP case study and current IDSA/ATS guidelines.",
+  "tags": [
+    "pneumonia",
+    "CAP",
+    "respiratory",
+    "NCLEX",
+    "med-surg",
+    "antibiotics",
+    "BSN",
+    "clinical-judgment"
+  ],
+  "timeLimit": 40,
+  "passingScore": 75,
+  "draft": false,
+  "questions": [
+    {
+      "id": "cap-q1",
+      "text": "A nurse is reviewing two CAP severity scoring systems: PSI/PORT and CURB-65. Which statement best differentiates the two tools?",
+      "type": "multiple-choice",
+      "options": [
+        "PSI/PORT uses five variables and is simpler to calculate at the bedside; CURB-65 incorporates more demographic and lab data",
+        "CURB-65 uses five variables and is simpler to calculate at the bedside; PSI/PORT incorporates more demographic and lab data",
+        "Both tools use the same five variables and produce identical risk class scores",
+        "PSI/PORT is preferred in the emergency department because it requires no laboratory data"
+      ],
+      "answer": "CURB-65 uses five variables and is simpler to calculate at the bedside; PSI/PORT incorporates more demographic and lab data",
+      "explanation": "CURB-65 scores five variables (Confusion, Urea >7 mmol/L, Respiratory rate ≥30/min, Blood pressure <90 systolic or ≤60 diastolic, age ≥65) making it rapid and practical for bedside use. PSI/PORT (Pneumonia Severity Index) uses 20 variables including demographics, comorbidities, physical exam findings, and labs, providing more granular risk stratification but requiring more data. CURB-65 scores 0–1 suggest outpatient treatment, score 2 suggests hospital admission, and ≥3 suggests ICU consideration. PSI/PORT assigns Risk Classes I–V: Classes I–II are treated as outpatients, Class III may warrant short observation, and Classes IV–V require hospitalization."
+    },
+    {
+      "id": "cap-q2",
+      "text": "A nurse is comparing typical versus atypical CAP pathogens. Which pairing of pathogen and its key differentiating clinical feature is CORRECT?",
+      "type": "multiple-choice",
+      "options": [
+        "Streptococcus pneumoniae — 'walking pneumonia,' gradual onset, dry cough, affects young adults; treat with amoxicillin",
+        "Mycoplasma pneumoniae — rust-colored sputum, acute lobar consolidation, gram-positive diplococci on Gram stain",
+        "Legionella pneumophila — hyponatremia, GI symptoms, positive urinary antigen test; intracellular organism requiring fluoroquinolone or macrolide",
+        "Haemophilus influenzae — positive cold agglutinins, bilateral patchy infiltrates disproportionate to mild symptoms"
+      ],
+      "answer": "Legionella pneumophila — hyponatremia, GI symptoms, positive urinary antigen test; intracellular organism requiring fluoroquinolone or macrolide",
+      "explanation": "Legionella pneumophila is an atypical, intracellular pathogen with classic features: hyponatremia (Na often <130 mEq/L from SIADH-like effect), prominent GI symptoms (diarrhea, nausea), relative bradycardia, elevated liver enzymes, and rapid diagnosis via urinary antigen test (detects serogroup 1). Beta-lactams are ineffective; treatment requires a fluoroquinolone (preferred) or azithromycin. The distractors describe other pathogens: Streptococcus pneumoniae causes rust-colored sputum and lobar consolidation (NOT walking pneumonia); Mycoplasma pneumoniae causes walking pneumonia in young adults with dry cough, bilateral patchy infiltrates, and positive cold agglutinins; Haemophilus influenzae is a typical gram-negative organism common in COPD patients."
+    },
+    {
+      "id": "cap-q3",
+      "text": "A hospitalized patient with CAP is producing rust-colored (rusty) sputum. Which pathogen is most characteristically associated with this finding?",
+      "type": "multiple-choice",
+      "options": [
+        "Mycoplasma pneumoniae",
+        "Legionella pneumophila",
+        "Streptococcus pneumoniae",
+        "Haemophilus influenzae"
+      ],
+      "answer": "Streptococcus pneumoniae",
+      "explanation": "Rust-colored or blood-tinged sputum is a classic hallmark of Streptococcus pneumoniae (pneumococcal) pneumonia. The color results from RBCs and hemosiderin-laden macrophages in the consolidated alveoli — a product of the intense inflammatory exudate filling the alveolar spaces. This is a high-yield NCLEX clinical pearl: rust-colored sputum = S. pneumoniae. By contrast, Mycoplasma produces scant, non-purulent sputum; Legionella may produce minimally productive cough; and Klebsiella pneumoniae (common in alcoholic or aspiration settings) is classically associated with 'currant jelly' (thick, blood-mixed mucus) sputum."
+    },
+    {
+      "id": "cap-q4",
+      "text": "A patient with CAP is about to receive their first dose of antibiotics. The nurse notes that sputum and blood cultures have not yet been collected. What is the nurse's priority action?",
+      "type": "multiple-choice",
+      "options": [
+        "Administer the antibiotic as ordered; cultures can be collected on the next blood draw",
+        "Collect sputum and blood cultures before administering the first antibiotic dose",
+        "Delay the antibiotic and notify the provider to discuss whether cultures are necessary",
+        "Skip sputum culture; blood cultures alone are sufficient before antibiotic administration"
+      ],
+      "answer": "Collect sputum and blood cultures before administering the first antibiotic dose",
+      "explanation": "Sputum and blood cultures must be obtained BEFORE the first antibiotic dose to preserve culture sensitivity. Even a single dose of antibiotics can significantly reduce culture yield by killing or suppressing organisms, making it impossible to identify the causative pathogen and its susceptibility pattern. Identifying the pathogen allows antibiotic de-escalation (a key antimicrobial stewardship goal), switches from empiric to targeted therapy, and detects resistant organisms. Per IDSA/ATS guidelines, cultures should be collected within the first hour of CAP management. The only exception is if the patient is in septic shock — then antibiotics must not be delayed beyond 1 hour; collect cultures simultaneously or immediately prior if feasible."
+    },
+    {
+      "id": "cap-q5",
+      "text": "A nurse reviews empiric antibiotic orders for four different CAP patients. Match each patient scenario to the appropriate first-line IDSA/ATS regimen. Which antibiotic choice is correctly matched to its CAP severity and patient scenario?",
+      "type": "multiple-choice",
+      "options": [
+        "Healthy 28-year-old outpatient, no comorbidities → IV ceftriaxone plus IV azithromycin",
+        "65-year-old outpatient with COPD and recent antibiotic use → amoxicillin monotherapy",
+        "Hospitalized 70-year-old on medical unit (non-ICU) → IV ceftriaxone plus azithromycin, OR respiratory fluoroquinolone monotherapy",
+        "ICU patient with severe CAP → oral levofloxacin monotherapy"
+      ],
+      "answer": "Hospitalized 70-year-old on medical unit (non-ICU) → IV ceftriaxone plus azithromycin, OR respiratory fluoroquinolone monotherapy",
+      "explanation": "IDSA/ATS empiric antibiotic recommendations by CAP severity: (1) Outpatient, no comorbidities → amoxicillin, azithromycin, or doxycycline MONOTHERAPY (IV antibiotics not needed); (2) Outpatient with comorbidities (COPD, diabetes, prior antibiotics) → beta-lactam (amoxicillin-clavulanate) PLUS macrolide, OR respiratory fluoroquinolone (levofloxacin/moxifloxacin) monotherapy; (3) Hospitalized non-ICU → IV beta-lactam (ceftriaxone) PLUS azithromycin or doxycycline, OR respiratory fluoroquinolone monotherapy; (4) ICU/severe CAP → IV beta-lactam PLUS respiratory fluoroquinolone — dual therapy is mandatory (fluoroquinolone monotherapy alone is NOT recommended for ICU severity). Respiratory fluoroquinolones (levofloxacin, moxifloxacin) cover both S. pneumoniae and atypicals; ciprofloxacin is NOT appropriate for CAP."
+    },
+    {
+      "id": "cap-q6",
+      "text": "A nurse questions why levofloxacin is ordered for a patient with CAP rather than ciprofloxacin. Which explanation is most accurate?",
+      "type": "multiple-choice",
+      "options": [
+        "Ciprofloxacin has superior activity against Streptococcus pneumoniae and atypical organisms compared to levofloxacin",
+        "Levofloxacin is a 'respiratory quinolone' with enhanced activity against S. pneumoniae and atypical organisms; ciprofloxacin has poor pneumococcal coverage",
+        "Levofloxacin is preferred solely because it is available in an oral formulation, while ciprofloxacin is only available intravenously",
+        "Both fluoroquinolones have identical spectra; levofloxacin is preferred for CAP solely due to once-daily dosing convenience"
+      ],
+      "answer": "Levofloxacin is a 'respiratory quinolone' with enhanced activity against S. pneumoniae and atypical organisms; ciprofloxacin has poor pneumococcal coverage",
+      "explanation": "Levofloxacin and moxifloxacin are classified as 'respiratory fluoroquinolones' because of their enhanced gram-positive activity, particularly against Streptococcus pneumoniae (including penicillin-resistant strains), as well as excellent activity against atypical pathogens (Mycoplasma, Chlamydophila, Legionella). Ciprofloxacin has predominantly gram-negative and anti-pseudomonal coverage but POOR activity against S. pneumoniae — using ciprofloxacin for empiric CAP treatment is considered a medication error and is associated with treatment failure. This is a critical NCLEX pharmacology distinction. Respiratory fluoroquinolones are reserved for patients with comorbidities or when beta-lactams are contraindicated, to preserve their efficacy and prevent resistance development."
+    },
+    {
+      "id": "cap-q7",
+      "text": "A patient with CAP has an SpO₂ of 89% on room air. The nurse applies 2 L/min via nasal cannula and SpO₂ rises to 91%. What is the target SpO₂ for a CAP patient without COPD, and what is the nurse's next action?",
+      "type": "multiple-choice",
+      "options": [
+        "Target SpO₂ is ≥88%; 91% is acceptable; document and continue monitoring",
+        "Target SpO₂ is ≥92%; 91% is below target; increase oxygen flow rate or upgrade delivery device",
+        "Target SpO₂ is 100%; escalate immediately to non-rebreather mask at 15 L/min",
+        "Target SpO₂ is ≥95%; discontinue nasal cannula and apply Venturi mask at 24% FiO₂"
+      ],
+      "answer": "Target SpO₂ is ≥92%; 91% is below target; increase oxygen flow rate or upgrade delivery device",
+      "explanation": "For CAP patients without chronic hypoxemic conditions (e.g., COPD), the target SpO₂ is ≥92% (some guidelines recommend ≥94%). The patient at 91% on 2 L/min nasal cannula has not achieved the target. The nurse should titrate oxygen delivery in a stepwise escalation: Nasal cannula (NC): up to 6 L/min (~44% FiO₂) → Simple face mask: 5–10 L/min (~35–50% FiO₂) → Non-rebreather mask (NRB): 10–15 L/min (~90–95% FiO₂) → High-flow nasal cannula (HFNC): up to 60 L/min at 100% FiO₂ → Intubation/mechanical ventilation. For COPD/hypercapnic patients, target SpO₂ is 88–92% to prevent suppression of hypoxic drive. The nurse must reassess SpO₂ after each oxygen change and notify the provider if targets are not met."
+    },
+    {
+      "id": "cap-q8",
+      "text": "A nurse is teaching a patient with CAP how to use an incentive spirometer (IS). Which instruction best reflects correct technique, frequency, and therapeutic purpose?",
+      "type": "multiple-choice",
+      "options": [
+        "Breathe in and out rapidly through the mouthpiece 10 times per hour to mobilize secretions",
+        "Inhale slowly and deeply through the mouthpiece to raise the piston, hold at peak inhalation for 2–3 seconds, then exhale; perform 10 repetitions every 1–2 hours while awake",
+        "Exhale forcefully through the mouthpiece to push the piston upward; repeat every 4 hours",
+        "Use the IS only once in the morning; over-use can worsen dyspnea and fatigue"
+      ],
+      "answer": "Inhale slowly and deeply through the mouthpiece to raise the piston, hold at peak inhalation for 2–3 seconds, then exhale; perform 10 repetitions every 1–2 hours while awake",
+      "explanation": "Incentive spirometry promotes sustained maximal inspiration (SMI), which re-inflates collapsed alveoli and prevents or reverses atelectasis — a common complication of pneumonia, prolonged bed rest, and postoperative states. Correct technique: (1) sit upright or HOB 45°; (2) exhale normally; (3) create a seal around the mouthpiece; (4) inhale slowly and as deeply as possible to raise the piston to the prescribed level; (5) hold for 2–3 seconds at peak inhalation to allow full alveolar recruitment; (6) remove mouthpiece and exhale normally; (7) breathe normally 1–2 breaths between repetitions. Perform 10 repetitions every 1–2 hours while awake. The IS is an inspiratory device — it does NOT work by exhaling; exhalation maneuvers do not generate the therapeutic benefit. Goal volume should be set at 75–100% of predicted normal."
+    },
+    {
+      "id": "cap-q9",
+      "text": "A patient with right-lower-lobe CAP is experiencing significant dyspnea and an SpO₂ of 90%. Which positioning strategy is most appropriate as the nurse's initial intervention?",
+      "type": "multiple-choice",
+      "options": [
+        "Lateral decubitus with the RIGHT (affected) side down to maximize blood flow to the consolidated lung",
+        "Semi-Fowler's position (HOB 30–45°) to improve diaphragm excursion and reduce work of breathing",
+        "Supine flat position to prevent orthostatic hypotension associated with fever",
+        "Immediate prone positioning, as it is the standard for all CAP patients with hypoxia"
+      ],
+      "answer": "Semi-Fowler's position (HOB 30–45°) to improve diaphragm excursion and reduce work of breathing",
+      "explanation": "Semi-Fowler's position (head of bed elevated 30–45°) is the first-line positioning intervention for CAP patients with dyspnea and hypoxia because: (1) gravity pulls abdominal contents away from the diaphragm, improving diaphragmatic excursion and tidal volume; (2) reduces work of breathing; (3) lowers aspiration risk. The 'good lung down' principle (lateral decubitus with the healthy lung dependent) can improve V/Q matching in selected unilateral pneumonia patients by directing blood flow to the better-ventilated healthy lung, but semi-Fowler's is the foundational first step. Prone positioning (prone ventilation) is reserved for severe ARDS with PaO₂/FiO₂ ratio <150 mmHg despite maximal conventional support — not for routine CAP. Supine flat positioning restricts diaphragm movement and increases aspiration risk."
+    },
+    {
+      "id": "cap-q10",
+      "text": "A patient with CAP develops worsening pleuritic chest pain, fever persisting despite 48 hours of appropriate antibiotics, and a new pleural effusion on chest X-ray. Which complication should the nurse suspect, and what is the priority nursing action?",
+      "type": "multiple-choice",
+      "options": [
+        "Pulmonary embolism from immobility; prepare for CT pulmonary angiography",
+        "Parapneumonic effusion progressing to empyema; notify the provider and prepare for possible thoracentesis",
+        "Spontaneous pneumothorax from vigorous coughing; prepare for emergent chest tube insertion",
+        "Drug fever from antibiotics; discontinue current antibiotic regimen immediately"
+      ],
+      "answer": "Parapneumonic effusion progressing to empyema; notify the provider and prepare for possible thoracentesis",
+      "explanation": "Parapneumonic effusion (PPE) is the most common complication of bacterial pneumonia, occurring when inflammatory exudate tracks into the pleural space. Persistent fever and leukocytosis despite appropriate antibiotics, combined with a growing or loculated pleural effusion, suggests progression to empyema (frank pus in the pleural space). Other recognized CAP complications include: lung abscess (cavity on CXR with air-fluid level, foul sputum), bacteremia/sepsis (positive blood cultures, hemodynamic instability), and ARDS (bilateral infiltrates, refractory hypoxemia, PaO₂/FiO₂ <300). The nurse should notify the provider, prepare for diagnostic ± therapeutic thoracentesis, obtain pleural fluid analysis (pH <7.2, glucose <60, LDH >1000, positive Gram stain/culture = exudative/complicated PPE requiring drainage), and monitor respiratory status closely."
+    },
+    {
+      "id": "cap-q11",
+      "text": "A 72-year-old patient asks the nurse about pneumococcal vaccination. The patient has never received a pneumococcal vaccine. Which vaccination strategy is currently recommended by ACIP for vaccine-naive adults ≥65 years?",
+      "type": "multiple-choice",
+      "options": [
+        "PPSV23 alone is preferred for all adults age 65 and older",
+        "PCV15 followed by PPSV23 at least one year later, OR PCV20 alone as a single dose",
+        "PCV20 followed by PPSV23 four weeks later for maximum combined serotype coverage",
+        "No pneumococcal vaccine is needed if the annual influenza vaccine has been received"
+      ],
+      "answer": "PCV15 followed by PPSV23 at least one year later, OR PCV20 alone as a single dose",
+      "explanation": "Current ACIP recommendations (2023) for pneumococcal-vaccine-naive adults ≥65 years: (1) PCV20 alone (single dose — covers 20 serotypes responsible for most invasive pneumococcal disease), OR (2) PCV15 followed by PPSV23 at least 12 months later (or ≥8 weeks later for immunocompromised patients). PCV13 is no longer routinely recommended for adults ≥65 since PCV15 and PCV20 replaced it. PPSV23 alone (without conjugate vaccine) is outdated guidance and not optimal. Pneumococcal vaccines do NOT provide cross-protection against influenza; both vaccine types are recommended. Key pharmacology distinction: Conjugate vaccines (PCV) generate T-cell dependent immunologic memory; polysaccharide vaccines (PPSV23) do not generate memory cells."
+    },
+    {
+      "id": "cap-q12",
+      "text": "A nurse is providing discharge education about CAP prevention. The patient asks how the annual influenza vaccine relates to CAP prevention. What is the most accurate response?",
+      "type": "multiple-choice",
+      "options": [
+        "Influenza vaccine directly prevents all types of pneumonia, including all bacterial CAP",
+        "Influenza vaccine prevents influenza infection, which reduces the risk of secondary bacterial CAP that frequently complicates influenza",
+        "Influenza vaccine and pneumococcal vaccine cannot be given at the same visit due to interaction risk",
+        "Influenza vaccine is only recommended for patients over age 65 with underlying lung disease"
+      ],
+      "answer": "Influenza vaccine prevents influenza infection, which reduces the risk of secondary bacterial CAP that frequently complicates influenza",
+      "explanation": "Influenza infection damages respiratory epithelium and impairs mucociliary clearance and innate immune defense, creating an ideal environment for secondary bacterial superinfection. The most common secondary bacterial pneumonia pathogens after influenza include: S. pneumoniae, S. aureus (including MRSA), H. influenzae, and S. pyogenes. Secondary bacterial pneumonia is a leading cause of influenza-related morbidity and mortality. The influenza vaccine prevents influenza infection, thereby indirectly reducing the risk of secondary bacterial CAP. Annual influenza vaccine is recommended for ALL persons ≥6 months of age. Influenza and pneumococcal vaccines CAN and SHOULD be administered at the same visit when both are due (given at different anatomical sites)."
+    },
+    {
+      "id": "cap-q13",
+      "text": "A patient admitted with CAP develops worsening confusion, tachycardia (HR 118 bpm), tachypnea (RR 26 breaths/min), temperature 39.6°C, and systolic BP 94 mmHg. Which rapid bedside assessment tool should the nurse apply first to screen for sepsis?",
+      "type": "multiple-choice",
+      "options": [
+        "CURB-65 scoring tool",
+        "qSOFA (Quick Sequential Organ Failure Assessment) score",
+        "PSI/PORT Pneumonia Severity Index",
+        "Glasgow Coma Scale score alone"
+      ],
+      "answer": "qSOFA (Quick Sequential Organ Failure Assessment) score",
+      "explanation": "qSOFA (Quick SOFA) is the rapid bedside sepsis screening tool requiring NO laboratory values. It scores three criteria: (1) Altered mentation (GCS <15), (2) Respiratory rate ≥22 breaths/min, (3) Systolic BP ≤100 mmHg. A qSOFA score ≥2 is associated with high risk of organ dysfunction and poor outcomes, prompting urgent full SOFA assessment, blood cultures × 2, serum lactate, and immediate provider notification for possible sepsis bundle activation. This patient scores ≥2 (RR 26 ≥22, SBP 94 ≤100), indicating potential sepsis. SIRS criteria (temp >38°C or <36°C, HR >90, RR >20, WBC >12,000 or <4,000) are also used for initial recognition but qSOFA better predicts organ dysfunction. CURB-65 and PSI assess CAP pneumonia severity, not sepsis organ failure risk."
+    },
+    {
+      "id": "cap-q14",
+      "text": "A nurse calculates a CURB-65 score for a 70-year-old patient with CAP. The patient is confused (new), has a BUN of 26 mg/dL (urea >7 mmol/L), respiratory rate of 32 breaths/min, and blood pressure of 86/52 mmHg. What is the CURB-65 score and recommended disposition?",
+      "type": "multiple-choice",
+      "options": [
+        "Score 3 — consider short-stay observation admission; routine antibiotics",
+        "Score 4 — hospitalization warranted; assess for ICU-level care",
+        "Score 5 — maximum possible score; hospitalization mandatory with strong ICU consideration",
+        "Score 2 — outpatient treatment with 24-hour follow-up"
+      ],
+      "answer": "Score 5 — maximum possible score; hospitalization mandatory with strong ICU consideration",
+      "explanation": "CURB-65 scoring for this patient: C (Confusion — new) = 1 point; U (Urea/BUN >7 mmol/L; BUN 26 mg/dL ÷ 2.8 = ~9.3 mmol/L) = 1 point; R (Respiratory rate ≥30/min; RR 32) = 1 point; B (Blood pressure — SBP <90 or DBP ≤60; SBP 86) = 1 point; 65 (Age ≥65; age 70) = 1 point. Total = 5 points (maximum possible score). CURB-65 ≥3 indicates severe CAP with 30-day mortality of 17–40%; a score of 5 carries the highest risk category and mandates hospitalization with strong recommendation for ICU-level assessment. The patient meets all five CURB-65 criteria and will likely require ICU admission. This question reinforces careful individual factor scoring; each criterion must be assessed independently and is binary (present = 1, absent = 0)."
+    },
+    {
+      "id": "cap-q15",
+      "text": "A patient with CAP is being evaluated for hospital discharge. Which set of clinical stability criteria must be met before discharge is appropriate per IDSA/ATS guidelines?",
+      "type": "multiple-choice",
+      "options": [
+        "Chest X-ray showing complete resolution of infiltrates and WBC returned to normal limits",
+        "Temperature ≤37.8°C, HR ≤100, RR ≤24, SBP ≥90, SpO₂ ≥90% on ≤2 L/min NC or room air, tolerating oral intake and medications",
+        "Patient subjectively feeling better with no dyspnea at rest, regardless of vital sign values",
+        "Completion of a minimum 10-day full IV antibiotic course before any oral step-down"
+      ],
+      "answer": "Temperature ≤37.8°C, HR ≤100, RR ≤24, SBP ≥90, SpO₂ ≥90% on ≤2 L/min NC or room air, tolerating oral intake and medications",
+      "explanation": "IDSA/ATS clinical stability criteria for CAP discharge include ALL of the following: (1) Temperature ≤37.8°C (100°F); (2) Heart rate ≤100 bpm; (3) Respiratory rate ≤24 breaths/min; (4) Systolic BP ≥90 mmHg; (5) SpO₂ ≥90% on ≤2 L/min nasal cannula or room air; (6) Ability to tolerate oral medications and maintain oral intake; (7) Normal or return-to-baseline mental status. Chest X-ray does NOT need to be clear at discharge — radiographic resolution lags clinical improvement by 4–6 weeks (or longer in the elderly) and is not a discharge criterion. IV-to-oral antibiotic switch can occur once clinical stability is achieved — no mandatory minimum IV duration is required. Typical total CAP antibiotic duration is 5–7 days for non-severe cases."
+    },
+    {
+      "id": "cap-q16",
+      "text": "A 22-year-old college student presents with 10 days of gradual onset dry cough, low-grade fever (38.1°C), headache, and fatigue. She reports attending classes throughout her illness. Chest X-ray shows bilateral patchy infiltrates greater than expected from her mild symptoms. Which pathogen and treatment are most appropriate?",
+      "type": "multiple-choice",
+      "options": [
+        "Streptococcus pneumoniae — treat with amoxicillin 1 g TID",
+        "Legionella pneumophila — treat with levofloxacin and send urinary antigen",
+        "Mycoplasma pneumoniae ('walking pneumonia') — treat with azithromycin or doxycycline",
+        "Klebsiella pneumoniae — treat with IV ceftriaxone plus metronidazole"
+      ],
+      "answer": "Mycoplasma pneumoniae ('walking pneumonia') — treat with azithromycin or doxycycline",
+      "explanation": "Mycoplasma pneumoniae is the classic cause of 'atypical' or 'walking pneumonia' — named because patients appear well enough to continue daily activities (attending class, walking) despite X-ray infiltrates. Key distinguishing features: young adults 15–35 years; gradual insidious onset over 1–3 weeks; dry, persistent, paroxysmal cough; headache, malaise, low-grade fever; X-ray changes disproportionately worse than clinical presentation; positive cold agglutinins in ~50% of cases. M. pneumoniae LACKS A CELL WALL, so beta-lactam antibiotics (amoxicillin, ceftriaxone) are completely INEFFECTIVE. First-line treatment: azithromycin (macrolide — 5-day course) or doxycycline (7–14 days); respiratory fluoroquinolones are alternatives. This is a high-yield pharmacology-clinical integration NCLEX question."
+    },
+    {
+      "id": "cap-q17",
+      "text": "A patient admitted with CAP develops hyponatremia (Na 127 mEq/L), diarrhea, and relative bradycardia (HR 58 bpm despite fever of 39.2°C). Legionella pneumophila is suspected. Which diagnostic test most rapidly confirms Legionella, and why are beta-lactam antibiotics ineffective?",
+      "type": "multiple-choice",
+      "options": [
+        "Sputum Gram stain (gram-negative rods); beta-lactams ineffective due to beta-lactamase production",
+        "Urinary antigen test (rapid, detects L. pneumophila serogroup 1); beta-lactams ineffective because Legionella is an intracellular organism",
+        "Serum cold agglutinin titer; beta-lactams ineffective because Legionella lacks a cell wall",
+        "Blood culture on standard blood agar; beta-lactams ineffective due to intrinsic drug efflux pumps"
+      ],
+      "answer": "Urinary antigen test (rapid, detects L. pneumophila serogroup 1); beta-lactams ineffective because Legionella is an intracellular organism",
+      "explanation": "Legionella pneumophila urinary antigen test (UAT): sensitivity ~70–90% for serogroup 1 (the most common cause), specificity >99%, results available within hours. Sputum cultures require special BCYE (buffered charcoal yeast extract) agar and take 3–7 days. Legionella CANNOT be seen on routine Gram stain (organism requires specialized staining). Beta-lactam antibiotics are ineffective against Legionella because it is an INTRACELLULAR pathogen — it survives and replicates inside alveolar macrophages. Beta-lactams cannot penetrate cells to reach the organism. Treatment requires antibiotics with excellent intracellular penetration: respiratory fluoroquinolones (levofloxacin — preferred for severe Legionella) or azithromycin. Classic Legionella triad on NCLEX: hyponatremia + GI symptoms + CAP = test for Legionella UAT."
+    },
+    {
+      "id": "cap-q18",
+      "text": "True or False: Applying a chest binder (a wide elastic wrap worn around the thorax) is an appropriate nursing intervention to relieve pleuritic chest pain in a patient recovering from CAP.",
+      "type": "true-false",
+      "options": ["True", "False"],
+      "answer": "False",
+      "explanation": "FALSE. Chest binders are CONTRAINDICATED in CAP and respiratory infections. A chest binder restricts chest wall expansion and diaphragmatic descent, reduces tidal volume and vital capacity, promotes progressive atelectasis, and worsens hypoxia — directly opposing the treatment goals in a patient compromised by pneumonia. The appropriate nursing intervention for pleuritic chest pain is SPLINTING: the patient holds a pillow firmly against the chest wall during coughing or deep breathing to provide support and reduce splinting from pain, WITHOUT restricting chest expansion. Analgesics (NSAIDs, acetaminophen, or low-dose opioids for severe pain) may also be used to enable effective coughing and deep breathing. This is a classic NCLEX distractor — students incorrectly choose binders for 'comfort,' but the physiologic harm is substantial and this intervention is never appropriate for chest/respiratory conditions."
+    },
+    {
+      "id": "cap-q19",
+      "text": "A patient aspirates gastric contents after vomiting while being repositioned. Four hours later, the patient has mild tachypnea (RR 22), cough, and SpO₂ 93% on room air, but NO fever and NO purulent sputum. Chest X-ray shows bilateral patchy opacities in dependent lung zones. Which condition does this presentation most likely represent, and what is the appropriate management?",
+      "type": "multiple-choice",
+      "options": [
+        "Aspiration pneumonia — start immediate broad-spectrum antibiotics targeting anaerobes",
+        "Aspiration pneumonitis — supportive care with oxygen; monitor for secondary bacterial infection before initiating antibiotics",
+        "Community-acquired pneumonia — begin empiric antibiotics per IDSA guidelines immediately",
+        "Pulmonary edema from aspiration of fluid volume — administer IV furosemide 40 mg"
+      ],
+      "answer": "Aspiration pneumonitis — supportive care with oxygen; monitor for secondary bacterial infection before initiating antibiotics",
+      "explanation": "Aspiration pneumonitis (Mendelson syndrome) is a chemical inflammatory injury caused by aspiration of sterile gastric acid (pH <2.5). It presents rapidly (within 1–6 hours), with tachypnea, hypoxia, and bilateral dependent infiltrates, but characteristically has ABSENCE of fever and purulent sputum in the early phase. It is typically self-resolving within 24–48 hours and does NOT require routine antibiotics unless secondary bacterial infection develops (suggested by new fever, leukocytosis, or purulent sputum after 48 hours). Aspiration pneumonia (bacterial), by contrast, develops more insidiously (24–72 hours) with fever, purulent sputum, and leukocytosis, caused by aspiration of oropharyngeal bacteria (anaerobes — Bacteroides, Peptostreptococcus) in at-risk patients (impaired consciousness, poor dentition, dysphagia), and DOES require antibiotic therapy. Distinguishing the two prevents unnecessary antibiotic use."
+    },
+    {
+      "id": "cap-q20",
+      "text": "A patient with CAP has an SpO₂ of 88% on room air. Identify two priority nursing diagnoses for this patient. (List the two most appropriate NANDA-aligned nursing diagnoses for this clinical presentation.)",
+      "type": "short-answer",
+      "answer": [
+        "Impaired gas exchange related to alveolar consolidation and ventilation-perfusion mismatch",
+        "Ineffective airway clearance related to increased secretions and pleuritic pain inhibiting effective cough"
+      ],
+      "explanation": "For a CAP patient with SpO₂ 88% (significant hypoxia), the two highest-priority nursing diagnoses are: (1) Impaired Gas Exchange related to alveolar consolidation, ventilation-perfusion mismatch, and decreased oxygen diffusion — evidenced by SpO₂ 88%, dyspnea, and tachypnea. This is the TOP priority because hypoxia is immediately life-threatening. Nursing interventions: apply supplemental oxygen titrated to SpO₂ ≥92%, position HOB 45°, monitor ABGs/SpO₂ continuously, escalate oxygen delivery device as needed, notify provider if SpO₂ target not met. (2) Ineffective Airway Clearance related to increased and tenacious respiratory secretions, impaired mucociliary function, and pleuritic chest pain inhibiting forceful cough — evidenced by productive cough, crackles/rhonchi on auscultation, and fever. Nursing interventions: encourage deep breathing and coughing with splinting technique, incentive spirometry q1–2h while awake, adequate hydration (2–3 L/day unless contraindicated), nebulized treatments if ordered, chest physiotherapy. Additional applicable diagnoses include Acute Pain (pleuritic), Activity Intolerance, and Risk for Sepsis, but gas exchange and airway clearance are the priority-order top two in respiratory emergencies per Maslow's hierarchy (physiologic needs first)."
+    }
+  ]
+}
