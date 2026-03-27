@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://sagreenxyz.github.io',
-  base: '/astro2/',
+  base: '/garden/',
   output: 'static',
   integrations: [svelte(), mdx()],
   vite: {

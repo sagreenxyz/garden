@@ -1,10 +1,10 @@
-# Astro LMS
+# Garden
 
-A Learning Management System (LMS) built with [Astro.build](https://astro.build) and published on [GitHub Pages](https://pages.github.com/).
+A digital garden for nursing school, built with [Astro.build](https://astro.build) and published on [GitHub Pages](https://pages.github.com/).
 
 ## Live Site
 
-> `https://sagreenxyz.github.io/astro2/`
+> `https://sagreenxyz.github.io/garden/`
 
 ---
 
