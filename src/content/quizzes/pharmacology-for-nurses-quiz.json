@@ -1,0 +1,274 @@
+{
+  "title": "Pharmacology for Nurses — Practice Quiz",
+  "description": "NCLEX-NG formative assessment covering pharmacokinetics, drug math, major drug classes, high-alert medication safety, adverse drug reactions, and case-based medication management for BSN students.",
+  "tags": [
+    "pharmacology",
+    "drug math",
+    "medication safety",
+    "NCLEX",
+    "high-alert medications",
+    "anticoagulants",
+    "insulin",
+    "opioids",
+    "antibiotics",
+    "cardiovascular drugs",
+    "BSN"
+  ],
+  "timeLimit": 45,
+  "passingScore": 75,
+  "draft": false,
+  "questions": [
+    {
+      "id": "pharm-q1",
+      "text": "A nurse is preparing to administer oral warfarin 5 mg to a patient. The patient states they have been eating large amounts of kale, spinach, and broccoli every day this week. The nurse's best response is to:",
+      "type": "multiple-choice",
+      "options": [
+        "Administer the warfarin as ordered and document the patient's dietary history",
+        "Hold the warfarin and notify the provider, as vitamin K–rich foods will increase the INR and raise bleeding risk",
+        "Administer the warfarin as ordered and teach the patient to maintain a consistent vitamin K intake rather than eliminating these foods",
+        "Hold the warfarin until a new INR is obtained and confirm with the provider"
+      ],
+      "answer": "Administer the warfarin as ordered and teach the patient to maintain a consistent vitamin K intake rather than eliminating these foods",
+      "explanation": "Vitamin K–rich foods (leafy green vegetables) antagonize warfarin's anticoagulant effect and will lower the INR, not raise it. More importantly, the goal of dietary counseling for warfarin patients is consistency — not elimination — of vitamin K–rich foods. Abrupt changes in dietary vitamin K intake (either increasing or decreasing) destabilize INR control. The nurse should administer the warfarin as ordered, notify the provider of the dietary change so a follow-up INR can be planned, and educate the patient about maintaining consistent intake."
+    },
+    {
+      "id": "pharm-q2",
+      "text": "A nurse is preparing to administer furosemide 60 mg IV push. Available: furosemide 10 mg/mL. How many mL should the nurse administer?",
+      "type": "multiple-choice",
+      "options": [
+        "4 mL",
+        "5 mL",
+        "6 mL",
+        "10 mL"
+      ],
+      "answer": "6 mL",
+      "explanation": "Using dimensional analysis: Volume = 60 mg × (1 mL / 10 mg) = 6 mL. IV furosemide should be administered no faster than 4 mg/min to reduce the risk of ototoxicity; 60 mg should be given over at least 15 minutes."
+    },
+    {
+      "id": "pharm-q3",
+      "text": "An 80-year-old patient with a creatinine clearance of 22 mL/min is prescribed enoxaparin for VTE prophylaxis. The nurse reviews the order and notes the standard prophylactic dose is 40 mg subcut daily. What is the nurse's best action?",
+      "type": "multiple-choice",
+      "options": [
+        "Administer the 40 mg dose as ordered — enoxaparin does not require renal dose adjustment",
+        "Hold the enoxaparin and notify the provider that renal dose adjustment is required for CrCl < 30 mL/min",
+        "Administer 20 mg subcut daily based on the nurse's own calculation",
+        "Switch to unfractionated heparin subcutaneously without a provider order"
+      ],
+      "answer": "Hold the enoxaparin and notify the provider that renal dose adjustment is required for CrCl < 30 mL/min",
+      "explanation": "Enoxaparin is primarily renally eliminated. For patients with severe renal impairment (CrCl < 30 mL/min), the VTE prophylaxis dose is typically reduced to 30 mg subcut daily. At a CrCl of 22 mL/min, this patient requires a dose reduction to prevent accumulation and excessive anticoagulation with bleeding risk. The nurse should hold the medication and clarify with the provider — nurses do not independently adjust doses."
+    },
+    {
+      "id": "pharm-q4",
+      "text": "A nurse is caring for a patient who received morphine 4 mg IV for pain 30 minutes ago. On reassessment, the nurse finds: respiratory rate 8/min, SpO₂ 88%, RASS −3 (difficult to arouse). Which action is the nurse's immediate priority?",
+      "type": "multiple-choice",
+      "options": [
+        "Administer naloxone 0.4–2 mg IV and prepare to support ventilation",
+        "Decrease the supplemental oxygen to prevent over-suppression of the hypoxic drive",
+        "Obtain a stat ABG to confirm respiratory depression before intervening",
+        "Continue monitoring and reassess in 15 minutes as this is expected after IV morphine"
+      ],
+      "answer": "Administer naloxone 0.4–2 mg IV and prepare to support ventilation",
+      "explanation": "This patient is exhibiting classic signs of opioid-induced respiratory depression: RR < 10/min, SpO₂ < 90%, and significant sedation (RASS −3). This is a medical emergency requiring immediate action. The nurse should call for help, administer naloxone 0.4–2 mg IV (titrating to adequate respiratory rate while preserving analgesia), and be prepared to support ventilation with a bag-valve mask. Because morphine's half-life may exceed naloxone's duration of effect (~30–90 min), continuous monitoring for renarcotization is essential and repeat naloxone doses may be needed."
+    },
+    {
+      "id": "pharm-q5",
+      "text": "A patient is ordered heparin 1,200 units/hour IV continuous infusion. The pharmacy delivers heparin 25,000 units in 500 mL NS. What infusion rate should the nurse program into the IV pump?",
+      "type": "multiple-choice",
+      "options": [
+        "18 mL/hour",
+        "20 mL/hour",
+        "24 mL/hour",
+        "30 mL/hour"
+      ],
+      "answer": "24 mL/hour",
+      "explanation": "Using dimensional analysis: Rate = 1,200 units/hour × (500 mL / 25,000 units) = 1,200 × 0.02 = 24 mL/hour. Heparin is a high-alert medication that requires an independent double-check of the pump rate and concentration by a second licensed nurse before initiating or changing the infusion."
+    },
+    {
+      "id": "pharm-q6",
+      "text": "A nurse is administering vancomycin 1 g IV over 60 minutes. Twenty minutes into the infusion, the patient develops diffuse facial flushing, pruritus, and a maculopapular rash across the face and upper torso. The patient denies dyspnea and has stable vital signs. The nurse's best action is to:",
+      "type": "multiple-choice",
+      "options": [
+        "Stop the infusion permanently and document a vancomycin allergy in the medical record",
+        "Stop the infusion, notify the provider, and administer diphenhydramine as ordered; plan to restart the infusion at a slower rate after premedication",
+        "Administer epinephrine 0.3 mg IM immediately — this is anaphylaxis",
+        "Continue the infusion at the same rate since the patient has no dyspnea"
+      ],
+      "answer": "Stop the infusion, notify the provider, and administer diphenhydramine as ordered; plan to restart the infusion at a slower rate after premedication",
+      "explanation": "This presentation is consistent with Red Man Syndrome (RMS), a rate-dependent infusion reaction caused by vancomycin-induced mast cell degranulation — not an IgE-mediated allergy. RMS is characterized by flushing, erythema, and pruritus of the face, neck, and upper torso and is not a true allergic reaction. Management includes stopping or slowing the infusion, administering diphenhydramine, and restarting vancomycin at a slower rate (e.g., extending the infusion time to 90–120 minutes) after premedication. RMS should not be documented as a vancomycin allergy. True anaphylaxis would include bronchospasm, hypotension, and urticaria/angioedema — these are absent here."
+    },
+    {
+      "id": "pharm-q7",
+      "text": "A nurse is preparing to administer metformin 1,000 mg PO to a patient scheduled for an abdominal CT scan with IV contrast in two hours. What is the nurse's priority action?",
+      "type": "multiple-choice",
+      "options": [
+        "Administer the metformin as scheduled — IV contrast does not interact with metformin",
+        "Hold the metformin and notify the provider and radiology department",
+        "Administer the metformin after the CT scan when contrast has cleared",
+        "Reduce the dose to 500 mg and administer before the scan"
+      ],
+      "answer": "Hold the metformin and notify the provider and radiology department",
+      "explanation": "Iodinated IV contrast can cause contrast-induced nephropathy (CIN), which impairs renal clearance of metformin. Metformin accumulation in the setting of renal impairment can cause life-threatening lactic acidosis. Current guidelines recommend withholding metformin at the time of IV contrast administration in patients with eGFR < 60 mL/min and for 48 hours afterward. The nurse should hold the scheduled dose, notify the provider and radiology, and plan to reassess renal function before resuming metformin."
+    },
+    {
+      "id": "pharm-q8",
+      "text": "A patient is receiving amiodarone 200 mg PO daily for maintenance of sinus rhythm after atrial fibrillation. Which of the following assessment findings would the nurse prioritize as a potential adverse effect requiring provider notification?",
+      "type": "multiple-choice",
+      "options": [
+        "Patient reports mild constipation",
+        "Patient reports a new dry cough that has developed over the past two weeks",
+        "Patient's heart rate is 62 bpm",
+        "Patient's blood pressure is 112/70 mmHg"
+      ],
+      "answer": "Patient reports a new dry cough that has developed over the past two weeks",
+      "explanation": "Amiodarone is associated with a serious and potentially fatal adverse effect: pulmonary toxicity (amiodarone-induced pulmonary toxicity, AIPT), which may present as a new or worsening cough, dyspnea, chest pain, and radiographic infiltrates. AIPT can be insidious in onset and is estimated to occur in 1–5% of patients on long-term amiodarone. A new dry cough in a patient on amiodarone should be promptly evaluated with a chest X-ray and pulmonary function tests. A heart rate of 62 bpm and BP of 112/70 mmHg are expected in a patient on amiodarone (a Class III antiarrhythmic that also has Class I, II, and IV properties). A dry cough is the classic side effect of ACE inhibitors, but for an amiodarone patient, pulmonary toxicity must be ruled out first."
+    },
+    {
+      "id": "pharm-q9",
+      "text": "The nurse is caring for a patient who weighs 90 kg and is receiving a norepinephrine infusion at 8 mcg/min via an infusion pump. The standard pharmacy concentration is 4 mg norepinephrine in 250 mL D5W. The nurse needs to convert this to mL/hour for pump programming. What is the correct rate?",
+      "type": "multiple-choice",
+      "options": [
+        "22 mL/hour",
+        "28 mL/hour",
+        "30 mL/hour",
+        "16 mL/hour"
+      ],
+      "answer": "30 mL/hour",
+      "explanation": "Step 1: Determine concentration. 4 mg × 1,000 mcg/mg = 4,000 mcg in 250 mL = 16 mcg/mL. Step 2: Convert mcg/min to mL/hr. Rate = 8 mcg/min × (60 min/hr) ÷ 16 mcg/mL = 480 mcg/hr ÷ 16 mcg/mL = 30 mL/hr. Note: This norepinephrine dose is not weight-based — the ordered dose is 8 mcg/min flat, not per kg."
+    },
+    {
+      "id": "pharm-q10",
+      "text": "A patient is prescribed ciprofloxacin 500 mg PO BID for a urinary tract infection. Which of the following patient education points is the highest priority for the nurse to include?",
+      "type": "multiple-choice",
+      "options": [
+        "Take ciprofloxacin with a full glass of milk to reduce GI upset",
+        "Report any tendon pain, swelling, or rupture — especially of the Achilles tendon — and stop the medication immediately",
+        "Ciprofloxacin can be safely taken with calcium supplements, antacids, and iron tablets at any time of day",
+        "Stop taking the medication once symptoms resolve, even if the full course is not complete"
+      ],
+      "answer": "Report any tendon pain, swelling, or rupture — especially of the Achilles tendon — and stop the medication immediately",
+      "explanation": "Fluoroquinolones (including ciprofloxacin) carry an FDA black box warning for tendinitis and tendon rupture, peripheral neuropathy, and CNS effects. Achilles tendon rupture is the most serious musculoskeletal adverse effect and can occur during or up to several months after completing therapy. Patients should be instructed to stop ciprofloxacin and contact their provider immediately if they develop tendon pain or swelling. Additionally, dairy products, calcium supplements, antacids, and iron should be separated from ciprofloxacin by at least 2 hours (fluoroquinolones chelate divalent cations), and patients should complete the full course to prevent antibiotic resistance."
+    },
+    {
+      "id": "pharm-q11",
+      "text": "True or false: When administering subcutaneous enoxaparin (Lovenox), the nurse should aspirate the syringe before injecting to confirm the needle is not in a blood vessel.",
+      "type": "true-false",
+      "options": ["True", "False"],
+      "answer": "False",
+      "explanation": "Aspiration is NOT recommended for subcutaneous enoxaparin or heparin injections. Aspiration before subcut injection of anticoagulants does not reliably confirm or deny intravascular placement and may cause tissue trauma, hematoma formation, and bruising at the injection site. Current evidence-based technique for LMWH/heparin subcut injections: pinch a fold of skin, insert at 90° angle, inject without aspiration, withdraw needle, and apply gentle pressure — do not rub the site."
+    },
+    {
+      "id": "pharm-q12",
+      "text": "A patient with chronic obstructive pulmonary disease (COPD) is prescribed ipratropium bromide 0.5 mg via nebulizer. The nurse knows that which of the following conditions in this patient's history requires special monitoring during therapy?",
+      "type": "multiple-choice",
+      "options": [
+        "History of seasonal allergies",
+        "Benign prostatic hyperplasia (BPH) and narrow-angle glaucoma",
+        "History of hypertension currently well controlled on amlodipine",
+        "Mild renal insufficiency with eGFR of 55 mL/min"
+      ],
+      "answer": "Benign prostatic hyperplasia (BPH) and narrow-angle glaucoma",
+      "explanation": "Ipratropium is an anticholinergic (antimuscarinic) agent. Anticholinergics block muscarinic receptors systemically, which can worsen urinary retention in patients with BPH (urinary urgency, incomplete bladder emptying) and precipitate acute angle-closure glaucoma in patients with narrow-angle glaucoma (by causing mydriasis that blocks aqueous humor drainage). The nurse should assess urinary symptoms before and after therapy and instruct the patient to avoid contact of the nebulizer mist with the eyes. Seasonal allergies, hypertension on amlodipine, and mild CKD do not significantly affect ipratropium safety."
+    },
+    {
+      "id": "pharm-q13",
+      "text": "A nurse is reviewing morning laboratory values for a patient on digoxin 0.25 mg PO daily for heart failure with reduced ejection fraction. The results show: Na⁺ 138, K⁺ 3.0 mEq/L, Mg²⁺ 1.4 mg/dL, digoxin level 1.8 ng/mL. The patient reports new nausea, and assessment reveals a heart rate of 52 bpm. What is the nurse's priority action?",
+      "type": "multiple-choice",
+      "options": [
+        "Administer the digoxin as scheduled since the level is within the therapeutic range of 0.5–2.0 ng/mL",
+        "Hold the digoxin, notify the provider, and report the hypokalemia, hypomagnesemia, bradycardia, and GI symptoms",
+        "Administer potassium chloride 40 mEq PO and then give the digoxin",
+        "Obtain a 12-lead ECG and then administer the digoxin if no arrhythmia is detected"
+      ],
+      "answer": "Hold the digoxin, notify the provider, and report the hypokalemia, hypomagnesemia, bradycardia, and GI symptoms",
+      "explanation": "Although the digoxin level of 1.8 ng/mL is technically within the therapeutic range, digoxin toxicity is a clinical diagnosis — not purely a laboratory one. Several findings strongly suggest digitalis toxicity: bradycardia (HR 52 bpm), new nausea (a classic GI symptom of toxicity), hypokalemia (K⁺ 3.0 mEq/L — hypokalemia potentiates digoxin toxicity by increasing drug binding to Na⁺/K⁺-ATPase), and hypomagnesemia. The nurse should hold the dose, notify the provider with a complete SBAR report, obtain an ECG, and anticipate orders for electrolyte replacement and possible Digibind (digoxin immune Fab) if toxicity worsens."
+    },
+    {
+      "id": "pharm-q14",
+      "text": "A nurse is preparing to administer a dose of IV insulin regular 10 units via a dedicated IV line. Available is a 1:1 concentration (1 unit/mL). Which of the following actions reflects evidence-based safe practice before administration?",
+      "type": "multiple-choice",
+      "options": [
+        "Administer after confirming blood glucose is above 200 mg/dL",
+        "Ensure an independent double-check of the insulin type, dose, and concentration has been completed by a second licensed nurse",
+        "Document the administration before drawing up the dose to save time during a busy shift",
+        "Prepare the insulin in the same syringe as the patient's IV fluids to simplify administration"
+      ],
+      "answer": "Ensure an independent double-check of the insulin type, dose, and concentration has been completed by a second licensed nurse",
+      "explanation": "Insulin is a high-alert medication. An independent double-check — where a second nurse independently verifies the insulin type (regular insulin vs. other types), dose, concentration, patient identity, and route — is required before IV insulin administration in virtually all clinical settings. Pre-charting (documenting before administration) is an error-prone practice that can document medications never given. Insulin must never be mixed in IV bags unless specifically formulated and verified with pharmacy. The nurse should not predetermine the blood glucose threshold for administration without specific provider orders."
+    },
+    {
+      "id": "pharm-q15",
+      "text": "A patient is starting linezolid for a vancomycin-resistant Enterococcus (VRE) infection. The patient's home medication list includes sertraline 100 mg PO daily (SSRI), tramadol 50 mg PO every 6 hours PRN (weak opioid + SNRI activity), and metoprolol 25 mg PO BID. Which drug interaction requires the most urgent provider notification before starting linezolid?",
+      "type": "multiple-choice",
+      "options": [
+        "Linezolid and metoprolol — risk of severe bradycardia",
+        "Linezolid and sertraline — risk of serotonin syndrome due to linezolid's MAOI activity",
+        "Linezolid and tramadol — risk of increased tramadol clearance leading to under-treatment",
+        "Linezolid and metoprolol — risk of hypertensive crisis"
+      ],
+      "answer": "Linezolid and sertraline — risk of serotonin syndrome due to linezolid's MAOI activity",
+      "explanation": "Linezolid is a monoamine oxidase inhibitor (MAOI) — a property related to its antibacterial mechanism. When combined with serotonergic drugs such as SSRIs (sertraline) and serotonin-norepinephrine reuptake inhibitors, linezolid can precipitate life-threatening serotonin syndrome, characterized by agitation, tremor, myoclonus, hyperthermia, tachycardia, and autonomic instability. The FDA has issued a drug safety communication warning about this interaction. Additionally, tramadol has serotonergic activity (SNRI-like effect) and would compound the risk. The provider must be notified immediately, and the team should consider whether sertraline and tramadol can be safely held or replaced, or whether an alternative anti-infective should be used."
+    },
+    {
+      "id": "pharm-q16",
+      "text": "A patient is prescribed phenytoin 300 mg PO daily for seizure prophylaxis. The nurse is reviewing the morning labs and notes a phenytoin level of 22 mcg/mL (therapeutic range: 10–20 mcg/mL). The patient's albumin is 2.1 g/dL (normal: 3.5–5.0 g/dL). What is the nurse's best interpretation of this result?",
+      "type": "multiple-choice",
+      "options": [
+        "The level is toxic and the nurse should hold phenytoin and notify the provider immediately",
+        "The level appears elevated but likely represents a normal free (unbound) phenytoin level given the patient's hypoalbuminemia — consult the provider for a free phenytoin level",
+        "The level is only slightly above the upper limit; administer the dose and recheck in 24 hours",
+        "Phenytoin levels are not affected by albumin; this value is accurate and represents true toxicity"
+      ],
+      "answer": "The level appears elevated but likely represents a normal free (unbound) phenytoin level given the patient's hypoalbuminemia — consult the provider for a free phenytoin level",
+      "explanation": "Phenytoin is highly protein-bound (~90%). Standard phenytoin levels measure total drug (bound + free), but only the unbound (free) fraction is pharmacologically active. In patients with hypoalbuminemia, less drug is bound, meaning more is pharmacologically active — so the total level underestimates the effective drug exposure. The Sheiner-Tozer equation can be used to correct the total level for albumin, or a free phenytoin level (therapeutic range 1–2 mcg/mL) should be ordered. The nurse should notify the provider, request a free phenytoin level, and assess the patient for signs of phenytoin toxicity (nystagmus, ataxia, diplopia, slurred speech) before administering the next dose."
+    },
+    {
+      "id": "pharm-q17",
+      "text": "The nurse is preparing to administer acetaminophen 1,000 mg PO to a patient who also received acetaminophen 500 mg as part of a hydrocodone/acetaminophen (Vicodin) tablet 2 hours ago, and has a scheduled dose of acetaminophen 650 mg IV infusing via a piggyback ordered for tonight's temperature. How many total mg of acetaminophen will this patient have received within a 24-hour window if all doses are given as ordered?",
+      "type": "short-answer",
+      "answer": [
+        "The nurse should recognize that the patient is receiving acetaminophen from multiple sources and calculate the total: 500 mg (Vicodin) + 1,000 mg (scheduled PO) + 650 mg (IV) = 2,150 mg in a partial day. The nurse must review all 24 hours of scheduled doses to ensure the total does not exceed 4,000 mg per day in a healthy adult (or 2,000 mg in a patient with liver disease or chronic alcohol use) and notify the provider if duplication is detected.",
+        "The three mentioned doses total 2,150 mg. However, the nurse cannot determine the full 24-hour total from the information given without reviewing the complete MAR. The priority nursing action is to perform a complete medication reconciliation to identify all acetaminophen sources, calculate the 24-hour total, and notify the provider if the total approaches or exceeds the maximum safe daily dose."
+      ],
+      "explanation": "Acetaminophen toxicity is a leading cause of acute liver failure in the United States, and a significant proportion of cases result from unintentional overconsumption from multiple products containing acetaminophen. Combination opioid products (Vicodin, Percocet, Tylenol with Codeine), OTC cold and flu medications, and sleep aids frequently contain acetaminophen. The nurse must reconcile all acetaminophen sources — scheduled, PRN, combination products, and OTC — to ensure the 24-hour total does not exceed the maximum safe dose. Patients with liver disease, malnutrition, or chronic alcohol use should have a lower limit of 2 g/day."
+    },
+    {
+      "id": "pharm-q18",
+      "text": "A patient with a history of asthma is newly prescribed metoprolol succinate 25 mg PO daily for hypertension. The nurse should:",
+      "type": "multiple-choice",
+      "options": [
+        "Administer the medication as ordered — metoprolol is cardioselective and is safe for all asthma patients",
+        "Hold the medication and notify the provider, as all beta-blockers are absolutely contraindicated in asthma",
+        "Administer the medication as ordered but monitor closely for bronchospasm, and ensure the patient's rescue inhaler is accessible and the provider is aware of the asthma history",
+        "Substitute a calcium channel blocker for metoprolol without a provider order, as CCBs are preferred in asthma"
+      ],
+      "answer": "Administer the medication as ordered but monitor closely for bronchospasm, and ensure the patient's rescue inhaler is accessible and the provider is aware of the asthma history",
+      "explanation": "Beta-1 selective (cardioselective) beta-blockers such as metoprolol, atenolol, and bisoprolol have relatively greater affinity for β₁-adrenergic receptors (cardiac) than β₂ receptors (bronchial). At usual doses, they are generally tolerated in patients with mild-to-moderate asthma or COPD, though cardioselectivity is lost at high doses. Non-selective beta-blockers (propranolol, carvedilol) are more problematic in reactive airway disease. The provider has clearly weighed the risks and benefits. The nurse should administer the medication, ensure rescue bronchodilator availability, monitor for increased wheezing or dyspnea, and ensure the provider is aware of the asthma history if not already documented. The nurse should never substitute one drug for another without a provider order."
+    },
+    {
+      "id": "pharm-q19",
+      "text": "A nurse administers a scheduled dose of metoclopramide to a patient who has been receiving it three times daily for eight weeks for gastroparesis. On assessment, the nurse notices new repetitive, involuntary lip-smacking movements and tongue protrusion. The nurse's priority action is to:",
+      "type": "multiple-choice",
+      "options": [
+        "Document the findings and continue the medication as ordered",
+        "Hold the metoclopramide, notify the provider, and document the finding as a potential tardive dyskinesia adverse effect",
+        "Administer diphenhydramine to treat the extrapyramidal symptoms and continue metoclopramide",
+        "Reassess in 4 hours to determine if the movements are transient before notifying the provider"
+      ],
+      "answer": "Hold the metoclopramide, notify the provider, and document the finding as a potential tardive dyskinesia adverse effect",
+      "explanation": "The movements described — involuntary, repetitive lip-smacking and tongue protrusion — are classic features of tardive dyskinesia (TD), a serious and potentially irreversible movement disorder associated with dopamine antagonist medications including metoclopramide. The FDA has issued a black box warning that metoclopramide should not be used for longer than 12 weeks due to the risk of TD. The nurse's immediate priority is to hold the medication and notify the provider. Early recognition and discontinuation of the offending drug are the most important interventions, as TD may become permanent with continued exposure. This is not a situation for waiting or empirical diphenhydramine administration."
+    },
+    {
+      "id": "pharm-q20",
+      "text": "A nurse is educating a patient newly prescribed apixaban (Eliquis) for atrial fibrillation. Which of the following statements by the patient indicates a need for further teaching?",
+      "type": "multiple-choice",
+      "options": [
+        "'I should tell my dentist that I take apixaban before any dental procedures.'",
+        "'I will need to get my blood checked weekly to make sure the medication is at the right level.'",
+        "'If I notice blood in my urine or have unusual bruising, I should contact my provider.'",
+        "'I should not take ibuprofen or aspirin without talking to my provider first.'"
+      ],
+      "answer": "'I will need to get my blood checked weekly to make sure the medication is at the right level.'",
+      "explanation": "This statement indicates a need for further teaching. Unlike warfarin, direct oral anticoagulants (DOACs) such as apixaban do not require routine coagulation monitoring (INR, aPTT). There is no standard lab test that needs weekly checking to adjust the apixaban dose. This is one of the major advantages of DOACs over warfarin. The patient should, however, have periodic renal function monitoring to ensure dose adjustments are not needed. All other statements are correct: informing dental providers, reporting bleeding signs, and avoiding NSAIDs/aspirin without provider guidance are all accurate teaching points."
+    }
+  ]
+}
