@@ -59,8 +59,11 @@ const curriculumAlignment = z.object({
 const encyclopediaSection = z.enum([
   'overview',
   'pathophysiology',
+  'etiology-pathogens',
+  'risk-factors',
   'clinical-presentation',
   'diagnostic-studies',
+  'risk-stratification',
   'nursing-assessment',
   'nursing-interventions',
   'pharmacological-considerations',
