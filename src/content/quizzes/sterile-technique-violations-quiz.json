@@ -1,0 +1,312 @@
+{
+  "title": "Sterile Technique Violations — Identify the Error in a Scenario",
+  "description": "NCLEX-NG aligned formative assessment covering the identification of sterile technique violations in clinical scenarios. Based on D442 competency — spot the error format. Tests knowledge of sterile field integrity, strike-through contamination, the 1-inch border rule, sterile gloving, catheter insertion, wound dressing changes, and the 'when in doubt, throw it out' principle.",
+  "tags": [
+    "sterile-technique",
+    "aseptic-technique",
+    "infection-control",
+    "wound-care",
+    "catheterization",
+    "NCLEX",
+    "D442",
+    "patient-safety",
+    "fundamentals"
+  ],
+  "timeLimit": 30,
+  "passingScore": 80,
+  "draft": false,
+  "questions": [
+    {
+      "id": "stv-q1",
+      "text": "A nurse sets up a sterile field on the overbed table and then turns away from the field to retrieve additional supplies from the supply cart behind her. Which sterile technique principle has the nurse violated?",
+      "type": "multiple-choice",
+      "options": [
+        "The 1-inch border rule — the edge of the sterile drape was not maintained",
+        "Sterile field integrity — a sterile field must remain within the nurse's direct line of sight at all times",
+        "Strike-through contamination — turning away causes moisture transfer to the drape",
+        "The sequential gloving rule — gloves must be donned before the field is established"
+      ],
+      "answer": "Sterile field integrity — a sterile field must remain within the nurse's direct line of sight at all times",
+      "explanation": "A sterile field must remain continuously within the nurse's line of sight. Turning away from the field — even briefly — is considered a violation because any contact with the field that occurs outside the nurse's awareness cannot be assessed for contamination. The corrective action is to face the sterile field at all times; if additional supplies are needed, a second person should retrieve them or the field should be set up after all supplies have been gathered."
+    },
+    {
+      "id": "stv-q2",
+      "text": "True or False: A sterile field that has been left unattended for two minutes in an empty room with the door closed is still considered sterile and safe to use.",
+      "type": "true-false",
+      "options": ["True", "False"],
+      "answer": "False",
+      "explanation": "False. A sterile field that is left unattended — regardless of how brief the absence or how seemingly controlled the environment — is considered contaminated and must be discarded and reconstructed. There is no defined 'safe' window of unattended time. Airborne particles, environmental microorganisms, and any unobserved contact can all compromise the field. The corrective action is to always remain present once a sterile field is established, or to close and discard the setup if the nurse must leave the area."
+    },
+    {
+      "id": "stv-q3",
+      "text": "A nurse needs an item that has been placed on the far side of a sterile field. To retrieve it, the nurse reaches directly across the center of the sterile drape with a sterile-gloved hand. Which principle has the nurse violated?",
+      "type": "multiple-choice",
+      "options": [
+        "No principle is violated — sterile gloves make this action acceptable",
+        "Sterile field integrity — reaching across the field passes a non-sterile body part (the arm and sleeve) over the sterile surface, risking contamination",
+        "Strike-through contamination — perspiration from the arm can wick through the glove",
+        "The 1-inch border rule — the item on the far side is in the non-sterile border zone"
+      ],
+      "answer": "Sterile field integrity — reaching across the field passes a non-sterile body part (the arm and sleeve) over the sterile surface, risking contamination",
+      "explanation": "Even when wearing sterile gloves, reaching across a sterile field is a violation because the sleeve and non-sterile portions of the arm pass directly over the field, creating a risk of contamination by falling particles, microorganisms, or incidental contact. The corrective action is to walk around the table to access the item from the near side, or to reposition items on the field before gloving so that all needed supplies are within reach without crossing over the sterile surface."
+    },
+    {
+      "id": "stv-q4",
+      "text": "During a bedside sterile dressing change, a nurse inadvertently lowers the overbed table so that the sterile field drops below the level of the nurse's waist. Which sterile technique violation has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — table height does not affect sterility",
+        "Strike-through contamination — the lowered surface is more likely to become wet",
+        "Waist-level contamination — any sterile item or surface positioned below the waist is considered non-sterile",
+        "The 1-inch border rule — border integrity is lost when the table is lowered"
+      ],
+      "answer": "Waist-level contamination — any sterile item or surface positioned below the waist is considered non-sterile",
+      "explanation": "A foundational rule of sterile technique holds that any sterile item or field positioned below the waist is considered contaminated. The waist serves as the demarcation point because the nurse cannot maintain adequate visual surveillance of items below this level, and the risk of undetected contact with non-sterile surfaces or clothing is too high. The corrective action is to immediately raise the table to waist level or above, discard any items that fell below the waist, and reconstruct the sterile field."
+    },
+    {
+      "id": "stv-q5",
+      "text": "During a sterile procedure setup, a nurse accidentally knocks over a small basin of normal saline, soaking the sterile drape. The drape is resting on a non-absorbent plastic tray. The nurse proceeds with the procedure, believing the plastic tray prevents contamination. Which violation has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — the non-absorbent plastic tray prevents strike-through contamination",
+        "Strike-through contamination — a sterile barrier that has become wet is considered contaminated regardless of the underlying surface",
+        "The 1-inch border rule — the saline only contaminated the border zone",
+        "Sterile field integrity — the drape is contaminated only if the nurse leaves the room"
+      ],
+      "answer": "Strike-through contamination — a sterile barrier that has become wet is considered contaminated regardless of the underlying surface",
+      "explanation": "Strike-through contamination occurs when moisture soaks through a sterile barrier, providing a pathway for microorganisms to migrate from a non-sterile surface to the sterile side, or vice versa. Once the drape is wet, it is no longer a reliable sterile barrier — the nature of the underlying surface (plastic, metal, or otherwise) does not alter this determination. The corrective action is to discard the soaked drape and all items on it, dry the surface thoroughly, and reconstruct the entire sterile field."
+    },
+    {
+      "id": "stv-q6",
+      "text": "True or False: A sterile drape that has become wet during a procedure is still considered sterile if it is immediately moved to a completely dry surface.",
+      "type": "true-false",
+      "options": ["True", "False"],
+      "answer": "False",
+      "explanation": "False. Once a sterile barrier becomes wet, it is contaminated — the damage is done. Moving the wet drape to a dry surface does not restore sterility because moisture that has already wicked through the barrier has already created a pathway for microbial migration. Sterility cannot be recovered once strike-through has occurred. The corrective action is to discard the wet drape and all items that were in contact with it, and establish a new sterile field on a clean, dry surface."
+    },
+    {
+      "id": "stv-q7",
+      "text": "A nurse prepares to perform a sterile urinary catheterization at the bedside. After opening the catheter kit, the nurse unfolds the sterile drape and places it directly on the overbed table, which has a small pool of water from a recently emptied water pitcher. Which violation has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — the water is clean tap water and does not contain pathogens",
+        "The 1-inch border rule — the wet surface only compromises the border zone of the drape",
+        "Strike-through contamination — moisture on the non-sterile surface wicks upward through the drape, contaminating the sterile side",
+        "Sterile field integrity — the drape is contaminated only if the nurse turns away from it"
+      ],
+      "answer": "Strike-through contamination — moisture on the non-sterile surface wicks upward through the drape, contaminating the sterile side",
+      "explanation": "Placing a sterile drape on a wet surface is a classic strike-through contamination scenario. Even if the water itself appears clean, it provides a medium through which microorganisms from the non-sterile table surface can migrate upward through the permeable drape material and contaminate the sterile working surface. The corrective action is to dry the overbed table thoroughly before placing any sterile barrier, or to use an alternative dry surface. The contaminated drape and kit must be discarded and replaced."
+    },
+    {
+      "id": "stv-q8",
+      "text": "A nurse is setting up a sterile field for a wound irrigation procedure. After opening the sterile drape, the nurse places a pair of sterile forceps directly at the very edge of the drape, with the tips touching the outer border. Which principle has the nurse violated?",
+      "type": "multiple-choice",
+      "options": [
+        "No principle is violated — the forceps are still on the drape surface",
+        "The 1-inch (2.5 cm) border rule — the outer margin of the sterile drape is non-sterile and items placed there are considered contaminated",
+        "Strike-through contamination — metal forceps placed at the edge cause moisture transfer",
+        "Sterile field integrity — forceps must remain in the center of the field at all times"
+      ],
+      "answer": "The 1-inch (2.5 cm) border rule — the outer margin of the sterile drape is non-sterile and items placed there are considered contaminated",
+      "explanation": "The outer 1 inch (2.5 cm) border of any sterile drape is considered non-sterile. This border may have been touched during unfolding or may have contacted a non-sterile surface, and it is too proximal to environmental contamination to be considered reliably sterile. Any item placed in this border zone is considered contaminated. The corrective action is to reposition all sterile items at least 1 inch inward from the edge of the drape, and to discard or re-sterilize any item that contacted the border."
+    },
+    {
+      "id": "stv-q9",
+      "text": "During setup of a sterile field, a nurse wearing sterile gloves reaches toward the 1 cm outer margin of the drape to reposition a sterile gauze pad that has drifted too close to the edge. Which sterile technique error has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No error — the nurse is wearing sterile gloves, so contact with the border is acceptable",
+        "The 1-inch border rule — the outer 2.5 cm border is non-sterile; touching it with a sterile glove contaminates the glove",
+        "Waist-level contamination — reaching toward the border lowers the hand below the waist",
+        "Sterile field integrity — repositioning items on the field after setup is always prohibited"
+      ],
+      "answer": "The 1-inch border rule — the outer 2.5 cm border is non-sterile; touching it with a sterile glove contaminates the glove",
+      "explanation": "The 1-inch (2.5 cm) border of a sterile drape is non-sterile. If a sterile-gloved hand contacts this zone — even accidentally or in an effort to correct a problem — the glove is now considered contaminated and must be replaced before continuing. The sterile status of the glove is lost the moment it contacts the non-sterile border. The corrective action is to never touch the border zone with sterile gloves; if an item migrates toward the edge, it should be considered contaminated and removed from the field without risking glove integrity."
+    },
+    {
+      "id": "stv-q10",
+      "text": "True or False: The outer 2.5 cm (1 inch) border of a sterile drape is considered part of the sterile field and may be used to place sterile instruments.",
+      "type": "true-false",
+      "options": ["True", "False"],
+      "answer": "False",
+      "explanation": "False. The outer 2.5 cm (1 inch) border of a sterile drape is universally considered non-sterile. This margin is the zone most likely to have contacted non-sterile surfaces during unfolding and positioning, and it is too close to environmental sources of contamination to be regarded as reliably sterile. No sterile instruments or supplies should be placed within this border. Items positioned in this zone are considered contaminated and must be discarded and replaced with sterile equivalents."
+    },
+    {
+      "id": "stv-q11",
+      "text": "A nurse without sterile gloves is assisting a sterile-gloved colleague during a complex dressing change. The non-sterile nurse opens a sterile package, peels back the outer wrapper, and then hands the inner sterile wrapper — touching the inner surface — directly to the sterile-gloved nurse. Which violation has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — the sterile-gloved nurse received the item and it is now protected",
+        "The non-sterile nurse contaminated the inner surface by touching it; the sterile-gloved nurse should not accept this item",
+        "Strike-through contamination — the inner wrapper became wet during handling",
+        "The 1-inch border rule — the non-sterile nurse should have held the outer wrapper only at the border"
+      ],
+      "answer": "The non-sterile nurse contaminated the inner surface by touching it; the sterile-gloved nurse should not accept this item",
+      "explanation": "When a non-sterile person opens a sterile package to present its contents to a sterile field, only the outer wrapper may be handled. The inner surface and the item itself must never be touched by ungloved or non-sterile hands. The correct technique is to peel the outer wrapper back completely and either drop the item onto the sterile field from an appropriate distance, or present the inner wrapper without touching its interior so the sterile-gloved clinician can retrieve the item. The contaminated item must be discarded and replaced."
+    },
+    {
+      "id": "stv-q12",
+      "text": "A nurse needs to add a sterile gauze package to an established sterile field. Standing approximately one foot away, the nurse flips the package from the outer wrapper so it lands on the sterile drape — but it comes to rest with one corner of the gauze packet overlapping the 1-inch border of the drape. Which error has the nurse made?",
+      "type": "multiple-choice",
+      "options": [
+        "No error — the majority of the gauze packet is on the sterile field",
+        "The gauze packet is contaminated because any part of a sterile item that contacts or overlaps the non-sterile border renders the entire item non-sterile",
+        "Strike-through contamination — tossing items onto the field causes moisture transfer",
+        "Sterile field integrity — items must never be tossed or dropped onto a sterile field"
+      ],
+      "answer": "The gauze packet is contaminated because any part of a sterile item that contacts or overlaps the non-sterile border renders the entire item non-sterile",
+      "explanation": "If any portion of a sterile item makes contact with the non-sterile 1-inch border of the drape, the entire item is considered contaminated — contamination is not limited to the corner that touched the border. The principle of sterile technique does not allow for 'partial contamination.' The corrective action is to remove the contaminated gauze from the field without dragging it across the sterile surface, discard it, and add a new sterile gauze packet using proper technique (presenting it low over the field and releasing it so it falls only within the sterile zone)."
+    },
+    {
+      "id": "stv-q13",
+      "text": "During setup for a sterile irrigation procedure, a nurse pours sterile normal saline from a large bottle into a sterile basin. While pouring, the lip of the bottle makes brief contact with the rim of the sterile basin. Which violation has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — the saline is sterile, so contact between the bottle and basin is acceptable",
+        "The bottle lip is considered non-sterile; contact between it and the sterile basin has contaminated the basin and its contents",
+        "Strike-through contamination — the poured saline soaked through the drape below the basin",
+        "The 1-inch border rule — the bottle should be held over the border zone when pouring"
+      ],
+      "answer": "The bottle lip is considered non-sterile; contact between it and the sterile basin has contaminated the basin and its contents",
+      "explanation": "Once a sterile solution bottle has been opened, the outer surface of the bottle — including the bottle lip — is considered non-sterile. Contact between the non-sterile bottle lip and the sterile basin transfers contamination to the basin and its contents. Correct technique requires holding the bottle several inches above the basin without touching it, and pouring in a slow, controlled stream to prevent splashing. The corrective action is to discard the contaminated saline and basin and repeat the pour with a new sterile basin, maintaining adequate clearance between the bottle and the basin."
+    },
+    {
+      "id": "stv-q14",
+      "text": "A nurse is applying sterile gloves using the open-gloving technique. After donning the first (dominant-hand) glove using the bare non-dominant hand, the nurse picks up the second glove by grasping its outer surface with the bare non-dominant hand to pull it on. Which violation has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — the bare hand may touch the exterior of the glove as long as it does not touch the interior",
+        "The bare hand has contaminated the outer surface of the second glove by direct contact; the glove is no longer sterile",
+        "Strike-through contamination — perspiration from the bare hand wicks through the glove material",
+        "No violation — the outer surface of a sterile glove is non-sterile by convention"
+      ],
+      "answer": "The bare hand has contaminated the outer surface of the second glove by direct contact; the glove is no longer sterile",
+      "explanation": "During open-gloving technique, the bare (ungloved) hand may only touch the inner cuffed surface of the first glove (the side that will contact the nurse's skin). When donning the second glove, the already-gloved dominant hand must be used to slide fingers under the cuff of the second glove and pull it on, keeping the bare non-dominant hand from ever touching the outer surface of either glove. Touching the outer surface of the second glove with the bare hand contaminates it. The corrective action is to discard both gloves and restart the gloving procedure."
+    },
+    {
+      "id": "stv-q15",
+      "text": "True or False: During the closed-gloving technique, the nurse's bare hands never directly contact the outer (sterile) surface of the sterile gloves.",
+      "type": "true-false",
+      "options": ["True", "False"],
+      "answer": "True",
+      "explanation": "True. Closed gloving is specifically designed so that the nurse's bare hands remain entirely within the sleeves of a sterile gown throughout the gloving process. The gloves are manipulated through the gown sleeve fabric, ensuring that bare skin never contacts the outer sterile surface of either glove. This technique is particularly used in the operating room setting. It provides a higher margin of safety than open gloving because the risk of inadvertent bare-hand contact with the glove exterior is eliminated by design."
+    },
+    {
+      "id": "stv-q16",
+      "text": "A nurse has just finished donning sterile gloves in preparation for a catheter insertion. Before approaching the patient, the nurse realizes her eyeglasses have slipped down her nose and uses a sterile-gloved finger to push them back up. Which violation has the nurse committed?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — the nurse touched only her own face, not the sterile field",
+        "The sterile gloves are now contaminated because the nurse touched a non-sterile surface (her face and glasses) with the sterile gloves",
+        "The 1-inch border rule — the nurse should have touched only the frame of the glasses, not the lenses",
+        "Strike-through contamination — facial oils transferred through the glove material"
+      ],
+      "answer": "The sterile gloves are now contaminated because the nurse touched a non-sterile surface (her face and glasses) with the sterile gloves",
+      "explanation": "Once sterile gloves are donned, the outer surface must only contact sterile items or surfaces. The nurse's face, eyeglasses, hair, and clothing are all non-sterile. Touching any of these surfaces — even unintentionally — immediately contaminates the gloves. The corrective action is to remove and discard the contaminated gloves, perform hand hygiene, and don a new pair of sterile gloves before proceeding. To prevent this situation, nurses should ensure eyeglasses are securely fitted and adjust them before donning sterile gloves."
+    },
+    {
+      "id": "stv-q17",
+      "text": "During a female urinary catheterization, a nurse cleans the urethral meatus and inserts the catheter approximately 2 cm before realizing it has been misplaced into the vaginal vault. The nurse withdraws the catheter and attempts to insert it a second time into the correct opening without changing to a new catheter. Which violation has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — the catheter was only inserted 2 cm and can be reused for the correct opening",
+        "The catheter is contaminated after contact with the vaginal vault; reinserting it introduces vaginal flora into the urethra and bladder, violating sterile technique",
+        "Strike-through contamination — the catheter became wet inside the vagina",
+        "The 1-inch border rule — the catheter must be repositioned at least 1 inch from the meatus before reinsertion"
+      ],
+      "answer": "The catheter is contaminated after contact with the vaginal vault; reinserting it introduces vaginal flora into the urethra and bladder, violating sterile technique",
+      "explanation": "Once the catheter has entered the vaginal vault, it is contaminated with vaginal flora and must not be reinserted into the urethra. Reusing the contaminated catheter dramatically increases the risk of a catheter-associated urinary tract infection (CAUTI). The correct technique when the vagina is inadvertently catheterized is to leave that catheter in the vaginal opening as a landmark (if available), obtain a new sterile catheter, and insert it into the correctly identified urethral meatus. The vaginal catheter is then removed after successful urethral placement is confirmed."
+    },
+    {
+      "id": "stv-q18",
+      "text": "A nurse sets up a complete sterile catheterization kit at the bedside of a female patient, opens all supplies, and places the sterile drape. The nurse then realizes she forgot the correct catheter size in the supply room. She steps out of the room to retrieve it, leaving the open sterile field unattended, and returns two minutes later to complete the procedure. Which violation has the nurse made?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — the room was empty and the field was undisturbed",
+        "The sterile field is contaminated because it was left unattended; the entire setup must be discarded and reconstructed with new supplies",
+        "Strike-through contamination — the unattended field is susceptible to environmental moisture",
+        "The 1-inch border rule — leaving the room compromises the border zone of the sterile drape"
+      ],
+      "answer": "The sterile field is contaminated because it was left unattended; the entire setup must be discarded and reconstructed with new supplies",
+      "explanation": "A sterile field must never be left unattended. Once the nurse leaves the room, she can no longer account for what may have contacted the sterile field — whether airborne particles, environmental organisms, or any person who may have entered the room. An unattended sterile field is considered contaminated regardless of elapsed time or room occupancy status. The corrective action is to discard the entire setup, return to the supply room to gather all necessary equipment, and reconstruct the sterile field without leaving once it is established."
+    },
+    {
+      "id": "stv-q19",
+      "text": "During a urinary catheterization, a nurse's sterile-gloved hand briefly contacts the patient's inner thigh while spreading the labia for urethral visualization. The nurse continues with the procedure without changing gloves. Which error in sterile technique has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No error — the inner thigh is a clean area and does not contaminate the sterile glove",
+        "The sterile glove is contaminated because the patient's skin — including the inner thigh — is a non-sterile surface; the nurse must re-glove before proceeding",
+        "Strike-through contamination — perspiration from the thigh wicks through the glove",
+        "No error — contact with the patient's skin is unavoidable and expected during catheterization"
+      ],
+      "answer": "The sterile glove is contaminated because the patient's skin — including the inner thigh — is a non-sterile surface; the nurse must re-glove before proceeding",
+      "explanation": "The patient's skin — including the inner thigh, perineum, and any area not draped and considered part of the sterile field — is non-sterile. Contact between a sterile glove and any non-sterile skin surface contaminates the glove. The nurse must stop the procedure, remove and discard the contaminated gloves, perform hand hygiene, don new sterile gloves, and reestablish the sterile field as needed before continuing. During catheterization, the non-dominant hand used to spread the labia or hold the penis is considered contaminated after that contact and must not touch the catheter."
+    },
+    {
+      "id": "stv-q20",
+      "text": "A nurse enters a patient's room to perform a sterile wound dressing change. The nurse dons clean gloves, removes the soiled dressing, and then — without changing gloves — opens the sterile supplies and begins applying the new sterile dressing. Which violation has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — clean gloves are acceptable for both removal and application of wound dressings",
+        "The nurse used the same contaminated gloves (used to remove the soiled dressing) to handle and apply sterile supplies, violating sterile technique and increasing infection risk",
+        "Strike-through contamination — the soiled dressing transferred moisture to the new dressing",
+        "The 1-inch border rule — the new sterile dressing was placed too close to the wound edge"
+      ],
+      "answer": "The nurse used the same contaminated gloves (used to remove the soiled dressing) to handle and apply sterile supplies, violating sterile technique and increasing infection risk",
+      "explanation": "Removing a soiled wound dressing is a clean (non-sterile) step, and the gloves used for this task are contaminated by contact with wound exudate, biofilm, and microorganisms. These gloves must never be used to handle sterile supplies or apply a new dressing. The correct sequence is: (1) don clean gloves to remove and discard the soiled dressing; (2) remove and discard the contaminated gloves; (3) perform hand hygiene; (4) don sterile gloves before handling all sterile supplies and applying the new dressing. This two-glove-change sequence is a core principle of sterile wound care."
+    },
+    {
+      "id": "stv-q21",
+      "text": "During a sterile wound dressing change, a patient turns her head and produces an uncontrolled cough that blows across the open sterile field from approximately 18 inches away. The nurse continues setting up the dressing without reconstructing the field. Which principle has been violated?",
+      "type": "multiple-choice",
+      "options": [
+        "No principle is violated — a single cough at 18 inches does not contaminate a sterile field",
+        "Sterile field integrity — respiratory droplets and airborne particles from a cough can deposit organisms on the sterile field, rendering it contaminated",
+        "Strike-through contamination — moisture from the cough soaked through the drape",
+        "The 1-inch border rule — only the border zone of the field is affected by the cough"
+      ],
+      "answer": "Sterile field integrity — respiratory droplets and airborne particles from a cough can deposit organisms on the sterile field, rendering it contaminated",
+      "explanation": "A cough directed across a sterile field — even from a distance — is considered a contamination event. Respiratory droplets and aerosolized particles carry microorganisms that can settle on the sterile surface and its contents. Sterile fields must be protected from sneezing, coughing, and talking over them by all persons in the room, including the patient. The corrective action is to consider the sterile field contaminated, discard all supplies on it, and reconstruct a new sterile field. Positioning the field away from the patient's face or using a mask for the patient during the procedure can reduce this risk."
+    },
+    {
+      "id": "stv-q22",
+      "text": "During a sterile wound dressing change, a nurse notices excess exudate at the wound margin. To absorb it quickly, the nurse folds the edge of the sterile drape — the outer 1-inch border — and uses it to blot the wound drainage, then proceeds with the dressing change. Which violation has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — using the drape border is acceptable because the border is separate from the sterile field",
+        "The 1-inch border rule — using the non-sterile border to contact the wound introduces non-sterile material to the wound site, and the maneuver also risks dragging the non-sterile border across the sterile field",
+        "Strike-through contamination — wound exudate soaked through the border into the sterile field",
+        "Sterile field integrity — touching the wound with the drape contaminated the drape's sterile center"
+      ],
+      "answer": "The 1-inch border rule — using the non-sterile border to contact the wound introduces non-sterile material to the wound site, and the maneuver also risks dragging the non-sterile border across the sterile field",
+      "explanation": "The outer 1-inch border of the sterile drape is non-sterile and must never contact the wound or be drawn inward across the sterile field. Using it to blot wound drainage introduces non-sterile material into the wound environment and creates a pathway for contamination to enter the sterile field. The corrective action is to use sterile gauze (held with sterile-gloved hands or sterile forceps) to absorb excess exudate at the wound site, keeping all materials and manipulations within the sterile zone and well clear of the non-sterile border."
+    },
+    {
+      "id": "stv-q23",
+      "text": "A nurse retrieves a sterile supply package from the unit storage shelf and notices a small but definite tear in the outer plastic wrapper before opening it. The package is within its expiration date and the inner contents appear dry. The nurse decides to use the package because the tear is small. Which principle has been violated?",
+      "type": "multiple-choice",
+      "options": [
+        "No principle is violated — a small tear does not breach the inner sterile barrier",
+        "The 'when in doubt, throw it out' principle — compromised packaging cannot guarantee sterility and the item must be discarded",
+        "Strike-through contamination — the tear allows moisture to enter and contaminate the contents",
+        "The 1-inch border rule — the tear is at the border of the packaging and does not affect the inner contents"
+      ],
+      "answer": "The 'when in doubt, throw it out' principle — compromised packaging cannot guarantee sterility and the item must be discarded",
+      "explanation": "The integrity of sterile packaging is the only guarantee of the sterility of its contents. Any breach in the outer wrapper — regardless of size — creates a potential pathway for microorganisms, moisture, and environmental contaminants to reach the inner contents. There is no reliable way to visually confirm that a torn package remains sterile. The 'when in doubt, throw it out' principle is absolute: the nurse must discard the compromised package, obtain an intact replacement, and document the disposal. Using a package with compromised packaging places the patient at risk for infection and the nurse at risk for an adverse event report."
+    },
+    {
+      "id": "stv-q24",
+      "text": "During preparation for a urinary catheterization, a nurse retrieves a catheter insertion kit from the supply closet and notes that the printed expiration date on the package reads yesterday's date. The kit's packaging is intact and dry. The nurse decides to proceed with the kit, reasoning that it expired only one day ago and is probably still safe. Which violation has occurred?",
+      "type": "multiple-choice",
+      "options": [
+        "No violation — expiration dates on sterile supplies have a 24-hour grace period",
+        "The 'when in doubt, throw it out' principle — an expired sterile kit cannot be guaranteed sterile and must be discarded regardless of apparent packaging integrity",
+        "Strike-through contamination — expired kits are more likely to have moisture inside the packaging",
+        "Sterile field integrity — expired items may be used if a supervising nurse verifies their condition"
+      ],
+      "answer": "The 'when in doubt, throw it out' principle — an expired sterile kit cannot be guaranteed sterile and must be discarded regardless of apparent packaging integrity",
+      "explanation": "Expiration dates on sterile supplies represent the manufacturer's validated guarantee of sterility — the date by which sterility can be assured under appropriate storage conditions. Once that date has passed, sterility can no longer be guaranteed, even if the packaging appears intact. There is no grace period; a kit that expired yesterday is treated the same as one that expired a year ago. The nurse must discard the expired kit, obtain a non-expired replacement, and notify the unit charge nurse or materials management so that remaining expired stock can be identified and removed. Using an expired kit exposes the patient to unacceptable infection risk and constitutes a patient safety violation."
+    }
+  ]
+}
