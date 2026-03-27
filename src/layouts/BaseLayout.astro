@@ -9,7 +9,7 @@ export interface Props {
 
 const {
   title,
-  description = 'Root — a static knowledge hub with public and private content.',
+  description = 'Garden — a digital garden for nursing school, with courses, notes, encyclopedias, quizzes, and more.',
   fullWidth = false,
 } = Astro.props;
 const base = import.meta.env.BASE_URL;
@@ -40,7 +40,7 @@ const privateLink = { href: `${base}private/`, label: 'Private' };
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
-    <title>{title} | Root</title>
+    <title>{title} | Garden</title>
   </head>
   <body class="min-h-screen flex flex-col text-base-content" style="background-color:#f5f5f7;display:none">
     <!-- Navbar -->
@@ -50,7 +50,7 @@ const privateLink = { href: `${base}private/`, label: 'Private' };
         <a
           href={base}
           class="flex items-center gap-1.5 font-bold text-lg tracking-tight text-base-content hover:opacity-80 transition-opacity"
-          aria-label="Root home"
+          aria-label="Garden home"
         >
           <svg
             width="20"
@@ -62,22 +62,23 @@ const privateLink = { href: `${base}private/`, label: 'Private' };
           >
             <defs>
               <linearGradient
-                id="nav-bolt"
-                x1="12"
+                id="nav-leaf"
+                x1="4"
                 y1="2"
-                x2="12"
+                x2="20"
                 y2="22"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0%" stop-color="#f97316"></stop>
-                <stop offset="100%" stop-color="#f59e0b"></stop>
+                <stop offset="0%" stop-color="#22c55e"></stop>
+                <stop offset="100%" stop-color="#16a34a"></stop>
               </linearGradient>
             </defs>
+            <!-- Leaf shape -->
             <path
-              d="M13 2L4.09 12.96A1 1 0 005 14.5h6.5l-1 7.5 9.41-11.96A1 1 0 0019 8.5h-6.5L13 2z"
-              fill="url(#nav-bolt)"></path>
+              d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 7-13 7"
+              fill="url(#nav-leaf)"></path>
           </svg>
-          Root
+          Garden
         </a>
       </div>
 
@@ -184,7 +185,7 @@ const privateLink = { href: `${base}private/`, label: 'Private' };
     <!-- Footer -->
     <footer class="bg-white border-t border-base-300 p-6 text-center text-sm text-base-content/50">
       <p>
-        &copy; {new Date().getFullYear()} Root &mdash; Built with
+        &copy; {new Date().getFullYear()} Garden &mdash; Built with
         <a href="https://astro.build" class="underline hover:text-base-content/80 transition-colors"
           >Astro</a
         >

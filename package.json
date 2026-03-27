@@ -1,6 +1,6 @@
 {
-  "name": "astro2-lms",
-  "description": "LMS built with Astro.build, published on GitHub Pages",
+  "name": "garden",
+  "description": "Digital garden for nursing school, built with Astro.build and published on GitHub Pages",
   "type": "module",
   "version": "0.0.1",
   "private": true,

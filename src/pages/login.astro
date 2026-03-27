@@ -13,9 +13,9 @@ const base = import.meta.env.BASE_URL;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Sign in to access Root LMS" />
+    <meta name="description" content="Sign in to access Garden" />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
-    <title>Sign In | Root</title>
+    <title>Sign In | Garden</title>
   </head>
   <body class="min-h-screen flex items-center justify-center" style="background-color:#f5f5f7;">
     <div class="card bg-white shadow-md w-full max-w-sm mx-4">
@@ -32,22 +32,22 @@ const base = import.meta.env.BASE_URL;
           >
             <defs>
               <linearGradient
-                id="login-bolt"
-                x1="12"
+                id="login-leaf"
+                x1="4"
                 y1="2"
-                x2="12"
+                x2="20"
                 y2="22"
                 gradientUnits="userSpaceOnUse"
               >
-                <stop offset="0%" stop-color="#f97316"></stop>
-                <stop offset="100%" stop-color="#f59e0b"></stop>
+                <stop offset="0%" stop-color="#22c55e"></stop>
+                <stop offset="100%" stop-color="#16a34a"></stop>
               </linearGradient>
             </defs>
             <path
-              d="M13 2L4.09 12.96A1 1 0 005 14.5h6.5l-1 7.5 9.41-11.96A1 1 0 0019 8.5h-6.5L13 2z"
-              fill="url(#login-bolt)"></path>
+              d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20C19 20 22 3 22 3c-1 2-8 7-13 7"
+              fill="url(#login-leaf)"></path>
           </svg>
-          <span class="font-bold text-xl tracking-tight text-base-content">Root</span>
+          <span class="font-bold text-xl tracking-tight text-base-content">Garden</span>
         </div>
 
         <div class="text-center">
