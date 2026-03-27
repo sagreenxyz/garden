@@ -1,0 +1,131 @@
+name: Encyclopedia Entry
+description: Request a new nursing encyclopedia entry covering a concept, term, or clinical procedure.
+title: '[Encyclopedia]: '
+labels:
+  - bsn
+  - encyclopedia
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template to request a new **encyclopedia entry** for the BSN curriculum site.
+        The BSN Curriculum Agent will produce a clinically accurate, academically styled entry
+        placed in the `src/content/encyclopedia/` collection, with frontmatter aligned to the
+        encyclopedia schema (`title`, `summary`, `tags`, `publishedAt`, and optional curriculum
+        alignment metadata).
+
+  - type: input
+    id: title
+    attributes:
+      label: Entry Title *
+      description: The concept, term, or procedure the entry should cover.
+      placeholder: 'e.g., Therapeutic Communication'
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary / Overview *
+      description: >
+        A one-to-two sentence description of what this entry should explain. This will seed
+        the `summary` frontmatter field and the opening paragraph of the entry.
+      placeholder: >
+        e.g., Therapeutic communication describes the purposeful, patient-centered verbal
+        and non-verbal techniques nurses use to build trust, gather accurate health histories,
+        and support emotional well-being across the care continuum.
+    validations:
+      required: true
+
+  - type: input
+    id: slug
+    attributes:
+      label: Preferred File Slug
+      description: >
+        Desired filename (without `.mdx`) for `src/content/encyclopedia/`. Use lowercase
+        kebab-case. Leave blank to let the agent choose.
+      placeholder: 'e.g., therapeutic-communication'
+
+  - type: textarea
+    id: tags
+    attributes:
+      label: Tags
+      description: >
+        Comma-separated tags to categorise this entry (e.g., topic area, body system,
+        care setting). These populate the `tags` frontmatter array.
+      placeholder: 'e.g., communication, fundamentals, mental health, patient-centered care'
+
+  - type: dropdown
+    id: aacn_essentials
+    attributes:
+      label: Primary AACN Essentials Domain
+      description: The AACN (2021) domain most closely aligned with this entry.
+      options:
+        - D1 — Knowledge for Nursing Practice
+        - D2 — Person-Centered Care
+        - D3 — Population Health
+        - D4 — Scholarship for the Nursing Discipline
+        - D5 — Quality and Safety
+        - D6 — Interprofessional Partnerships
+        - D7 — Systems-Based Practice
+        - D8 — Informatics and Healthcare Technologies
+        - D9 — Professionalism
+        - D10 — Personal, Professional, and Leadership Development
+        - Not applicable / unsure
+
+  - type: dropdown
+    id: bloom_level
+    attributes:
+      label: Intended Bloom's Taxonomy Level
+      description: >
+        The primary cognitive depth this entry should support in learners.
+      options:
+        - Remember
+        - Understand
+        - Apply
+        - Analyze
+        - Evaluate
+        - Create
+
+  - type: textarea
+    id: learning_objectives
+    attributes:
+      label: Learning Objectives
+      description: >
+        Optional list of learning objectives this entry should address (one per line).
+        Use Bloom's action verbs.
+      placeholder: |
+        e.g.,
+        Define therapeutic communication and distinguish it from social conversation.
+        Apply active-listening techniques during a simulated patient interaction.
+        Analyze barriers to effective nurse–patient communication in diverse populations.
+
+  - type: textarea
+    id: key_concepts
+    attributes:
+      label: Key Concepts to Include
+      description: >
+        Specific subtopics, clinical examples, techniques, or procedures the entry must cover.
+      placeholder: |
+        e.g., active listening, open-ended questions, reflection, clarification,
+        non-verbal cues, cultural humility, SBAR as a communication framework
+
+  - type: textarea
+    id: related_entries
+    attributes:
+      label: Related Encyclopedia Entries or Courses
+      description: >
+        List any existing encyclopedia entries, courses, or notes this entry should
+        cross-reference (slugs or titles).
+      placeholder: 'e.g., chain-of-infection, sterile-technique, NUR 201 — Health Assessment'
+
+  - type: textarea
+    id: special_instructions
+    attributes:
+      label: Special Instructions for the Agent
+      description: >
+        Any additional guidance on depth, format, standards alignment, or audience level.
+      placeholder: |
+        e.g., Target BSN-2 students. Include a clinical-alert callout about documentation
+        of patient communication. Align to QSEN Patient-Centered Care competency.
+        Add a 3-question NCLEX-NG formative check at the end.
