@@ -50,6 +50,27 @@ const curriculumAlignment = z.object({
 });
 
 // ── Encyclopedia ────────────────────────────────────────────────────────────
+
+/**
+ * Structured nursing content sections that a comprehensive encyclopedia entry
+ * may include.  Declaring these in frontmatter lets tooling, agents, and
+ * review workflows confirm that required sections are present.
+ */
+const encyclopediaSection = z.enum([
+  'overview',
+  'pathophysiology',
+  'clinical-presentation',
+  'diagnostic-studies',
+  'nursing-assessment',
+  'nursing-interventions',
+  'pharmacological-considerations',
+  'patient-education',
+  'complications',
+  'special-populations',
+  'evidence-base',
+  'nclex-formative-check',
+]);
+
 const encyclopediaCollection = defineCollection({
   type: 'content',
   schema: z.object({
@@ -59,6 +80,13 @@ const encyclopediaCollection = defineCollection({
     publishedAt: z.date(),
     updatedAt: z.date().optional(),
     draft: z.boolean().default(false),
+    /**
+     * Declares which structured nursing sections this entry contains.
+     * Used by agents and review workflows to ensure comprehensive coverage
+     * (e.g., pathophysiology, nursing-interventions, patient-education).
+     * Omitting the field is valid for non-clinical reference entries.
+     */
+    contentSections: z.array(encyclopediaSection).default([]),
     /** Optional nursing curriculum alignment metadata */
     curriculum: curriculumAlignment.optional(),
   }),
